@@ -4,7 +4,7 @@
 
 #### Docker ビルド
 
-1.  
+1.git@github.com:kenta-10043/coachtech-flea.git  
 2.docker-compose up -d --build
 
 \*MySQL は、OS によって起動しない場合があるのでそれぞれの PC に合わせて docker-compose.yml ファイルを編集してください。
@@ -26,11 +26,6 @@ Laravel 環境構築
 6.シーディングの実行　(php artisan db:seed)  
 7.画像ファイルのシンボリックリンク　(php artisan storage:link)
 
-## アプリの URL について
-
-- アプリのベース URL（APP_URL）： http://localhost
-- トップページ URL（商品一覧）： http://localhost/products
-
 ## 使用技術
 
 - PHP 8.3-fpm
@@ -39,7 +34,7 @@ Laravel 環境構築
 
 ## ER 図
 
-![ER-ver2.png](ER-ver2.png)
+
 
 ## URL
 
