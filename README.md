@@ -9,7 +9,7 @@
 
 #### Docker ビルド
 
-1.git@github.com:kenta-10043/coachtech-flea.git  
+1.git clone<git@github.com:kenta-10043/coachtech-flea.git>  
 2.docker-compose up -d --build
 
 \*MySQL は、OS によって起動しない場合があるのでそれぞれの PC に合わせて docker-compose.yml ファイルを編集してください。
@@ -41,7 +41,8 @@ Laravel 環境構築
 
 
 
-## URL
+## 開発環境
 
-- 開発環境：http://localhost/
+- 商品一覧：http://localhost/
+- ユーザー登録：http://localhost/register
 - phpMyAdmin：http://localhost:8080/
