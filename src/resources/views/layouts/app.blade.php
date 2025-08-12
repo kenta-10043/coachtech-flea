@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <header class="main-header"></header>
+    <header class="main-header"><img src="{{ 'storage/sample_images/logo.svg' }}" alt="ロゴ"></header>
     <div class="container">
         @yield('content')
     </div>
