@@ -1,0 +1,13 @@
+.main-header{
+    width: 100vm;
+    height: 80px;
+    opacity: 1;
+    background-color: black;
+}
+
+.container{
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
