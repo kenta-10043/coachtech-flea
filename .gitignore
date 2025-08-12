@@ -1,37 +1,55 @@
-# Laravel
-/vendor
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/storage/*.pem
-/storage/app/public
-/storage/framework/cache/*
-/storage/framework/sessions/*
-/storage/framework/views/*
-/storage/logs/*
-.env
-.env.*  # .env.local なども含む
+# ==========================
+# Laravel (src/)
+# ==========================
+src/vendor/
+src/node_modules/
+src/public/hot
+src/public/storage
+src/storage/*.key
+src/storage/*.pem
 
+# storage/app/public は全無視
+src/storage/app/public/*
+
+# sample_images フォルダだけ追跡対象
+!src/storage/app/public/sample_images/
+!src/storage/app/public/sample_images/**
+
+src/storage/framework/cache/*
+src/storage/framework/sessions/*
+src/storage/framework/views/*
+src/storage/logs/*
+src/.env
+src/.env.*  # .env.local なども含む
+
+# ==========================
 # Docker（MySQLなど機密データ）
+# ==========================
 docker/mysql/data/
 docker/mysql/*.pem
 *.pem
 *.key
 
+# ==========================
 # Composer
+# ==========================
 composer.lock
 
+# ==========================
 # NPM/Yarn
+# ==========================
 package-lock.json
 yarn.lock
 
-# IDEs
+# ==========================
+# IDE 設定ファイル
+# ==========================
 .idea/
 .vscode/
 *.swp
 
-# OS
+# ==========================
+# OS生成ファイル
+# ==========================
 .DS_Store
 Thumbs.db
-src/vendor/
