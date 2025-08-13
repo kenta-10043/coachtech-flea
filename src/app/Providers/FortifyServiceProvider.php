@@ -25,7 +25,6 @@ class FortifyServiceProvider extends ServiceProvider
     {
         //
     }
-
     /**
      * Bootstrap any application services.
      */
@@ -45,6 +44,21 @@ class FortifyServiceProvider extends ServiceProvider
                 return view('auth.login');
             }
         );
+
+        Fortify::authenticateUsing(function ($request) {
+            $loginRequest = app(\App\Http\Requests\LoginRequest::class);
+            $loginRequest->merge($request->all());
+            $validated = $loginRequest->validateResolved();
+
+            if (\Illuminate\Support\Facades\Auth::attempt([
+                'email' => $validated['email'],
+                'password' => $validated['password'],
+            ])) {
+                return \Illuminate\Support\Facades\Auth::user();
+            }
+
+            return null;
+        });
 
         RateLimiter::for(
             'login',
