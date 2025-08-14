@@ -6,7 +6,7 @@
 @section('content')
     <h2>会員登録</h2>
 
-    <form action="/register" method="post" novalidate>
+    <form action="/login" method="post" novalidate>
         @csrf
 
 

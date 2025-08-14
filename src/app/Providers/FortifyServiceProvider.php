@@ -48,7 +48,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::authenticateUsing(function ($request) {
             $loginRequest = app(\App\Http\Requests\LoginRequest::class);
             $loginRequest->merge($request->all());
-            $validated = $loginRequest->validateResolved();
+            $validated = $loginRequest->validated();
 
             if (\Illuminate\Support\Facades\Auth::attempt([
                 'email' => $validated['email'],
@@ -56,6 +56,11 @@ class FortifyServiceProvider extends ServiceProvider
             ])) {
                 return \Illuminate\Support\Facades\Auth::user();
             }
+
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'email' => ['ログイン情報が登録されていません'],
+                'password' => ['ログイン情報が登録されていません'],
+            ]);
 
             return null;
         });

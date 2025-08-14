@@ -27,7 +27,7 @@ class CreateNewUser implements CreatesNewUsers
         $request->merge($input);
 
 
-        $validated = $request->validateResolved();
+        $validated = $request->validated();
 
 
         return User::create(
