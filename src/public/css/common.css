@@ -5,6 +5,53 @@
     background-color: black;
 }
 
+.header__nav{
+    height: 100%;
+    text-decoration: none;
+    margin: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.title{
+    width: 370px;
+    height: 36px;
+}
+
+.input__search{
+    width: 500px;
+    height: 40px;
+    border-radius: 5%;
+    margin-left: 100px;
+}
+
+.button__logout{
+    margin-left: 250px;
+    background-color: black;
+    color: white;
+    border: none;
+}
+.button__login{
+    margin-left: 250px;
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.button__mypage{
+    margin-left: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.button__exhibition{
+    margin-left: 10px;
+}
+
+
+
 .container{
     max-width: 1440px;
     margin: 0 auto;
