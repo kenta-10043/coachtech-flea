@@ -16,7 +16,7 @@
     <header class="main-header">
         <ul class="header__nav">
             @if (Auth::check())
-                <li><img class="title" src="{{ 'storage/others/logo.svg' }}" alt="ロゴ"></li>
+                <li><img class="title" src="{{ asset('storage/others/logo.svg') }}" alt="ロゴ"></li>
 
                 <li>
                     <form action="">
@@ -45,7 +45,7 @@
                     </form>
                 </li>
             @else
-                <li><img class="title" src="{{ 'storage/others/logo.svg' }}" alt="ロゴ"></li>
+                <li><img class="title" src="{{ asset('storage/others/logo.svg') }}" alt="ロゴ"></li>
 
                 <li>
                     <form action="">

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,6 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', [ItemController::class, 'index'])->name('index');
+
+Route::get('/mypage/profile', [ProfileController::class, 'create'])->name('profile.create');
+Route::post('/mypage/profile', [ProfileController::class, 'store'])->name('profile.store');
