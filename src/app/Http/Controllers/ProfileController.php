@@ -22,7 +22,6 @@ class ProfileController extends Controller
 
         $user->update([
             'name' => $request->name,
-            'profile_completed' => true,
         ]);
 
         if ($user->profile) {
@@ -40,6 +39,12 @@ class ProfileController extends Controller
                 'building' => $request->building
             ]);
         }
+        $user->load('profile');
+
+        if ($user->profile && $user->profile->postal_code && $user->profile->address) {
+            $user->update(['profile_completed' => true]);
+        }
+
         return redirect()->route('index');
     }
 }
