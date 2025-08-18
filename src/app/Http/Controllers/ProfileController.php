@@ -24,20 +24,21 @@ class ProfileController extends Controller
             'name' => $request->name,
         ]);
 
+        $profileDate = [
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+            'building' => $request->building,
+        ];
+
+        if ($request->hasFile('profile_image')) {
+            $profileImagePath = $request->file('profile_image')->store('profile_images', 'public');
+            $profileDate['profile_image'] = $profileImagePath;
+        }
+
         if ($user->profile) {
-            $user->profile->update([
-                'profile_image' => $request->profile_image,
-                'postal_code' => $request->postal_code,
-                'address' => $request->address,
-                'building' => $request->building,
-            ]);
+            $user->profile->update($profileDate);
         } else {
-            $user->profile()->create([
-                'profile_image' => $request->profile_image,
-                'postal_code' => $request->postal_code,
-                'address' => $request->address,
-                'building' => $request->building
-            ]);
+            $user->profile()->create($profileDate);
         }
         $user->load('profile');
 
@@ -46,5 +47,11 @@ class ProfileController extends Controller
         }
 
         return redirect()->route('index');
+    }
+
+    public function index()
+    {
+        $user = Auth::user();
+        return view('profile.profile', compact('user'));
     }
 }

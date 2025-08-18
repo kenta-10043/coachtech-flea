@@ -1,0 +1,28 @@
+.profile__container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.profile__image{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile__user-name{
+    font-size: xx-large;
+    margin-top: 28px;
+}
+
+.button__edit{
+    width: 150px;
+    height: 30px;
+    border-color: red;
+    color: red;
+    font-weight: bold;
+    background-color: white;
+    margin-top: 70px;
+    border-radius: 7px;
+}

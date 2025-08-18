@@ -19,3 +19,5 @@ Route::get('/', [ItemController::class, 'index'])->name('index');
 
 Route::get('/mypage/profile', [ProfileController::class, 'create'])->name('profile.create');
 Route::post('/mypage/profile', [ProfileController::class, 'store'])->name('profile.store');
+
+Route::get('/mypage', [ProfileController::class, 'index'])->name('profile.index');

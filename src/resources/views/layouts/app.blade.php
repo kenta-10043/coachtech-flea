@@ -32,7 +32,7 @@
                 </li>
 
                 <li>
-                    <form action="" method="post">
+                    <form action="{{ route('profile.index') }}" method="get">
                         @csrf
                         <button class="button__mypage">マイページ</button>
                     </form>
@@ -58,7 +58,7 @@
                 </li>
 
                 <li>
-                    <form action="" method="post">
+                    <form action="/login" method="post">
                         @csrf
                         <button type="button" class="button__mypage">マイページ</button>
                     </form>
