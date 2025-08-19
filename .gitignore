@@ -8,16 +8,16 @@ src/public/storage
 src/storage/*.key
 src/storage/*.pem
 
-# storage/app/public は全無視
 src/storage/app/public/*
 
-# sample_images フォルダだけ追跡対象
 !src/storage/app/public/sample_images/
 !src/storage/app/public/sample_images/**
 
-# others フォルダだけ追跡対象 ← 追加
 !src/storage/app/public/others/
 !src/storage/app/public/others/**
+
+!src/storage/app/public/profile_image/
+!src/storage/app/public/profile_image/**
 
 src/storage/framework/cache/*
 src/storage/framework/sessions/*
