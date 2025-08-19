@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Item extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'item_name',
+        'brand_name',
+        'price',
+        'item_image',
+        'status',
+        'description',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function condition()
+    {
+        return $this->belongsTo(Condition::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Like::class);
+    }
+
+    public function comments()
+    {
+        return $this->belongsToMany(Comment::class);
+    }
+}
