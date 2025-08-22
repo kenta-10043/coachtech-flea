@@ -1,0 +1,125 @@
+.item-data__container {
+    display: flex;
+    height: 100vh;
+    margin-top: 60px;
+}
+
+.item__image {
+    width: 500px;
+    height: 500px;
+    margin-left: 30px;
+}
+
+.item-data__inner {
+    width: 60%;
+    margin-left: 60px;
+}
+
+.item__name {
+    font-family: Inter;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 45px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.information__category,
+.information__condition {
+    display: flex;
+}
+
+.item__tittle-category,
+.item__tittle-condition {
+    margin-right: 30px;
+}
+
+.item__category {
+    width: 100px;
+    height: 30px;
+    border-radius: 10%;
+    background-color: #E5E5E5;
+    border: none;
+    text-align: center;
+    padding: auto;
+    margin: 18px 10px 0;
+    padding-top: 3px;
+}
+
+.item__condition {
+    margin-left: 18px;
+}
+
+.alert-success {
+    color: white;
+    background-color: black;
+    font-weight: bolder;
+    width: 220px;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+.error-alert {
+    color: red;
+}
+
+.profile_images {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.item__reactions {
+    display: flex;
+}
+
+.like__form {
+    height: 40px;
+}
+
+.like__button {
+    background: none;
+    border: none;
+}
+
+.like__buttonliked {
+    background: none;
+    border: none;
+    background-color: aqua;
+}
+
+.likes__count,
+.comments__count {
+    text-align: center;
+}
+
+.comment__icon {
+    margin-left: 50px;
+}
+
+.comment__list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.comment__content {
+    width: 570px;
+    height: 70px;
+    background-color: #E5E5E5;
+}
+
+.comment__input {
+    width: 570px;
+    height: 246px;
+}
+
+.purchase__button,
+.comment__button {
+    width: 570px;
+    height: 45px;
+    border: none;
+    color: white;
+    font-weight: bolder;
+    background-color: #FF5555;
+}

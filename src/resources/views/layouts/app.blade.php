@@ -16,13 +16,17 @@
     <header class="main-header">
         <ul class="header__nav">
             @if (Auth::check())
-                <li><img class="title" src="{{ asset('storage/others/logo.svg') }}" alt="ロゴ"></li>
+                <li><a href="{{ route('index') }}"><img class="title" src="{{ asset('storage/others/logo.svg') }}"
+                            alt="ロゴ"></a></li>
 
-                <li>
-                    <form action="">
-                        <input class="input__search" type="text" value="" placeholder="　　　　　なにをお探しですか？　　　　　">
-                    </form>
-                </li>
+
+                <form action="{{ route('item.search') }}" method="get">
+                    <li>
+                        <input class="input__search" type="text" name="keyword" value="{{ $keyword ?? '' }}"
+                            placeholder="　　　　　なにをお探しですか？　　　　　">
+                    </li>
+                </form>
+
 
                 <li>
                     <form action="/logout" method="post">
@@ -45,13 +49,17 @@
                     </form>
                 </li>
             @else
-                <li><img class="title" src="{{ asset('storage/others/logo.svg') }}" alt="ロゴ"></li>
+                <li><a href="{{ route('index') }}"><img class="title" src="{{ asset('storage/others/logo.svg') }}"
+                            alt="ロゴ"></a></li>
 
                 <li>
-                    <form action="">
-                        <input class="input__search" type="text" value="" placeholder="　　　　　なにをお探しですか？　　　　　">
+                    <form action="{{ route('item.search') }}" method="get">
+                        <input class="input__search" type="text" name="keyword" value="{{ $keyword ?? '' }}"
+                            placeholder="　　　　　なにをお探しですか？　　　　　">
                     </form>
                 </li>
+
+
 
                 <li>
                     <button onclick="location.href='/login'" class="button__login">ログイン</button>
