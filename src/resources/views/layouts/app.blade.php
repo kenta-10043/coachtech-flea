@@ -16,18 +16,13 @@
     <header class="main-header">
         <ul class="header__nav">
             @if (Auth::check())
-                <li><a href="{{ route('index') }}"><img class="title" src="{{ asset('storage/others/logo.svg') }}"
-                            alt="ロゴ"></a></li>
+                <li><img class="title" src="{{ asset('storage/others/logo.svg') }}" alt="ロゴ"></li>
 
-
-                <form action="{{ route('item.search') }}" method="get">
-                    <li>
-                        <input class="input__search" type="text" name="keyword" value="{{ $keyword ?? '' }}"
-                            placeholder="　　　　　なにをお探しですか？　　　　　">
-                    </li>
-                </form>
-
-
+                <li>
+                    <form action="">
+                        <input class="input__search" type="text" value="" placeholder="　　　　　なにをお探しですか？　　　　　">
+                    </form>
+                </li>
 
                 <li>
                     <form action="/logout" method="post">
@@ -44,18 +39,17 @@
                 </li>
 
                 <li>
-                    <form action="" method="get">
+                    <form action="" method="post">
+                        @csrf
                         <button class="button__exhibition">出品</button>
                     </form>
                 </li>
             @else
-                <li><a href="{{ route('index') }}"><img class="title" src="{{ asset('storage/others/logo.svg') }}"
-                            alt="ロゴ"></a></li>
+                <li><img class="title" src="{{ asset('storage/others/logo.svg') }}" alt="ロゴ"></li>
 
                 <li>
-                    <form action="{{ route('item.search') }}" method="get">
-                        <input class="input__search" type="text" name="keyword" value="{{ $keyword ?? '' }}"
-                            placeholder="　　　　　なにをお探しですか？　　　　　">
+                    <form action="">
+                        <input class="input__search" type="text" value="" placeholder="　　　　　なにをお探しですか？　　　　　">
                     </form>
                 </li>
 

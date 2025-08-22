@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\Status as StatusEnum;
 
 class Item extends Model
 {
@@ -18,11 +17,6 @@ class Item extends Model
         'status',
         'description',
     ];
-
-    public function getLabelAttribute(): string
-    {
-        return StatusEnum::from($this->status)->label();
-    }
 
     public function user()
     {
@@ -41,16 +35,11 @@ class Item extends Model
 
     public function likes()
     {
-        return $this->hasMany(Like::class);
-    }
-
-    public function isLikedBy(User $user): bool
-    {
-        return $this->likes()->where('user_id', $user->id)->exists();
+        return $this->belongsToMany(Like::class);
     }
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsToMany(Comment::class);
     }
 }

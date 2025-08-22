@@ -13,7 +13,7 @@ class ProfileController extends Controller
     public function create()
     {
         $user = Auth::user();
-        return view('profiles.create', compact('user'));
+        return view('profile.create', compact('user'));
     }
 
     public function store(ProfileRequest $request)
@@ -46,12 +46,12 @@ class ProfileController extends Controller
             $user->update(['profile_completed' => true]);
         }
 
-        return redirect()->route('index')->with('success', 'プロフィールを更新しました');
+        return redirect()->route('index');
     }
 
     public function index()
     {
         $user = Auth::user();
-        return view('profiles.profile', compact('user'));
+        return view('profile.profile', compact('user'));
     }
 }
