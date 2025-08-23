@@ -1,0 +1,24 @@
+
+.input__category
+{
+    display: none;
+}
+
+.input__category+label {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 4px;
+    border: 1px solid #FF5655;
+    border-radius: 20px;
+    /* タグ風 */
+    background: #fff;
+    color: #FF5655;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.input__category:checked+label {
+    background: #FF5655;
+    color: white;
+    border-color: #FF5655;
+}
