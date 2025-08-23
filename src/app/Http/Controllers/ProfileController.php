@@ -16,6 +16,13 @@ class ProfileController extends Controller
         return view('profiles.create', compact('user'));
     }
 
+    public function items()
+    {
+        $items = auth()->user()->items;
+
+        return view('profiles.profile', compact('items'));
+    }
+
     public function store(ProfileRequest $request)
     {
         $user = Auth::user();

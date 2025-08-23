@@ -31,6 +31,8 @@ Route::middleware('auth')->group(
         Route::get('/mypage/profile', [ProfileController::class, 'create'])->name('profile.create');
         Route::post('/mypage/profile', [ProfileController::class, 'store'])->name('profile.store');
         Route::get('/mypage', [ProfileController::class, 'index'])->name('profile.index');
+        Route::get('/mypage?page=sell', [ProfileController::class, 'items'])->name('profile.sell');
+
 
         Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
         Route::post('/item/{item_id}/like', [ItemController::class, 'toggleLike'])->name('item.like');
