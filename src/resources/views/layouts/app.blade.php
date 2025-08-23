@@ -43,8 +43,7 @@
                 </li>
 
                 <li>
-                    <form action="" method="post">
-                        @csrf
+                    <form action="{{ route('sell.index') }}" method="get">
                         <button class="button__exhibition">出品</button>
                     </form>
                 </li>

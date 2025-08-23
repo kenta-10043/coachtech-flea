@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('brand_name')->nullable();;
             $table->integer('price');
             $table->string('item_image');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->text('description');
             $table->timestamps();
         });

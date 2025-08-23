@@ -11,16 +11,18 @@
             <form action="{{ route('sell.store') }}" method="post" enctype="multipart/form-data" novalidate>
                 @csrf
 
-                <div class="form__input">
-                    <label for="image">商品画像</label>
-                    <input class="form__input__image" id="image" type="file" name="image">
+
+                <h3>商品画像</h3>
+                <div class="form__input-body">
+                    <input class="form__input__image" type="file" name="item_image">
                 </div>
 
-                @error('image')
-                    <div class="error-alert">{{ $message }}</div>
+                @error('item_image')
+                    <div class="error-alert">{{ $message }}
+                    </div>
                 @enderror
 
-                <h2>商品の詳細</h2>
+                <h2 class="subheading">商品の詳細</h2>
 
 
                 <div class="item__information">
@@ -29,8 +31,8 @@
 
                         @foreach ($categories as $category)
                             <input class="input__category" id="category{{ $loop->index }}" type="checkbox"
-                                name="category[]" value="{{ $category->value }}"
-                                {{ is_array(old('category', [])) && in_array($category->value, old('category', [])) ? 'checked' : '' }}>
+                                name="category[]" value="{{ $category->category }}"
+                                {{ is_array(old('category', [])) && in_array($category->category, old('category', [])) ? 'checked' : '' }}>
                             <label for="category{{ $loop->index }}">{{ $category->label }}</label>
                         @endforeach
 
@@ -39,47 +41,52 @@
                         @enderror
                     </div>
 
+                    <h4 class="item__tittle-condition">商品の状態</h4>
+
                     <div class="form__input">
-                        <label for="condition">商品の状態</label>
-                        <select name="condition" id="condition">
-                            <option value="1"></option>
-                            <option value="1"></option>
-                            <option value="1"></option>
-                            <option value="1"></option>
-                        </select>
+
+                        <label for="condition">
+                            <select class="choice__condition" name="condition" id="condition">
+                                <option value="" disabled selected {{ old('condition') ? '' : 'selected' }}>選択してください
+                                </option>
+                                @foreach ($conditions as $condition)
+                                    <option value="{{ $condition->condition }}"
+                                        {{ old('condition') == $condition->condition ? 'selected' : '' }}>
+                                        {{ $condition->label }}</option>
+                                @endforeach
+                            </select>
+                        </label>
+                        @error('condition')
+                            <div class="error-alert">{{ $message }}</div>
+                        @enderror
+
                     </div>
                 </div>
 
-                <h2>商品名と説明</h2>
+                <h2 class="subheading">商品名と説明 </h2>
 
-                <div class="item__name-description">
-                    <div class="form__input">
-                        <label for="name">商品名</label>
-                        <input class="form__input__name" id="name" type="text" name="name"
-                            value="{{ old('name') }}" placeholder="商品名を入力">
+                <div class="item__information-description">
+                    <div class="form__input__name">
+                        <label class="label__name" for="item_name">商品名</label>
+                        <input class="input__name" id="item_name" type="text" name="item_name"
+                            value="{{ old('item_name') }}" placeholder="商品名を入力">
 
-
-                        @error('name')
+                        @error('item_name')
                             <div class="error-alert">{{ $message }}</div>
                         @enderror
                     </div>
 
 
-                    <div class="form__input">
+                    <div class="form__input__brand-name">
                         <label for="brand_name">ブランド名</label>
-                        <input class="form__input__name" id="brand_name" type="text" name="brand_name"
+                        <input class="input__brand-name" id="brand_name" type="text" name="brand_name"
                             value="{{ old('brand_name') }}" placeholder="ブランド名を入力">
-
-                        @error('brand_name')
-                            <div class="error-alert">{{ $message }}</div>
-                        @enderror
                     </div>
 
-                    <div class="form__input">
+                    <div class="form__input__description">
                         <label for="description">商品の説明</label>
-                        <textarea class="form__input__description" id="description" name="description" cols="30" rows="10"
+                        <textarea class="input__description" id="description" name="description" cols="30" rows="10"
                             placeholder="商品の説明を入力">{{ old('description') }}</textarea>
-
 
                         @error('description')
                             <div class="error-alert">{{ $message }}</div>
@@ -87,15 +94,16 @@
                     </div>
 
 
-                    <div class="form__input">
+                    <div class="form__input__price">
                         <label for="price">販売価格</label>
-                        <input class="form__input__price" id="price" type="text" name="price"
-                            value="￥{{ old('price') }}" placeholder="販売価格を入力">
+                        <input class="input__price" id="price" type="text" name="price"
+                            value="{{ old('price') }}" placeholder="販売価格を入力">
 
                         @error('price')
                             <div class="error-alert">{{ $message }}</div>
                         @enderror
                     </div>
+
                 </div>
 
                 <div class="form__button">

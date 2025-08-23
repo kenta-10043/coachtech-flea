@@ -17,6 +17,8 @@ class Item extends Model
         'item_image',
         'status',
         'description',
+        'user_id',
+        'condition_id'
     ];
 
 

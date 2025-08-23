@@ -4,8 +4,8 @@ namespace App\Enums;
 
 enum Status: int
 {
-    case AVAILABLE = 0;
-    case SOLD = 1;
+    case AVAILABLE = 1;
+    case SOLD = 2;
 
     public function label(): string
     {

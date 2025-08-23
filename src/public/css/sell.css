@@ -1,3 +1,36 @@
+.error-alert {
+    color: red;
+}
+
+.sell__main{
+    width: 680px;
+    height: 1vh;
+    margin-left: 300px;
+}
+
+.subheading{
+    color: #5F5F5F;
+    border-bottom: #5F5F5F 1px solid;
+    margin-top: 50px;
+
+}
+
+.sell__contents__tittle{
+    text-align: center;
+}
+
+.form__input__image{
+    margin-top: 60px;
+}
+
+.form__input-body{
+    width: 680px;
+    height: 150px;
+    border: dashed 1px ;
+    vertical-align: middle;
+    text-align: center;
+
+}
 
 .input__category
 {
@@ -10,7 +43,6 @@
     margin: 4px;
     border: 1px solid #FF5655;
     border-radius: 20px;
-    /* タグ風 */
     background: #fff;
     color: #FF5655;
     cursor: pointer;
@@ -21,4 +53,30 @@
     background: #FF5655;
     color: white;
     border-color: #FF5655;
+}
+
+.choice__condition, .input__name, .input__brand-name, .input__description, .input__price{
+     width: 680px;
+     height: 45px;
+}
+
+.form__input__name, .form__input__brand-name, .form__input__description, .form__input__price {
+    margin-top: 30px;
+}
+
+.input__name, .input__brand-name, .input__description, .input__price,
+.label__name, .label__brand-name, .label__description, .label__price{
+    display: block;
+}
+
+
+
+.submit__button__register{
+    width: 680px;
+    height: 45px;
+    border: none;
+    color: white;
+    font-weight: bolder;
+    background-color: #FF5555;
+    margin-top: 10px;
 }
