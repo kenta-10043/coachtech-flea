@@ -23,6 +23,14 @@
     margin-top: 60px;
 }
 
+.preview__image{
+    display:none;
+    max-width:200px;
+    margin-top: -80px;
+    max-height: 140px;
+    margin-left: 5px;
+}
+
 .form__input-body{
     width: 680px;
     height: 150px;

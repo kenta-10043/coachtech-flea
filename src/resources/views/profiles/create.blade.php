@@ -12,9 +12,12 @@
         <div class="form__input">
             <img class="profile__image" src="{{ asset('storage/' . $user->profile->profile_image) }}"
                 alt="{{ $user->name }}">
-            <label for="image"></label>
-            <input class="form__input__image" id="image" type="file" name="profile_image">
+            <label for="profile_image"></label>
+            <input class="form__input__image" id="profile_image" type="file" name="profile_image">
+            <img class="preview__image" id="preview" src="#">
         </div>
+
+
 
         @error('image')
             <div class="error-alert">{{ $message }}</div>
@@ -65,4 +68,22 @@
 
 
     </form>
+
+    <script>
+        document.getElementById('profile_image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('preview');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    preview.src = event.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = "none";
+            }
+        });
+    </script>
 @endsection

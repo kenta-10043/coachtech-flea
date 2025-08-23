@@ -14,8 +14,11 @@
 
                 <h3>商品画像</h3>
                 <div class="form__input-body">
-                    <input class="form__input__image" type="file" name="item_image">
+                    <input class="form__input__image" type="file" name="item_image" id="item_image">
+                    <img class="preview__image" id="preview" src="#">
                 </div>
+
+
 
                 @error('item_image')
                     <div class="error-alert">{{ $message }}
@@ -113,4 +116,24 @@
             </form>
         </div>
     </div>
+
+
+
+    <script>
+        document.getElementById('item_image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('preview');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    preview.src = event.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = "none";
+            }
+        });
+    </script>
 @endsection

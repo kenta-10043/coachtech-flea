@@ -16,12 +16,15 @@
     </div>
     <div class="item__container">
         @foreach ($items as $item)
-            <a class="item__link" href="{{ route('item.show', ['item_id' => $item->id]) }}">
-                <div class="item__cards">
-                    <img class="item__cards__image" src="{{ 'storage/' . $item->item_image }}" alt="{{ $item->item_name }}">
-                    <p class="item__cards__name">{{ $item->item_name }} </p>
-                </div>
-            </a>
+            @if ($item->user_id !== auth()->id())
+                <a class="item__link" href="{{ route('item.show', ['item_id' => $item->id]) }}">
+                    <div class="item__cards">
+                        <img class="item__cards__image" src="{{ 'storage/' . $item->item_image }}"
+                            alt="{{ $item->item_name }}">
+                        <p class="item__cards__name">{{ $item->item_name }} </p>
+                    </div>
+                </a>
+            @endif
         @endforeach
     </div>
 @endsection
