@@ -22,22 +22,17 @@ class AddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'profile_image' => 'nullable|mimes:png,jpeg',
-            'name' => 'required|max:20',
-            'postal_code' => 'required|regex:/^\d{3}-\d{4}$/',
-            'address' => 'required',
+            'shopping_postal_code' => 'required|regex:/^\d{3}-\d{4}$/',
+            'shopping_address' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'お名前を入力してください',
-            'name.max' => 'お名前は20文字以内で入力してください',
-            'postal_code.required' => '郵便番号を入力してください',
-            'postal_code.regex' => '郵便番号はハイフンありの8文字で入力してください',
-            'address.required' => '住所を入力してください',
-            'profile_image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
+            'shopping_postal_code.required' => '郵便番号を入力してください',
+            'shopping_postal_code.regex' => '郵便番号はハイフンありの8文字で入力してください',
+            'shopping_address.required' => '住所を入力してください',
         ];
     }
 }

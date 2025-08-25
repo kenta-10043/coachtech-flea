@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    <h2>会員登録</h2>
+    <h2>ログイン</h2>
 
     <form action="/login" method="post" novalidate>
         @csrf

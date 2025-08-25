@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 use App\Enums\Category;
 use App\Enums\Condition;
 use App\Enums\Status;
@@ -16,7 +17,7 @@ class ItemsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $param = [
+        $items = [
             [
                 'item_name' => '腕時計',
                 'price' => 15000,
@@ -25,7 +26,6 @@ class ItemsTableSeeder extends Seeder
                 'item_image' => 'sample_images/Armani+Mens+Clock.jpg',
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::GOOD->value,
-                'user_id'      => 1,
 
             ],
             [
@@ -36,7 +36,6 @@ class ItemsTableSeeder extends Seeder
                 'item_image' => 'sample_images/HDD+Hard+Disk.jpg',
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::NEAR_GOOD->value,
-                'user_id'      => 1,
             ],
             [
                 'item_name' => '玉ねぎ3束',
@@ -46,7 +45,6 @@ class ItemsTableSeeder extends Seeder
                 'item_image' => 'sample_images/iLoveIMG+d.jpg',
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::FAIR->value,
-                'user_id'      => 1,
             ],
             [
                 'item_name' => '革靴',
@@ -56,7 +54,6 @@ class ItemsTableSeeder extends Seeder
                 'item_image' => 'sample_images/Leather+Shoes+Product+Photo.jpg',
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::BAD->value,
-                'user_id'      => 1,
             ],
             [
                 'item_name' => 'ノートPC',
@@ -66,7 +63,6 @@ class ItemsTableSeeder extends Seeder
                 'item_image' => 'sample_images/Living+Room+Laptop.jpg',
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::GOOD->value,
-                'user_id'      => 1,
             ],
             [
                 'item_name' => 'マイク',
@@ -76,7 +72,6 @@ class ItemsTableSeeder extends Seeder
                 'item_image' => 'sample_images/Music+Mic+4632231.jpg',
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::NEAR_GOOD->value,
-                'user_id'      => 1,
             ],
             [
                 'item_name' => 'ショルダーバッグ',
@@ -86,7 +81,6 @@ class ItemsTableSeeder extends Seeder
                 'item_image' => 'sample_images/Purse+fashion+pocket.jpg',
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::FAIR->value,
-                'user_id'      => 1,
             ],
             [
                 'item_name' => 'タンブラー',
@@ -96,7 +90,6 @@ class ItemsTableSeeder extends Seeder
                 'item_image' => 'sample_images/Tumbler+souvenir.jpg',
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::BAD->value,
-                'user_id'      => 1,
             ],
             [
                 'item_name' => 'コーヒーミル',
@@ -106,7 +99,6 @@ class ItemsTableSeeder extends Seeder
                 'item_image' => 'sample_images/Waitress+with+Coffee+Grinder.jpg',
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::GOOD->value,
-                'user_id'      => 1,
             ],
             [
                 'item_name' => 'メイクセット',
@@ -116,10 +108,15 @@ class ItemsTableSeeder extends Seeder
                 'item_image' => 'sample_images/外出メイクアップセット.jpg',
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::NEAR_GOOD->value,
-                'user_id'      => 1,
             ],
 
         ];
-        DB::table('items')->insert($param);
+
+        $itemsWithUser = collect($items)->map(function ($item) {
+            $item['user_id'] = rand(1, 5);
+            return $item;
+        })->toArray();
+
+        DB::table('items')->insert($itemsWithUser);
     }
 }

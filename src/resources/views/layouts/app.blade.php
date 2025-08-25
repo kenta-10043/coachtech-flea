@@ -65,14 +65,14 @@
                 </li>
 
                 <li>
-                    <form action="/login" method="post">
+                    <form action="/login" method="get">
                         @csrf
-                        <button type="button" class="button__mypage">マイページ</button>
+                        <button class="button__mypage">マイページ</button>
                     </form>
                 </li>
 
                 <li>
-                    <form action="" method="post">
+                    <form action="/login" method="get">
                         @csrf
                         <button class="button__exhibition">出品</button>
                     </form>

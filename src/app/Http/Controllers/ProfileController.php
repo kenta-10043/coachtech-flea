@@ -16,11 +16,27 @@ class ProfileController extends Controller
         return view('profiles.create', compact('user'));
     }
 
+    public function index()
+    {
+        $user = Auth::user();
+        $items = $user->items;
+        return view('profiles.profile', compact('user', 'items'));
+    }
+
     public function items()
     {
-        $items = auth()->user()->items;
+        $user = Auth::user();
+        $sellItems = $user->items()->where('status', 1)->get();
 
-        return view('profiles.profile', compact('items'));
+        return view('profiles.profile', compact('sellItems', 'user'));
+    }
+
+    public function purchases()
+    {
+        $user = Auth::user();
+        $buyItems = $user->items()->where('status', 2)->get();
+
+        return view('profiles.profile', compact('buyItems', 'user'));
     }
 
     public function store(ProfileRequest $request)
@@ -54,11 +70,5 @@ class ProfileController extends Controller
         }
 
         return redirect()->route('index')->with('success', 'プロフィールを更新しました');
-    }
-
-    public function index()
-    {
-        $user = Auth::user();
-        return view('profiles.profile', compact('user'));
     }
 }

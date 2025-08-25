@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -20,7 +21,7 @@ class ItemController extends Controller
             ->withCount('comments', 'likes')
             ->findOrFail($item_id);
 
-        $userId = auth()->id();
+        $userId = Auth::id();
         $isLiked = $userId ? $item->likes()->where('user_id', $userId)->exists() : false;
 
         return view('show', compact('item', 'isLiked'));
@@ -30,7 +31,7 @@ class ItemController extends Controller
     public function toggleLike($item_id)
     {
         $item = Item::findOrFail($item_id);
-        $user = auth()->user();
+        $user = Auth::user();
         $existing = $item->likes()->where('user_id', $user->id)->first();
 
         if ($existing) {

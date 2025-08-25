@@ -22,15 +22,19 @@ class PurchaseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'comment' => 'required|max:255',
+            'pay_method' => 'required',
+            'shopping_postal_code' => 'required',
+            'shopping_address' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'comment.required' => 'コメントを入力してください',
-            'comment.max' => 'コメントは250文字以内で入力してください',
+            'pay_method.required' => 'お支払い方法を選択してください',
+            'shopping_postal_code.required' => '配送先を入力してください',
+            'shopping_address.required' => '配送先を入力してください',
+
         ];
     }
 }

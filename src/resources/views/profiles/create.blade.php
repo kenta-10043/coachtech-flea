@@ -10,7 +10,8 @@
         @csrf
 
         <div class="form__input">
-            <img class="profile__image" src="{{ asset('storage/' . $user->profile->profile_image) }}"
+            <img class="profile__image"
+                src="{{ $user->profile?->profile_image ? asset('storage/' . $user->profile->profile_image) : asset('storage/profile_images/default.png') }}"
                 alt="{{ $user->name }}">
             <label for="profile_image"></label>
             <input class="form__input__image" id="profile_image" type="file" name="profile_image">
