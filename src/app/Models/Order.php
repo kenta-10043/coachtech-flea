@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\PaymentMethod as PaymentMethodEnum;
 
 class Order extends Model
 {
@@ -18,7 +19,13 @@ class Order extends Model
         'shopping_address',
         'shopping_building',
         'paid_at',
+        'status',
     ];
+
+    public function getLabelAttribute(): string
+    {
+        return PaymentMethodEnum::from($this->payment_method)->label();
+    }
 
     public function user()
     {
