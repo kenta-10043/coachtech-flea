@@ -16,6 +16,9 @@
             <div>
                 <h2 class="item__name">{{ $item->item_name }} </h2>
                 <h5 class="Brand__name">{{ $item->brand_name }}</h5>
+                @if ($item->status === \App\Enums\Status::SOLD->value)
+                    <span class="item__status-alert">{{ \App\Enums\Status::from($item->status)->label() }}</span>
+                @endif
                 <p class="item__price">{{ '￥' . number_format($item->price) }}（税込）</p>
 
                 <div class="item__reactions">

@@ -42,3 +42,8 @@
     text-decoration: none;
     color: black;
 }
+
+.item__status-alert {
+    background-color: red;
+    color: white;
+}

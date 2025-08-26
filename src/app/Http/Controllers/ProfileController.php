@@ -20,11 +20,9 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $sellItems = $user->items()->where('status', 1)->get();
-        $buyItems = $user->orders()->whereNotNull('paid_at')->with('item')->get();
-        $allItems = $sellItems->concat($buyItems);
+        $buyItems = $user->orders()->whereNotNull('paid_at')->whereHas('item')->with('item')->get();
 
-
-        return view('profiles.profile', compact('user', 'sellItems', 'buyItems', 'allItems'));
+        return view('profiles.profile', compact('user', 'sellItems', 'buyItems'));
     }
 
     public function store(ProfileRequest $request)

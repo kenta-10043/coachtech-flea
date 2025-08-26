@@ -22,6 +22,9 @@
                         <img class="item__cards__image" src="{{ 'storage/' . $item->item_image }}"
                             alt="{{ $item->item_name }}">
                         <p class="item__cards__name">{{ $item->item_name }} </p>
+                        @if ($item->status === \App\Enums\Status::SOLD->value)
+                            <span class="item__status-alert">{{ \App\Enums\Status::from($item->status)->label() }}</span>
+                        @endif
                     </div>
                 </a>
             @endif

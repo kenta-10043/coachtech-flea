@@ -29,6 +29,10 @@
                             <img class="item__cards__image" src="{{ asset('storage/' . $item->item_image) }}"
                                 alt="{{ $item->item_name }}">
                             <p class="item__cards__name">{{ $item->item_name }} </p>
+                            @if ($item->status === \App\Enums\Status::SOLD->value)
+                                <span
+                                    class="item__status-alert">{{ \App\Enums\Status::from($item->status)->label() }}</span>
+                            @endif
                         </div>
                     </a>
                 @endforeach
@@ -36,11 +40,15 @@
 
             @if (request()->query('page') === 'buy' || !request()->query('page'))
                 @foreach ($buyItems as $item)
-                    <a class="item__link" href="{{ route('item.show', ['item_id' => $item->id]) }}">
+                    <a class="item__link" href="{{ route('item.show', ['item_id' => $item->item->id]) }}">
                         <div class="item__cards">
                             <img class="item__cards__image" src="{{ asset('storage/' . $item->item->item_image) }}"
-                                alt="{{ $item->item_name }}">
+                                alt="{{ $item->item->item_name }}">
                             <p class="item__cards__name">{{ $item->item->item_name }} </p>
+                            @if ($item->item->status === \App\Enums\Status::SOLD->value)
+                                <span
+                                    class="item__status-alert">{{ \App\Enums\Status::from($item->item->status)->label() }}</span>
+                            @endif
                         </div>
                     </a>
                 @endforeach

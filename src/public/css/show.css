@@ -63,6 +63,11 @@
     color: red;
 }
 
+.item__status-alert {
+    background-color: red;
+    color: white;
+}
+
 .profile_images {
     width: 70px;
     height: 70px;
