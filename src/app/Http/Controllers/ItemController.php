@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Comment;
+use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
@@ -12,7 +13,9 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::all();
-        return view('index', compact('items'));
+        $user = Auth::user();
+
+        return view('index', compact('items', 'user'));
     }
 
     public function show($item_id)

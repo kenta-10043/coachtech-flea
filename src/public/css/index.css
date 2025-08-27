@@ -9,14 +9,18 @@
     color: black;
 }
 
-.item__cards {}
+.item__cards {
+
+}
 
 .item__cards__image {
     width: 290px;
     height: 290px;
 }
 
-.item__cards__name {}
+.item__cards__name {
+  
+}
 
 .alert-success {
     color: white;

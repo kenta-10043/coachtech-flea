@@ -51,10 +51,15 @@
                         <p class="comments__count">{{ $item->comments_count }}</p>
                     </div>
                 </div>
-                <div>
-                    <button class="purchase__button"
-                        onclick="location.href='{{ route('purchase.order', ['item_id' => $item->id]) }}'">購入手続きへ</button>
-                </div>
+
+                @if ($item->status !== 2)
+                    <div>
+                        <button class="purchase__button"
+                            onclick="location.href='{{ route('purchase.order', ['item_id' => $item->id]) }}'">購入手続きへ</button>
+                    </div>
+                @else
+                    <p class="purchased-alert">この商品は完売しました</p>
+                @endif
             </div>
 
             <div>
