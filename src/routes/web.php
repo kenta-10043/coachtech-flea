@@ -22,7 +22,6 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/', [ItemController::class, 'index'])->name('index');
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
-Route::get('/search', [ItemController::class, 'search'])->name('item.search');
 
 Route::middleware('auth')->group(
     function () {

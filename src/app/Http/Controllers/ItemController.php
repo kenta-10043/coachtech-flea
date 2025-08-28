@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
-    public function index()
-    {
-        $items = Item::all();
-        $user = Auth::user();
-
-        return view('index', compact('items', 'user'));
-    }
 
     public function show($item_id)
     {
@@ -45,15 +38,31 @@ class ItemController extends Controller
         return back();
     }
 
-    public function search(Request $request)
+    public function index(Request $request)
     {
         $keyword = $request->input('keyword', '');
         $query = Item::query();
 
         if ($request->filled('keyword')) {
-
             $query->where('item_name', 'LIKE', '%' . $keyword . '%');
         }
+
+        if ($request->query('tab') === 'mylist') {
+            if (auth()->check()) {
+
+                $user = Auth::user();
+                $likedItemIds = $user->likes()->pluck('item_id');
+                $query->whereIn('id', $likedItemIds);
+            } else {
+                $items = collect();
+                return view('index', compact('items', 'keyword'));
+            }
+        } else {
+            if (auth()->check()) {
+                $query->where('user_id', '!=', auth()->id());
+            }
+        }
+
         $items = $query->get();
         return view('index', compact('items', 'keyword'));
     }

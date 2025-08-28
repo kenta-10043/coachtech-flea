@@ -20,7 +20,7 @@
                             alt="ロゴ"></a></li>
 
 
-                <form action="{{ route('item.search') }}" method="get">
+                <form action="{{ route('index') }}" method="get">
                     <li>
                         <input class="input__search" type="text" name="keyword" value="{{ $keyword ?? '' }}"
                             placeholder="　　　　　なにをお探しですか？　　　　　">
@@ -52,7 +52,7 @@
                             alt="ロゴ"></a></li>
 
                 <li>
-                    <form action="{{ route('item.search') }}" method="get">
+                    <form action="{{ route('index') }}" method="get">
                         <input class="input__search" type="text" name="keyword" value="{{ $keyword ?? '' }}"
                             placeholder="　　　　　なにをお探しですか？　　　　　">
                     </form>
