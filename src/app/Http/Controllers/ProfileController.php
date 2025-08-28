@@ -19,24 +19,10 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $items = $user->items;
-        return view('profiles.profile', compact('user', 'items'));
-    }
-
-    public function items()
-    {
-        $user = Auth::user();
         $sellItems = $user->items()->where('status', 1)->get();
+        $buyItems = $user->orders()->whereNotNull('paid_at')->whereHas('item')->with('item')->get();
 
-        return view('profiles.profile', compact('sellItems', 'user'));
-    }
-
-    public function purchases()
-    {
-        $user = Auth::user();
-        $buyItems = $user->items()->where('status', 2)->get();
-
-        return view('profiles.profile', compact('buyItems', 'user'));
+        return view('profiles.profile', compact('user', 'sellItems', 'buyItems'));
     }
 
     public function store(ProfileRequest $request)

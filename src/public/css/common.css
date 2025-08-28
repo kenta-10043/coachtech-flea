@@ -31,12 +31,15 @@
     background-color: black;
     color: white;
     border: none;
+    cursor: pointer;
 }
+
 .button__login{
     margin-left: 250px;
     background-color: black;
     color: white;
     border: none;
+    cursor: pointer;
 }
 
 .button__mypage{
@@ -44,10 +47,12 @@
     background-color: black;
     color: white;
     border: none;
+    cursor: pointer;
 }
 
 .button__exhibition{
     margin-left: 10px;
+    cursor: pointer;
 }
 
 

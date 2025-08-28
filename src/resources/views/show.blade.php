@@ -16,6 +16,9 @@
             <div>
                 <h2 class="item__name">{{ $item->item_name }} </h2>
                 <h5 class="Brand__name">{{ $item->brand_name }}</h5>
+                @if ($item->status === \App\Enums\Status::SOLD->value)
+                    <span class="item__status-alert">{{ \App\Enums\Status::from($item->status)->label() }}</span>
+                @endif
                 <p class="item__price">{{ '￥' . number_format($item->price) }}（税込）</p>
 
                 <div class="item__reactions">
@@ -48,10 +51,15 @@
                         <p class="comments__count">{{ $item->comments_count }}</p>
                     </div>
                 </div>
-                <div>
-                    <button class="purchase__button"
-                        onclick="location.href='{{ route('purchase.order', ['item_id' => $item->id]) }}'">購入手続きへ</button>
-                </div>
+
+                @if ($item->status !== 2)
+                    <div>
+                        <button class="purchase__button"
+                            onclick="location.href='{{ route('purchase.order', ['item_id' => $item->id]) }}'">購入手続きへ</button>
+                    </div>
+                @else
+                    <p class="purchased-alert">この商品は完売しました</p>
+                @endif
             </div>
 
             <div>

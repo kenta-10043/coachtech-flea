@@ -22,7 +22,7 @@ class PurchaseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pay_method' => 'required',
+            'payment_method' => 'required',
             'shopping_postal_code' => 'required',
             'shopping_address' => 'required',
         ];
@@ -31,7 +31,7 @@ class PurchaseRequest extends FormRequest
     public function messages()
     {
         return [
-            'pay_method.required' => 'お支払い方法を選択してください',
+            'payment_method.required' => 'お支払い方法を選択してください',
             'shopping_postal_code.required' => '配送先を入力してください',
             'shopping_address.required' => '配送先を入力してください',
 
