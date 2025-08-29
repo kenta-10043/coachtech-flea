@@ -16,6 +16,10 @@ use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 use App\Http\Responses\RegisterResponse;
 use App\Http\Responses\LoginResponse;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use App\Http\Responses\VerifyEmailResponse;
+use Laravel\Fortify\Contracts\VerifyEmailResponse as VerifyEmailResponseContract;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Event;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -33,6 +37,10 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Event::listen(Registered::class, function ($event) {
+            Auth::logout();
+        });
+
         Fortify::createUsersUsing(CreateNewUser::class);
 
         Fortify::registerView(function () {
@@ -41,6 +49,10 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::loginView(function () {
             return view('auth.login');
+        });
+
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify-email');
         });
 
         Fortify::authenticateUsing(function ($request) {
@@ -70,5 +82,9 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
         $this->app->singleton(RegisterResponseContract::class, RegisterResponse::class);
         $this->app->singleton(LoginResponseContract::class, LoginResponse::class);
+        $this->app->singleton(
+            VerifyEmailResponseContract::class,
+            VerifyEmailResponse::class
+        );
     }
 }

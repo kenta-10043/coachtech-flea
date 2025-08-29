@@ -27,6 +27,7 @@ class ProfileController extends Controller
 
     public function store(ProfileRequest $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         $user->update([

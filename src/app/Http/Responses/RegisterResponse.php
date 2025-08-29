@@ -9,7 +9,6 @@ class RegisterResponse implements RegisterResponseContract
 {
     public function toResponse($request)
     {
-        Auth::logout();
-        return redirect('/login');
+        return redirect()->intended('/email/verify');
     }
 }
