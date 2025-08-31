@@ -21,10 +21,13 @@ Laravel 環境構築
 3.env.example ファイルから.env を作成し、環境変数を変更　(cp .env.example .env)  
  |設定項目|変更前|変更後|  
  |---|---|---|  
- |DB_HOST|127.0.0.1|mysql|  
- |DB_DATABASE|laravel|laravel_db|  
+ |DB\*HOST|127.0.0.1|mysql|  
+ |DB\*DATABASE|laravel|laravel_db|  
  |DB_USERNAME|root|laravel_user|  
  |DB_PASSWORD|ー|laravel_pass|
+
+|STRIPE*KEY|---|pk_test*×××××|（××××× はご自身で KEY を取得・入力してください。）  
+ |STRIPE*SECRET|---|sk_test*×××××|（××××× はご自身で KEY を取得・入力してください。）
 
 4.アプリケーションキーの作成　(php artisan key:generate)  
 5.マイグレーションの実行　(php artisan migrate)  
