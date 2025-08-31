@@ -20,6 +20,7 @@ class Order extends Model
         'shopping_building',
         'paid_at',
         'status',
+        'checkout_session_id',
     ];
 
     public function getLabelAttribute(): string

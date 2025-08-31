@@ -12,7 +12,7 @@
 
     <h3>商品の購入</h3>
 
-    <form action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="post">
+    <form action="{{ route('purchase.checkout', ['item_id' => $item->id]) }}" method="post">
         @csrf
         <div class="purchase__content">
 
@@ -31,9 +31,6 @@
                 <select name="payment_method" id="payment_method">
                     <option value="" disabled selected {{ old('payment_method') ? '' : 'selected' }}>選択してください</option>
                     @foreach ($paymentMethods as $method)
-                        @if ($method === \App\Enums\PaymentMethod::UNSELECTED)
-                            @continue
-                        @endif
                         <option value="{{ $method->value }}"
                             {{ old('payment_method') == $method->value ? 'selected' : '' }}>
                             {{ $method->label() }}</option>
@@ -80,7 +77,7 @@
 
                     <div>
                         <p>支払方法 <span
-                                id="selectedPayment">{{ old('payment_method') ? \App\Enums\PaymentMethod::from(old('payment_method'))->label() : 'コンビニ払い' }}</span>
+                                id="selectedPayment">{{ old('payment_method') ? \App\Enums\PaymentMethod::from(old('payment_method'))->label() : $selectedPayment ?? '' }}</span>
                         </p>
 
                     </div>
@@ -94,6 +91,9 @@
     <script>
         const select = document.getElementById('payment_method');
         const display = document.getElementById('selectedPayment');
+
+        display.textContent = select.options[select.selectedIndex].text;
+
 
         select.addEventListener('change', function() {
             const value = this.value;

@@ -4,16 +4,22 @@ namespace App\Enums;
 
 enum PaymentMethod: int
 {
-    case UNSELECTED = 1;
-    case CONVENIENCE = 2;
-    case CREDIT = 3;
+    case KONBINI = 1;
+    case CARD = 2;
 
     public function label(): string
     {
         return match ($this) {
-            self::UNSELECTED => '未選択',
-            self::CONVENIENCE => 'コンビニ払い',
-            self::CREDIT => 'カード払い',
+            self::KONBINI => 'コンビニ払い',
+            self::CARD => 'カード払い',
+        };
+    }
+
+    public function stripeCode(): string
+    {
+        return match ($this) {
+            self::KONBINI => 'konbini',
+            self::CARD => 'card',
         };
     }
 }
