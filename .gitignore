@@ -24,7 +24,8 @@ src/storage/framework/sessions/*
 src/storage/framework/views/*
 src/storage/logs/*
 src/.env
-src/.env.*  # .env.local なども含む
+src/.env.*
+!src/.env.example
 
 # ==========================
 # Docker（MySQLなど機密データ）

@@ -27,7 +27,6 @@ Route::middleware('auth')->group(
     function () {
 
         Route::get('/purchase/{item_id}', [OrderController::class, 'order'])->name('purchase.order');
-        // Route::post('/purchase/{item_id}', [OrderController::class, 'store'])->name('purchase.store');
         Route::post('/purchase/{item_id}/checkout', [OrderController::class, 'createCheckoutSession'])->name('purchase.checkout');
         Route::get('/purchase/success/{item_id}', [OrderController::class, 'success'])->name('purchase.success');
         Route::get('/purchase/cancel/{item_id}', [OrderController::class, 'cancel'])->name('purchase.cancel');
