@@ -18,7 +18,7 @@ class ProfileFactory extends Factory
     {
         return [
             'profile_image' => 'dummy2.jpg',
-            'postal_code' => 123 - 4567,
+            'postal_code' => '123-4567',
             'address' => $this->faker->address(),
         ];
     }

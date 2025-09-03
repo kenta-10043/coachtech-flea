@@ -36,16 +36,11 @@
                 </li>
 
                 <li>
-                    <form action="{{ route('profile.index') }}" method="get">
-                        @csrf
-                        <button class="button__mypage">マイページ</button>
-                    </form>
+                    <a class="button__mypage" href="{{ route('profile.index') }}">マイページ</a>
                 </li>
 
                 <li>
-                    <form action="{{ route('sell.index') }}" method="get">
-                        <button class="button__exhibition">出品</button>
-                    </form>
+                    <a class="button__exhibition" href="{{ route('sell.index') }}">出品</a>
                 </li>
             @else
                 <li><a href="{{ route('index') }}"><img class="title" src="{{ asset('storage/others/logo.svg') }}"
