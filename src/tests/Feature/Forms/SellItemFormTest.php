@@ -38,6 +38,7 @@ class SellItemFormTest extends TestCase
 
         $response = $this->post(route('sell.store'), $formData);
 
+
         $response->assertRedirect(route('index'));
 
         $item = DB::table('items')->first();
