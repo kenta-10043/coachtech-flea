@@ -38,7 +38,7 @@ Laravel 環境構築
 
 - PHP 8.3-fpm
 - Laravel 10.48.29
-- MySQL 8.0.26
+- MySQL 8.0.34
 - fortify \* v1.28.0
 - mailhog
 

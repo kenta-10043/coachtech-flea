@@ -29,6 +29,7 @@
 .button__logout{
     margin-left: 250px;
     background-color: black;
+    font-size: 17px;
     color: white;
     border: none;
     cursor: pointer;
@@ -44,15 +45,22 @@
 
 .button__mypage{
     margin-left: 10px;
-    background-color: black;
     color: white;
-    border: none;
     cursor: pointer;
+    text-decoration: none;
+
 }
 
 .button__exhibition{
-    margin-left: 10px;
+    margin-left: 10px ;
+    display: inline-block;
+    width: 60px;
+    text-align: center;
     cursor: pointer;
+    border: soli 1px black;
+    background-color: white;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 
