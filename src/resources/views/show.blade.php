@@ -90,7 +90,7 @@
                         <li><img class="profile_images"
                                 src="{{ asset('storage/' . $comment->user->profile->profile_image) }}"
                                 alt="{{ $comment->user->name }}">
-                            <p>{{ $comment->user->name }} </p>
+                            <span class="comment__user__name">{{ $comment->user->name }} </span>
                             <p class="comment__content">{{ $comment->comment }} </p>
                         </li>
                     @endforeach
@@ -98,7 +98,7 @@
 
                 <form action="{{ route('comment.store', ['item_id' => $item->id]) }}" method="post">
                     @csrf
-                    <label for="comment">商品へのコメント</label><br>
+                    <label class="comment__label" for="comment">商品へのコメント</label><br>
                     <textarea class="comment__input" id="comment" name="comment" cols="30" rows="10"
                         placeholder="こちらへコメントを入力してください"></textarea>
 

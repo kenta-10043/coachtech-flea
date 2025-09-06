@@ -38,13 +38,15 @@
 .button__login{
     margin-left: 250px;
     background-color: black;
+    font-size: 17px;
     color: white;
     border: none;
     cursor: pointer;
 }
 
-.button__mypage{
+.button__mypage:link,.button__mypage:visited{
     margin-left: 10px;
+    background-color: black;
     color: white;
     cursor: pointer;
     text-decoration: none;

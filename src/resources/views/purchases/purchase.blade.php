@@ -10,7 +10,6 @@
         </div>
     @endif
 
-    <h3>商品の購入</h3>
 
     <form action="{{ route('purchase.checkout', ['item_id' => $item->id]) }}" method="post">
         @csrf
@@ -18,65 +17,72 @@
 
             <div class="purchase__content__information">
 
-                <div>
+                <div class="item__card">
                     <img class="item__image" src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->item_name }}">
-
-                    <p>{{ $item->item_name }} </p>
-
-                    <P>{{ '￥' . number_format($item->price) }}</P>
-                    <input type="hidden" name="order_price" value="{{ $item->price }}">
+                    <div class="item__information">
+                        <p class="item-name">{{ $item->item_name }} </p>
+                        <P class="item-price">{{ '￥' . number_format($item->price) }}</P>
+                        <input type="hidden" name="order_price" value="{{ $item->price }}">
+                    </div>
                 </div>
 
-                <h4>支払方法</h4>
-                <select name="payment_method" id="payment_method">
-                    <option value="" disabled selected {{ old('payment_method') ? '' : 'selected' }}>選択してください</option>
-                    @foreach ($paymentMethods as $method)
-                        <option value="{{ $method->value }}"
-                            {{ old('payment_method') == $method->value ? 'selected' : '' }}>
-                            {{ $method->label() }}</option>
-                    @endforeach
-                </select>
+                <h4>支払い方法</h4>
+                <div class="payment-method__box">
+                    <select class="select__payment-method" name="payment_method" id="payment_method">
+                        <option value="" disabled selected {{ old('payment_method') ? '' : 'selected' }}>選択してください
+                        </option>
+                        @foreach ($paymentMethods as $method)
+                            <option value="{{ $method->value }}"
+                                {{ old('payment_method') == $method->value ? 'selected' : '' }}>
+                                {{ $method->label() }}</option>
+                        @endforeach
+                    </select>
 
-                @error('payment_method')
-                    <div class="error-alert">{{ $message }}</div>
-                @enderror
+                    @error('payment_method')
+                        <div class="error-alert">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="shopping-address__box">
+                    <h4>配送先</h4>
+                    <a class="address__update-link" href="{{ route('address.edit', ['item_id' => $item->id]) }}">変更する</a>
+                </div>
+
+                <div class="shopping-address__box__inner">
+                    <p>〒{{ $postalCode }}</p>
+                    <input type="hidden" name="shopping_postal_code" value="{{ $postalCode }}">
+
+                    <span>{{ $address }} </span>
+                    <input type="hidden" name="shopping_address" value="{{ $address }}">
+
+                    <span>{{ $building }} </span>
+                    <input type="hidden" name="shopping_building" value="{{ $building }}">
 
 
-                <h4>配送先</h4>
-                <a href="{{ route('address.edit', ['item_id' => $item->id]) }}">変更する</a>
+                    @error('shopping_postal_code')
+                        <div class="error-alert">{{ $message }}</div>
+                    @enderror
 
-                <p>〒{{ $postalCode }}</p>
-                <input type="hidden" name="shopping_postal_code" value="{{ $postalCode }}">
+                    @error('shopping_address')
+                        <div class="error-alert">{{ $message }}</div>
+                    @enderror
 
-                <p>{{ $address }} </p>
-                <input type="hidden" name="shopping_address" value="{{ $address }}">
-
-                <p>{{ $building }} </p>
-                <input type="hidden" name="shopping_building" value="{{ $building }}">
+                    @error('shopping_building')
+                        <div class="error-alert">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
-
-            @error('shopping_postal_code')
-                <div class="error-alert">{{ $message }}</div>
-            @enderror
-
-            @error('shopping_address')
-                <div class="error-alert">{{ $message }}</div>
-            @enderror
-
-            @error('shopping_building')
-                <div class="error-alert">{{ $message }}</div>
-            @enderror
 
             <div class="purchase__content__pay-information">
 
-                <div>
-                    <div>
-                        <label for="shopping_price">商品代金</label>
-                        <p for="shopping_price">￥{{ number_format($item->price) }} </p>
+                <div class="subtotal">
+                    <div class="shopping-price__content">
+                        <label class="shopping-price__label" for="shopping_price">商品代金</label>
+                        <p class="shopping-price for="shopping_price">￥{{ number_format($item->price) }} </p>
                     </div>
 
                     <div>
-                        <p>支払方法 <span
+                        <p class="payment-method">支払方法 <span class="payment-method__select"
                                 id="selectedPayment">{{ old('payment_method') ? \App\Enums\PaymentMethod::from(old('payment_method'))->label() : $selectedPayment ?? '' }}</span>
                         </p>
 

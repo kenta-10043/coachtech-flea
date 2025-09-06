@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr;
+    margin-top: 60px;
 }
 
 .error-alert {
@@ -17,15 +18,99 @@
     padding-left: 5px;
 }
 
+.purchase__content__information{
+    width: 800px;
+    padding-left: 112px;
+}
+
+.item__card{
+    display: flex;
+    height: 222px;
+    border-bottom: solid #000000 1px;
+}
+
 .item__image{
     width: 177px;
     height: 177px;
+}
+
+.item-name,.item-price{
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.item-name{
+    margin-top: 0;
+}
+
+.payment-method__box{
+    height: 70px;
+    border-bottom: solid #000000 1px;
+}
+
+.select__payment-method{
+    margin-left: 50px;
+    width: 200px;
+}
+
+.shopping-address__box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.shopping-address__box__inner{
+    border-bottom: solid #000000 1px;
+    height: 105px;
+    font-weight: bold;
+}
+
+.address__update-link{
+    text-decoration: none;
+    padding-top: 15px;
+}
+
+.purchase__content__pay-information{
+    margin-right: 100px;
+}
+
+.subtotal{
+    text-align: center;
+    border: #000000 1px solid;
+}
+
+.shopping-price__content{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid #000000 1px;
+}
+
+.shopping-price__label{
+    margin-left: 70px;
+    padding-top: 28px;
+    height: 80px;
+}
+
+.shopping-price{
+    margin-right: 70px;
+    font-size: 25px;
+}
+
+.payment-method{
+    width: 100%;
+    height: 55px;
+    padding-top: 11px;
+}
+
+.payment-method__select{
+    margin-right: 70px;
 }
 
 .purchase__button{
     cursor: pointer;
     width: 400px;
     height: 55px;
+    margin-top: 80px;
     background-color: #FF5555;
     border: none;
     color: white;

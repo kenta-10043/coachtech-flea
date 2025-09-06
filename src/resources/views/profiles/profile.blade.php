@@ -15,9 +15,9 @@
 
     </div>
     <div>
-        <div>
-            <a href="{{ route('profile.index', ['page' => 'sell']) }}">出品した商品</a>
-            <a href="{{ route('profile.index', ['page' => 'buy']) }}">購入した商品</a>
+        <div class="profile__content__page">
+            <a class="page__sell" href="{{ route('profile.index', ['page' => 'sell']) }}">出品した商品</a>
+            <a class="page__buy" href="{{ route('profile.index', ['page' => 'buy']) }}">購入した商品</a>
         </div>
 
         <div class="item__container">
@@ -28,11 +28,13 @@
                         <div class="item__cards">
                             <img class="item__cards__image" src="{{ asset('storage/' . $item->item_image) }}"
                                 alt="{{ $item->item_name }}">
-                            <p class="item__cards__name">{{ $item->item_name }} </p>
-                            @if ($item->status === \App\Enums\Status::SOLD->value)
-                                <span
-                                    class="item__status-alert">{{ \App\Enums\Status::from($item->status)->label() }}</span>
-                            @endif
+                            <div class="item__card__description">
+                                <p class="item__cards__name">{{ $item->item_name }} </p>
+                                @if ($item->status === \App\Enums\Status::SOLD->value)
+                                    <span
+                                        class="item__status-alert">{{ \App\Enums\Status::from($item->status)->label() }}</span>
+                                @endif
+                            </div>
                         </div>
                     </a>
                 @endforeach

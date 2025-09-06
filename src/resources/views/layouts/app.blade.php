@@ -59,19 +59,14 @@
                     <button onclick="location.href='/login'" class="button__login">ログイン</button>
                 </li>
 
-                <li>
-                    <form action="/login" method="get">
-                        @csrf
-                        <button class="button__mypage">マイページ</button>
-                    </form>
+                 <li>
+                    <a class="button__mypage" href="{{ route('profile.index') }}">マイページ</a>
                 </li>
 
                 <li>
-                    <form action="/login" method="get">
-                        @csrf
-                        <button class="button__exhibition">出品</button>
-                    </form>
+                    <a class="button__exhibition" href="{{ route('sell.index') }}">出品</a>
                 </li>
+
             @endif
 
         </ul>

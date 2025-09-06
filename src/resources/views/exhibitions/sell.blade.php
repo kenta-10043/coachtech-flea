@@ -81,13 +81,13 @@
 
 
                     <div class="form__input__brand-name">
-                        <label for="brand_name">ブランド名</label>
+                        <label class="label__brand-name" for="brand_name">ブランド名</label>
                         <input class="input__brand-name" id="brand_name" type="text" name="brand_name"
                             value="{{ old('brand_name') }}" placeholder="ブランド名を入力">
                     </div>
 
                     <div class="form__input__description">
-                        <label for="description">商品の説明</label>
+                        <label class="label__description" for="description">商品の説明</label>
                         <textarea class="input__description" id="description" name="description" cols="30" rows="10"
                             placeholder="商品の説明を入力">{{ old('description') }}</textarea>
 
@@ -98,7 +98,7 @@
 
 
                     <div class="form__input__price">
-                        <label for="price">販売価格</label>
+                        <label class="label__price" for="price">販売価格</label>
                         <input class="input__price" id="price" type="text" name="price"
                             value="{{ old('price') }}" placeholder="販売価格を入力">
 

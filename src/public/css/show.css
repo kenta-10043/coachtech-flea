@@ -24,6 +24,10 @@
     letter-spacing: 0%;
 }
 
+.item__price{
+    font-size: 30px;
+}
+
 .information__category,
 .information__condition {
     display: flex;
@@ -37,7 +41,7 @@
 .item__category {
     width: 100px;
     height: 30px;
-    border-radius: 10%;
+    border-radius: 20%;
     background-color: #E5E5E5;
     border: none;
     text-align: center;
@@ -66,6 +70,8 @@
 .item__status-alert {
     background-color: red;
     color: white;
+    border-radius: 2px;
+    padding: 2px 7px;
 }
 
 .profile_images {
@@ -114,9 +120,22 @@
     background-color: #E5E5E5;
 }
 
+.comment__user__name{
+    font-weight: bold;
+    margin-left: 15px;
+}
+
 .comment__input {
     width: 570px;
     height: 246px;
+}
+
+.comment__label{
+    font-weight: bold;
+}
+
+.flex-item{
+    display: flex;
 }
 
 .purchase__button,
@@ -125,6 +144,7 @@
     height: 45px;
     border: none;
     color: white;
+    margin-top: 20px;
     font-weight: bolder;
     background-color: #FF5555;
     cursor: pointer;

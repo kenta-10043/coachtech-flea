@@ -75,9 +75,8 @@
 .input__name, .input__brand-name, .input__description, .input__price,
 .label__name, .label__brand-name, .label__description, .label__price{
     display: block;
+    font-weight: bold;
 }
-
-
 
 .submit__button__register{
     width: 680px;
@@ -86,5 +85,5 @@
     color: white;
     font-weight: bolder;
     background-color: #FF5555;
-    margin-top: 10px;
+    margin-top: 50px;
 }

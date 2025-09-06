@@ -1,7 +1,26 @@
+.index__content__tab{
+    border-bottom: solid 2px #5F5F5F;
+    margin: 50px 0 ;
+
+}
+
+.recommendation__tab{
+    text-decoration: none;
+    margin-left: 130px;
+    color: #5F5F5F;
+}
+
+.mylist__tab{
+    text-decoration: none;
+    margin-left: 60px;
+    color: #5F5F5F;
+}
+
 .item__container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    gap: 20px;
 }
 
 .item__link {
@@ -10,7 +29,7 @@
 }
 
 .item__cards {
-
+    margin-bottom: 20px;
 }
 
 .item__cards__image {
@@ -18,8 +37,12 @@
     height: 290px;
 }
 
+.item__card__description{
+    display: flex;
+}
+
 .item__cards__name {
-  
+    display: inline-block;
 }
 
 .alert-success {
@@ -32,6 +55,13 @@
 }
 
 .item__status-alert{
+    display: inline-block;
+    width: 60px;
+    height: 25px;
+    margin-top: 15px;
+    padding-left: 13px;
     background-color: red;
     color: white;
+    margin-left: 20px;
+    border-radius: 2px;
 }

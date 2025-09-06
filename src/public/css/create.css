@@ -16,3 +16,41 @@
 .error-alert {
     color: red;
 }
+
+.profile__container {
+    text-align: center;
+    margin: 0 auto;
+    width: 680px;
+    height: 672px;
+}
+
+.profile__form {
+    margin-bottom: 30px;
+}
+
+.input__name,
+.input__postal-code,.input__address,.input__building {
+    display: block;
+    width: 100%;
+    height: 35px;
+}
+
+.input__label {
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+}
+
+.register__button {
+    width: 100%;
+    height: 35px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    background-color: #FF5555;
+    color: white;
+    font-weight: bold;
+    border-color: #FF5555;
+}
+
+
