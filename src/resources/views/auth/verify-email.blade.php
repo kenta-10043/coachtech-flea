@@ -14,10 +14,13 @@
 
 <body>
     <header class="main-header">
-        <ul class="header__nav">
-            <li><a href="{{ route('index') }}"><img class="title" src="{{ asset('storage/others/logo.svg') }}"
-                        alt="ロゴ"></a></li>
+        <form class="header__nav" action="/logout" method="post">
+            @csrf
+            <button class="button__logout"><img class="title" src="{{ asset('storage/others/logo.svg') }}"
+                    alt="ロゴ"></a></button>
+        </form>
     </header>
+
     <div class="container">
         <div class="mail-message__contents">
             <div>

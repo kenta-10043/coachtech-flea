@@ -9,6 +9,6 @@ class RegisterResponse implements RegisterResponseContract
 {
     public function toResponse($request)
     {
-        return redirect()->intended('/email/verify');
+        return redirect('/email/verify');
     }
 }

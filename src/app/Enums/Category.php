@@ -15,8 +15,9 @@ enum Category: int
     case SPORTS = 9;
     case KITCHEN = 10;
     case HANDMADE = 11;
-    case TOYS = 12;
-    case BABY_KIDS = 13;
+    case ACCESSORY = 12;
+    case TOYS = 13;
+    case BABY_KIDS = 14;
 
     public function label(): string
     {
@@ -32,6 +33,7 @@ enum Category: int
             self::SPORTS => 'スポーツ',
             self::KITCHEN => 'キッチン',
             self::HANDMADE => 'ハンドメイド',
+            self::ACCESSORY => 'アクセサリー',
             self::TOYS => 'おもちゃ',
             self::BABY_KIDS => 'ベビー・キッズ',
         };

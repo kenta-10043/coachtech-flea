@@ -30,6 +30,7 @@ class CategoriesTableSeeder extends Seeder
             ['category' => Category::SPORTS->value],
             ['category' => Category::KITCHEN->value],
             ['category' => Category::HANDMADE->value],
+            ['category' => Category::ACCESSORY->value],
             ['category' => Category::TOYS->value],
             ['category' => Category::BABY_KIDS->value],
         ]);
