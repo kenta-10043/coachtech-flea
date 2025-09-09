@@ -1,2 +1,9 @@
 *
 !.gitignore
+
+!sample_images/
+!sample_images/**
+!others/
+!others/**
+!profile_images/
+!profile_images/**
