@@ -65,3 +65,22 @@
     margin-left: 20px;
     border-radius: 2px;
 }
+
+@media (max-width: 1243px) {
+    .item__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    }
+}
+
+@media (max-width: 933px) {
+    .item__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    }
+}
+

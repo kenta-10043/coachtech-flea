@@ -14,62 +14,40 @@
 
 <body>
     <header class="main-header">
-        <ul class="header__nav">
+        <nav class="header__nav">
             @if (Auth::check())
-                <li><a href="{{ route('index') }}"><img class="title" src="{{ asset('storage/others/logo.svg') }}"
-                            alt="ロゴ"></a></li>
-
-
-                <form action="{{ route('index') }}" method="get">
-                    <li>
-                        <input class="input__search" type="text" name="keyword" value="{{ $keyword ?? '' }}"
-                            placeholder="　　　　　なにをお探しですか？　　　　　">
-                    </li>
+                <a href="{{ route('index') }}"><img class="title" src="{{ asset('storage/others/logo.svg') }}"
+                        alt="ロゴ"></a>
+                <form class="search__form" action="{{ route('index') }}" method="get">
+                    <input class="search__input" type="text" name="keyword" value="{{ $keyword ?? '' }}"
+                        placeholder="　　　　　なにをお探しですか？　　　　　">
                 </form>
-
-
-                <li>
+                <div class="link__button">
                     <form action="/logout" method="post">
                         @csrf
                         <button class="button__logout">ログアウト</button>
                     </form>
-                </li>
 
-                <li>
                     <a class="button__mypage" href="{{ route('profile.index') }}">マイページ</a>
-                </li>
-
-                <li>
                     <a class="button__exhibition" href="{{ route('sell.index') }}">出品</a>
-                </li>
+                </div>
             @else
-                <li><a href="{{ route('index') }}"><img class="title" src="{{ asset('storage/others/logo.svg') }}"
-                            alt="ロゴ"></a></li>
+                <a href="{{ route('index') }}"><img class="title" src="{{ asset('storage/others/logo.svg') }}"
+                        alt="ロゴ"></a>
 
-                <li>
-                    <form action="{{ route('index') }}" method="get">
-                        <input class="input__search" type="text" name="keyword" value="{{ $keyword ?? '' }}"
-                            placeholder="　　　　　なにをお探しですか？　　　　　">
-                    </form>
-                </li>
+                <form class="search__form" action="{{ route('index') }}" method="get">
+                    <input class="search__input" type="text" name="keyword" value="{{ $keyword ?? '' }}"
+                        placeholder="　　　　　なにをお探しですか？　　　　　">
+                </form>
 
-
-
-                <li>
-                    <button onclick="location.href='/login'" class="button__login">ログイン</button>
-                </li>
-
-                 <li>
+                <div class="link__button">
+                    <button class="button__login" onclick="location.href='/login'">ログイン</button>
                     <a class="button__mypage" href="{{ route('profile.index') }}">マイページ</a>
-                </li>
-
-                <li>
                     <a class="button__exhibition" href="{{ route('sell.index') }}">出品</a>
-                </li>
-
+                </div>
             @endif
 
-        </ul>
+        </nav>
     </header>
     <div class="container">
         @yield('content')

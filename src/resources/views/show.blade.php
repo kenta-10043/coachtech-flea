@@ -96,7 +96,7 @@
                     @endforeach
                 </ul>
 
-                <form action="{{ route('comment.store', ['item_id' => $item->id]) }}" method="post">
+                <form class="comment__form" action="{{ route('comment.store', ['item_id' => $item->id]) }}" method="post">
                     @csrf
                     <label class="comment__label" for="comment">商品へのコメント</label><br>
                     <textarea class="comment__input" id="comment" name="comment" cols="30" rows="10"

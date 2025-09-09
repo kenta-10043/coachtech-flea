@@ -1,11 +1,13 @@
 .item-data__container {
     display: flex;
-    height: 100vh;
+    height: 100%;
+    margin: 0 auto;
     margin-top: 60px;
+    max-width: 1206px;
 }
 
 .item__image {
-    width: 500px;
+    width: 100%;
     height: 500px;
     margin-left: 30px;
 }
@@ -115,7 +117,7 @@
 }
 
 .comment__content {
-    width: 570px;
+    width: 100%;
     height: 70px;
     background-color: #E5E5E5;
 }
@@ -123,6 +125,10 @@
 .comment__user__name{
     font-weight: bold;
     margin-left: 15px;
+}
+
+.comment__form{
+    width: 100%;
 }
 
 .comment__input {
