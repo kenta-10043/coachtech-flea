@@ -10,7 +10,9 @@
 #### Docker ビルド
 
 1.git clone<https://github.com/kenta-10043/coachtech-flea.git>  
-2.docker-compose up -d --build
+2.（必要な場合）既存のコンテナ・DB データを削除  
+ docker-compose down -v
+3.docker-compose up -d --build
 
 \*MySQL は、OS によって起動しない場合があるのでそれぞれの PC に合わせて docker-compose.yml ファイルを編集してください。
 
