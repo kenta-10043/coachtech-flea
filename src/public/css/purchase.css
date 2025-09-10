@@ -19,7 +19,7 @@
 }
 
 .purchase__content__information{
-    width: 800px;
+    max-width: 800px;
     padding-left: 112px;
 }
 
@@ -114,4 +114,26 @@
     background-color: #FF5555;
     border: none;
     color: white;
+}
+
+@media (max-width: 1000px) {
+    .item-name,
+    .item-price {
+        margin-left: 0;
+        font-weight: bold;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 800px) {
+    .purchase__button {
+        cursor: pointer;
+        width: 380px;
+        height: 55px;
+        margin-top: 80px;
+        background-color: #FF5555;
+        border: none;
+        color: white;
+    }
+
 }

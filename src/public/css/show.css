@@ -7,7 +7,7 @@
 }
 
 .item__image {
-    width: 100%;
+    width: 546px;
     height: 500px;
     margin-left: 30px;
 }
@@ -165,4 +165,21 @@
     background-color: #FF5555;
     text-align: center;
     padding-top: 10px;
+}
+
+@media (max-width: 1180px) {
+    .item-data__container {
+            display: contents;
+            height: 100%;
+            margin: 0 auto;
+            margin-top: 60px;
+            max-width: 1206px;
+        }
+
+    .item__image {
+            width: 546px;
+            height: 500px;
+            margin-left: 65px;
+                }
+
 }
