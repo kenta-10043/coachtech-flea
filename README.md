@@ -92,7 +92,7 @@ php artisan storage:link
 8.テストを実行する際は.test.env ファイルを作成
 
 ```bash
-cp .env .test.env
+cp .env .env.testing
 ```
 
 | 設定項目      | 変更前       | 変更後     |
@@ -105,7 +105,15 @@ cp .env .test.env
 
 ### テスト実行手順
 
-- demo_test データベース作成
+- demo_test データベース作成  
+
+```bash
+docker-compose exec mysql bash
+```
+
+```sql
+mysql -u root -P
+```
 
 ```sql
 CREATE DATABASE demo_test
@@ -115,7 +123,14 @@ CREATE DATABASE demo_test
 
 ```bash
 php artisan migrate --env=testing
-```
+```  
+
+- php artisan migrate --env=testing 実行時に DB エラーが発生した場合は以下のコマンドで volume を削除して再構築してください。
+
+```bash
+docker-compose down -v  # volume 削除 DB 初期化
+docker-compose up -d
+```  
 
 - テスト実行
 
