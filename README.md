@@ -139,7 +139,9 @@ php artisan test
 - fortify \* v1.28.0
 - mailhog
 
-## ER 図
+## ER 図  
+
+![ER](./flea.drawio.png)  
 
 ## 開発環境
 
