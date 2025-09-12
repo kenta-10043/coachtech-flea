@@ -46,7 +46,6 @@ class ExhibitionRequest extends FormRequest
             'price.required' => '商品価格を入力してください',
             'price.numeric' => '商品価格を数値形式で入力してください',
             'price.min' => '商品価格を０円以上で入力してください',
-
         ];
     }
 }

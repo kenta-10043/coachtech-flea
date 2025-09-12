@@ -21,7 +21,6 @@ class Item extends Model
         'condition_id'
     ];
 
-
     public function getLabelAttribute(): string
     {
         return StatusEnum::from($this->status)->label();

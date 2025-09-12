@@ -3,7 +3,6 @@
 namespace Tests\Feature\Pages;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Item;
 use App\Models\User;
@@ -30,37 +29,25 @@ class ItemShowTest extends TestCase
             'user_id' => $user->id,
             'condition_id' => $condition->id,
             'description' => '説明文',
-
         ]);
-
         $likeUser = User::factory()->create(['name' => 'like_user']);
         $commentUser = User::factory()->create(['name' => 'comment_user']);
         $commentUser->profile()->create(Profile::factory()->make()->toArray());
-
-
         Like::factory()->create([
             'user_id' => $likeUser->id,
             'item_id' => $item->id
         ]);
-
         Comment::factory()->create([
             'user_id' => $commentUser->id,
             'item_id' => $item->id,
             'comment' => 'コメント本文'
         ]);
-
         $item = Item::withCount(['likes', 'comments'])->with('comments.user.profile', 'categories')->find($item->id);
-
         $category1 = Category::factory()->create(['category' => 1]);
         $category2 = Category::factory()->create(['category' => 2]);
         $category3 = Category::factory()->create(['category' => 3]);
-
         $item->categories()->attach([$category1->id, $category2->id, $category3->id]);
-
-
-
         $response = $this->get("/item/{$item->id}");
-
         $response->assertStatus(200);
         $response->assertSee('dummy1.jpg');
         $response->assertSee('name');

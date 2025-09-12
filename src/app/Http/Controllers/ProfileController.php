@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProfileRequest;
-use App\Models\User;
-use App\Models\Profile;
 
 class ProfileController extends Controller
 {
@@ -29,29 +26,24 @@ class ProfileController extends Controller
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
-
         $user->update([
             'name' => $request->name,
         ]);
-
         $profileDate = [
             'postal_code' => $request->postal_code,
             'address' => $request->address,
             'building' => $request->building,
         ];
-
         if ($request->hasFile('profile_image')) {
             $profileImagePath = $request->file('profile_image')->store('profile_images', 'public');
             $profileDate['profile_image'] = $profileImagePath;
         }
-
         if ($user->profile) {
             $user->profile->update($profileDate);
         } else {
             $user->profile()->create($profileDate);
         }
         $user->load('profile');
-
         if ($user->profile && $user->profile->postal_code && $user->profile->address) {
             $user->update(['profile_completed' => true]);
         }

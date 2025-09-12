@@ -11,7 +11,6 @@
     @endif
     <div class="item-data__container">
         <img class="item__image" src="{{ asset('storage/' . $item->item_image) }}" alt="{{ $item->item_name }}">
-
         <div class="item-data__inner">
             <div>
                 <h2 class="item__name">{{ $item->item_name }} </h2>
@@ -20,7 +19,6 @@
                     <span class="item__status-alert">{{ \App\Enums\Status::from($item->status)->label() }}</span>
                 @endif
                 <p class="item__price">{{ '￥' . number_format($item->price) }}（税込）</p>
-
                 <div class="item__reactions">
                     <div>
                         @auth
@@ -45,13 +43,11 @@
                             <p class="likes__count">{{ $item->likes_count }}</p>
                         @endguest
                     </div>
-
                     <div class="comment__icon">
                         <img src="{{ asset('storage/others/ふきだしのアイコン.jpg') }}" alt="ふきだしのアイコン">
                         <p class="comments__count">{{ $item->comments_count }}</p>
                     </div>
                 </div>
-
                 @if ($item->status !== 2)
                     <div>
                         <button class="purchase__button"
@@ -61,12 +57,10 @@
                     <p class="purchased-alert">この商品は完売しました</p>
                 @endif
             </div>
-
             <div>
                 <h3>商品説明</h3>
                 <p class="item__description">{{ $item->description }} </p>
             </div>
-
             <div class="item__information">
                 <div class="information__category">
                     <h4 class="item__tittle-category">カテゴリー</h4>
@@ -75,14 +69,12 @@
                     @endforeach
                 </div>
             </div>
-
             <div class="item__information">
                 <div class="information__condition">
                     <h4 class="item__tittle-condition">商品の状態</h4>
                     <p class="item__condition">{{ $item->condition->label }} </p>
                 </div>
             </div>
-
             <div>
                 <h3>コメント({{ $item->comments_count }} )</h3>
                 <ul class="comment__list">
@@ -95,24 +87,17 @@
                         </li>
                     @endforeach
                 </ul>
-
                 <form class="comment__form" action="{{ route('comment.store', ['item_id' => $item->id]) }}" method="post">
                     @csrf
                     <label class="comment__label" for="comment">商品へのコメント</label><br>
                     <textarea class="comment__input" id="comment" name="comment" cols="30" rows="10"
                         placeholder="こちらへコメントを入力してください"></textarea>
-
                     <button class="comment__button" type="submit">コメントを送信する</button>
                 </form>
                 @error('comment')
                     <div class="error-alert">{{ $message }}</div>
                 @enderror
-
             </div>
-
-
         </div>
-
-
     </div>
 @endsection

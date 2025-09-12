@@ -2,11 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
-use App\Enums\Category;
 use App\Enums\Condition;
 use App\Enums\Status;
 
@@ -26,7 +23,6 @@ class ItemsTableSeeder extends Seeder
                 'item_image' => 'sample_images/Armani+Mens+Clock.jpg',
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::GOOD->value,
-
             ],
             [
                 'item_name' => 'HDD',
@@ -109,14 +105,12 @@ class ItemsTableSeeder extends Seeder
                 'status'      => Status::AVAILABLE->value,
                 'condition_id' => Condition::NEAR_GOOD->value,
             ],
-
         ];
 
         $itemsWithUser = collect($items)->map(function ($item) {
             $item['user_id'] = rand(1, 5);
             return $item;
         })->toArray();
-
         DB::table('items')->insert($itemsWithUser);
     }
 }

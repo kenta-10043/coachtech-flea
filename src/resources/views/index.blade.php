@@ -9,7 +9,6 @@
             {{ session('success') }}
         </div>
     @endif
-
     <div class="index__content__tab">
         <a class="recommendation__tab" href="{{ route('index') }}">おすすめ</a>
         <a class="mylist__tab" href="{{ route('index', array_merge(request()->all(), ['tab' => 'mylist'])) }}">マイリスト</a>
@@ -25,15 +24,12 @@
                         <div class="item__card__description">
                             <p class="item__cards__name">{{ $item->item_name }} </p>
                             @if ($item->status === \App\Enums\Status::SOLD->value)
-                                <span
-                                    class="item__status-alert">{{ \App\Enums\Status::from($item->status)->label() }}</span>
+                                <span class="item__status-alert">{{ \App\Enums\Status::from($item->status)->label() }}</span>
                             @endif
                         </div>
                     </div>
                 </a>
             @endforeach
         @endif
-
-
     </div>
 @endsection

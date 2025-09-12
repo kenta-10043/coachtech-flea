@@ -14,7 +14,6 @@ class Category extends Model
         'category',
     ];
 
-
     public function getLabelAttribute(): string
     {
         return CategoryEnum::from($this->category)->label();

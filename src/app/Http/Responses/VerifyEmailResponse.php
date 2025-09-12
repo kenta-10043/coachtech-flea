@@ -10,7 +10,6 @@ class VerifyEmailResponse implements VerifyEmailResponseContract
     public function toResponse($request)
     {
         $user = Auth::user();
-
         if (!$user->profile_completed) {
             return redirect()->route('profile.create');
         }

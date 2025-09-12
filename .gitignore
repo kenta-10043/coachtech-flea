@@ -7,15 +7,13 @@ src/public/hot
 src/public/storage
 src/storage/*.key
 src/storage/*.pem
-
+src/.php-cs-fixer.cache
 src/storage/app/public/*
 
 !src/storage/app/public/sample_images/
 !src/storage/app/public/sample_images/**
-
 !src/storage/app/public/others/
 !src/storage/app/public/others/**
-
 !src/storage/app/public/profile_images/
 !src/storage/app/public/profile_images/**
 

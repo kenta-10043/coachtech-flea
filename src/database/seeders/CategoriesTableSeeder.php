@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Enums\Category;
@@ -17,7 +16,6 @@ class CategoriesTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('categories')->truncate();
         DB::table('category_item')->truncate();
-
         DB::table('categories')->insert([
             ['category' => Category::FASHION->value],
             ['category' => Category::ELECTRONICS->value],
@@ -34,7 +32,6 @@ class CategoriesTableSeeder extends Seeder
             ['category' => Category::TOYS->value],
             ['category' => Category::BABY_KIDS->value],
         ]);
-
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

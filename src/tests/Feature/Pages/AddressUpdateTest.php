@@ -18,19 +18,14 @@ class AddressUpdateTest extends TestCase
     {
         $user = User::factory()->create();
         $item = Item::factory()->create();
-
         $formData = [
             'shopping_postal_code' => '145-4567',
             'shopping_address' => 'サンプル住所',
             'shopping_building' => 'サンプル建物名',
             'payment_method' => 1,
         ];
-
-
         $response = $this->actingAs($user)
             ->put(route('address.update', ['item_id' => $item->id]), $formData);
-
-
         $this->assertDatabaseHas('orders', [
             'item_id' => $item->id,
             'user_id' => $user->id,
@@ -40,11 +35,8 @@ class AddressUpdateTest extends TestCase
             'shopping_building' => 'サンプル建物名',
             'payment_method'       => 1,
         ]);
-
-
         $response = $this->actingAs($user)
             ->get(route('address.edit', ['item_id' => $item->id]));
-
         $response->assertStatus(200);
         $response->assertSee('145-4567');
         $response->assertSee('サンプル住所');
@@ -59,12 +51,9 @@ class AddressUpdateTest extends TestCase
                 'url' => 'https://checkout.stripe.com/c/pay/cs_test_123'
             ], 200)
         ]);
-
         $user = User::factory()->create();
         $this->actingAs($user);
-
         $item = Item::factory()->create();
-
         $formData = [
             'payment_method' => 2,
             'shopping_postal_code' => '123-4567',
@@ -72,15 +61,11 @@ class AddressUpdateTest extends TestCase
             'shopping_building' => 'サンプル建物名',
             'status' => 'draft',
         ];
-
         $response = $this->post(route('purchase.checkout', ['item_id' => $item->id]), $formData);
-
         $order = Order::where('item_id', $item->id)->first();
         $order->update(['status' => 'paid']);
-
         $response->assertRedirect();
         $this->assertStringContainsString('checkout.stripe.com', $response->headers->get('Location'));
-
         $this->assertDatabaseHas('orders', [
             'payment_method' => 2,
             'shopping_postal_code' => '123-4567',

@@ -3,7 +3,6 @@
 namespace Tests\Feature\Pages;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Profile;
 use App\Models\User;
@@ -18,32 +17,24 @@ class ProfilePageTest extends TestCase
     {
         $user = User::factory()->create(['name' => 'name']);
         $this->actingAs($user);
-
         Profile::factory()->create([
             'user_id' => $user->id,
             'profile_image' => 'dummy.jpg'
         ]);
-
         $sellItem = Item::factory()->create([
             'user_id' => $user->id,
             'item_name' => 'sell_item',
             'status' => 1,
         ]);
-
         $buyItemModel = Item::factory()->create([
             'item_name' => 'buy_item',
             'status' => 2,
         ]);
-
         $buyItem = Order::factory()->create([
             'user_id' => $user->id,
             'item_id' => $buyItemModel->id,
         ]);
-
-
-
         $response = $this->get('/mypage');
-
         $response->assertStatus(200);
         $response->assertSee('name');
         $response->assertSee('dummy.jpg');
@@ -55,32 +46,24 @@ class ProfilePageTest extends TestCase
     {
         $user = User::factory()->create(['name' => 'name']);
         $this->actingAs($user);
-
         Profile::factory()->create([
             'user_id' => $user->id,
             'profile_image' => 'dummy.jpg'
         ]);
-
         $sellItem = Item::factory()->create([
             'user_id' => $user->id,
             'item_name' => 'sell_item',
             'status' => 1,
         ]);
-
         $buyItemModel = Item::factory()->create([
             'item_name' => 'buy_item',
             'status' => 2,
         ]);
-
         $buyItem = Order::factory()->create([
             'user_id' => $user->id,
             'item_id' => $buyItemModel->id,
         ]);
-
-
-
         $response = $this->get('/mypage?page=sell');
-
         $response->assertStatus(200);
         $response->assertSee('name');
         $response->assertSee('dummy.jpg');
@@ -92,32 +75,24 @@ class ProfilePageTest extends TestCase
     {
         $user = User::factory()->create(['name' => 'name']);
         $this->actingAs($user);
-
         Profile::factory()->create([
             'user_id' => $user->id,
             'profile_image' => 'dummy.jpg'
         ]);
-
         $sellItem = Item::factory()->create([
             'user_id' => $user->id,
             'item_name' => 'sell_item',
             'status' => 1,
         ]);
-
         $buyItemModel = Item::factory()->create([
             'item_name' => 'buy_item',
             'status' => 2,
         ]);
-
         $buyItem = Order::factory()->create([
             'user_id' => $user->id,
             'item_id' => $buyItemModel->id,
         ]);
-
-
-
         $response = $this->get('/mypage?page=buy');
-
         $response->assertStatus(200);
         $response->assertSee('name');
         $response->assertSee('dummy.jpg');

@@ -3,7 +3,6 @@
 namespace Tests\Feature\Pages;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Profile;
 use App\Models\User;
@@ -18,17 +17,13 @@ class ProfileCreatePageTest extends TestCase
             'name' => 'name',
         ]);
         $this->actingAs($user);
-
         Profile::factory()->create([
             'user_id' => $user->id,
             'profile_image' => 'dummy.jpg',
             'postal_code' => '123-4567',
             'address' => 'サンプル住所',
         ]);
-
-
         $response = $this->get('/mypage/profile');
-
         $response->assertStatus(200);
         $response->assertSee('name');
         $response->assertSee('dummy.jpg');

@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/verify-email.css') }}">
 
-
 </head>
 
 <body>
@@ -20,14 +19,12 @@
                     alt="ロゴ"></a></button>
         </form>
     </header>
-
     <div class="container">
         <div class="mail-message__contents">
             <div>
                 <span class="send-message">登録していただいたメールアドレスに認証メールを送付しました。<br>メール認証を完了してください。</span>
-                <button onclick="location.href='http://localhost:8025'">認証はこちらから</button>
+                <button class="button__verification" onclick="location.href='http://localhost:8025'">認証はこちらから</button>
             </div>
-
             <div>
                 <form action="{{ route('verification.send') }}" method="post">
                     @csrf
@@ -35,10 +32,6 @@
                 </form>
             </div>
         </div>
-
     </div>
-
-
 </body>
-
 </html>

@@ -17,6 +17,10 @@
     align-items: center;
 }
 
+.container{
+    margin-top: 170px;
+}
+
 .button__logout {
     all: unset;
     border: none;
@@ -36,10 +40,17 @@
 
 .send-message{
     display: block;
+    font-weight: bold;
+}
+
+.button__verification{
+    margin-top: 50px;
+    font-weight: bold;
 }
 
 .verification-send{
     background: none;
+    margin-top: 50px;
     padding: 0;
     color: #007bff;
     text-decoration: underline;

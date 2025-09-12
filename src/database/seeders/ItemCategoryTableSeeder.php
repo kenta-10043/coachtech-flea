@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -28,9 +27,6 @@ class ItemCategoryTableSeeder extends Seeder
             ['item_id' => 9, 'category_id' => 10],
             ['item_id' => 10, 'category_id' => 6],
         ];
-
-
-
         DB::table('category_item')->insert($param);
     }
 }

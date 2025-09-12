@@ -10,10 +10,13 @@
 ### Docker ビルド
 
 1.
+
 ```bash
 git clone https://github.com/kenta-10043/coachtech-flea.git
-```  
+```
+
 2.
+
 ```bash
 docker-compose up -d --build
 ```
@@ -23,56 +26,74 @@ docker-compose up -d --build
 ### Laravel 環境構築
 
 1.PHP コンテナへの移動
+
 ```bash
 docker-compose exec php bash
 ```
+
 2.Laravel のパッケージのインストール
+
 ```bash
 composer install
 ```
+
 3.env.example ファイルから.env を作成し、環境変数を変更
+
 ```bash
 cp .env.example .env
 ```
+
 | 設定項目    | 変更前    | 変更後       |
 | ----------- | --------- | ------------ |
 | DB_HOST     | 127.0.0.1 | mysql        |
 | DB_DATABASE | laravel   | laravel_db   |
 | DB_USERNAME | root      | laravel_user |
-| DB_PASSWORD | ー        | laravel_pass |  
+| DB_PASSWORD | ー        | laravel_pass |
 
-|設定項目|入力値|  
-|---|------|
-|STRIPE KEY|pk_test ×××××|    
-|STRIPE SECRET|sk_test ×××××|  
+| 設定項目      | 入力値        |
+| ------------- | ------------- |
+| STRIPE KEY    | pk_test ××××× |
+| STRIPE SECRET | sk_test ××××× |
 
-- ××××× はご自身で KEY を取得・入力してください。   
-- Stripe の API キーは、[Stripe]( https://stripe.com/jp)ダッシュボードから取得してください。
+- ××××× はご自身で KEY を取得・入力してください。
+- Stripe の API キーは、[Stripe](https://stripe.com/jp)ダッシュボードから取得してください。
 
-4.アプリケーションキーの作成
+  4.アプリケーションキーの作成
+
 ```bash
 php artisan key:generate
 ```
+
 5.マイグレーションの実行
+
 ```bash
 php artisan migrate
 ```
+
 - php artisan migrate 実行時に DB エラーが発生した場合は以下のコマンドで volume を削除して再構築してください。
+
 ```bash
 docker-compose down -v  # volume 削除 DB 初期化
 docker-compose up -d
 ```
+
 6.シーディングの実行
+
 ```bash
 php artisan db:seed
 ```
+
 7.画像ファイルのシンボリックリンク
+
 ```bash
 php artisan storage:link
 ```
+
 8.テストを実行する際は.test.env ファイルを作成
 
+```bash
 cp .env .test.env
+```
 
 | 設定項目      | 変更前       | 変更後     |
 | ------------- | ------------ | ---------- |
@@ -85,24 +106,30 @@ cp .env .test.env
 ### テスト実行手順
 
 - demo_test データベース作成
+
 ```sql
 CREATE DATABASE demo_test
 ```
+
 - テスト用テーブル作成
+
 ```bash
 php artisan migrate --env=testing
 ```
+
 - テスト実行
+
 ```bash
 php artisan test
 ```
+
 ### ストライプダミー決済実行のテストカード番号
 
 - カード番号：4242 4242 4242 4242
 - 有効期限：（例：12/34）
 - CVC：（例：123）
 
-> これらは **テストモード専用** の番号です。本番では使用しないでください。
+- これらは **テストモード専用** の番号です。本番では使用しないでください。
 
 ## 使用技術
 
@@ -118,4 +145,18 @@ php artisan test
 
 - 商品一覧：http://localhost/
 - ユーザー登録：http://localhost/register
-- phpMyAdmin：http://localhost:8080/
+- phpMyAdmin：http://localhost:8080/  
+
+## ログイン情報  
+
+### 管理者ユーザー  
+- email:admmin@example.com  
+- password:password00000  
+
+### 一般ユーザー  
+- email:user@example.com  
+- password:password00000  
+
+- roleによって管理者・一般ユーザーを区別しています  
+- 今回は仕様書から管理者機能は実装しておりません  
+

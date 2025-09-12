@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ExhibitionRequest;
-use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Condition;
@@ -26,11 +25,8 @@ class SellController extends Controller
         $data['user_id'] = auth()->id();
         $data['condition_id'] = $data['condition'];
         unset($data['condition']);
-
         $item = Item::create($data);
-
         $item->categories()->attach($request->category);
-
 
         return redirect()->route('index')->with('success', '商品を出品しました');
     }

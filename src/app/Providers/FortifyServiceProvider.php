@@ -42,7 +42,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::createUsersUsing(CreateNewUser::class);
-
+        
         Fortify::registerView(function () {
             return view('auth.register');
         });
@@ -59,14 +59,12 @@ class FortifyServiceProvider extends ServiceProvider
             $loginRequest = app(LoginRequest::class);
             $loginRequest->merge($request->all());
             $validated = $loginRequest->validated();
-
             if (Auth::attempt([
                 'email' => $validated['email'],
                 'password' => $validated['password'],
             ])) {
                 return Auth::user();
             }
-
             throw ValidationException::withMessages([
                 'email' => ['ログイン情報が登録されていません'],
                 'password' => ['ログイン情報が登録されていません'],
@@ -78,7 +76,6 @@ class FortifyServiceProvider extends ServiceProvider
 
             return Limit::perMinute(10)->by($email . $request->ip());
         });
-
         $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
         $this->app->singleton(RegisterResponseContract::class, RegisterResponse::class);
         $this->app->singleton(LoginResponseContract::class, LoginResponse::class);
