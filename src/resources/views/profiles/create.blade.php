@@ -12,9 +12,10 @@
                 <img class="profile__image"
                     src="{{ $user->profile?->profile_image ? asset('storage/' . $user->profile->profile_image) : asset('storage/profile_images/default.png') }}"
                     alt="{{ $user->name }}">
+                <img class="preview__image" id="preview" src="#">
                 <label for="profile_image"></label>
                 <input class="form__input__image" id="profile_image" type="file" name="profile_image">
-                <img class="preview__image" id="preview" src="#">
+
                 @error('image')
                     <div class="error-alert">{{ $message }}</div>
                 @enderror
@@ -62,7 +63,7 @@
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     preview.src = event.target.result;
-                    preview.style.display = "block";
+                    preview.style.display = "inline";
                 };
                 reader.readAsDataURL(file);
             } else {

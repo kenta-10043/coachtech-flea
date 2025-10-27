@@ -27,7 +27,7 @@ class OrderController extends Controller
             ->first();
         $postalCode = $latestOrder?->shopping_postal_code ?? $user->profile->postal_code;
         $address = $latestOrder?->shopping_address ?? $user->profile->address;
-        $building = $latestOrder?->shopping_building ?? $user->profile->building;
+        $building = $latestOrder?->shopping_building ??  $user->profile->building;
         $paymentMethods = PaymentMethod::cases();
         $selectedPayment = $latestOrder?->payment_method
             ? PaymentMethod::from($latestOrder->payment_method)->label()
@@ -136,9 +136,16 @@ class OrderController extends Controller
     }
 
 
+
     public function update(AddressRequest $request, $item_id)
     {
         $item = Item::findOrFail($item_id);
+        $building = $request->shopping_building;
+
+        // フォームが空でも空文字を代入
+        if ($building === null) {
+            $building = '';
+        }
         $order = Order::updateOrCreate(
             [
                 'item_id' => $item->id,
@@ -148,7 +155,7 @@ class OrderController extends Controller
             [
                 'shopping_postal_code' => $request->shopping_postal_code,
                 'shopping_address' => $request->shopping_address,
-                'shopping_building' => $request->shopping_building,
+                'shopping_building' => $building,
                 'order_price' => $item->price,
                 'payment_method' => (int)$request->payment_method,
             ]
