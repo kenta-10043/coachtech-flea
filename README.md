@@ -18,30 +18,16 @@ git clone https://github.com/kenta-10043/coachtech-flea.git
 2.
 
 ```bash
-docker-compose up -d --build
+make init
 ```
 
-\*MySQL は、OS によって起動しない場合があるのでそれぞれの PC に合わせて docker-compose.yml ファイルを編集してください。
+※プロジェクト直下のディレクトリで実行してください。  
+※MySQL は、OS によって起動しない場合があるのでそれぞれの PC に合わせて docker-compose.yml ファイルを編集してください。
+
 
 ### Laravel 環境構築
 
-1.PHP コンテナへの移動
-
-```bash
-docker-compose exec php bash
-```
-
-2.Laravel のパッケージのインストール
-
-```bash
-composer install
-```
-
-3.env.example ファイルから.env を作成し、環境変数を変更
-
-```bash
-cp .env.example .env
-```
+1.env の環境変数を変更
 
 | 設定項目    | 変更前    | 変更後       |
 | ----------- | --------- | ------------ |
@@ -50,21 +36,30 @@ cp .env.example .env
 | DB_USERNAME | root      | laravel_user |
 | DB_PASSWORD | ー        | laravel_pass |
 
+<br>
+
 | 設定項目      | 入力値        |
 | ------------- | ------------- |
 | STRIPE KEY    | pk_test ××××× |
 | STRIPE SECRET | sk_test ××××× |
-
 - ××××× はご自身で KEY を取得・入力してください。
 - Stripe の API キーは、[Stripe](https://stripe.com/jp)ダッシュボードから取得してください。
 
-  4.アプリケーションキーの作成
+<br>
 
+| 設定項目      | 入力値        |
+| ------------- | ------------- |
+| USER_ID       | ××××　　　　　 |
+| GROUP_ID 　　　| ××××　　　　　 |
+- Docker環境下で権限トラブルの軽減のためにプロジェクトルート直下に.envファイルを作成してUSER_IDとGROUP_IDにご自身のホストIDを入力してください。
+- ホストIDはローカルのターミナルでidコマンドを入力して確認できます。
 ```bash
-php artisan key:generate
+id
+# uid=××××（〇〇〇〇) gid=××××（〇〇〇〇）
 ```
+<br>
 
-5.マイグレーションの実行
+2.マイグレーションの実行
 
 ```bash
 php artisan migrate
@@ -76,67 +71,67 @@ php artisan migrate
 docker-compose down -v  # volume 削除 DB 初期化
 docker-compose up -d
 ```
+<br>
 
-6.シーディングの実行
+3.シーディングの実行
 
 ```bash
 php artisan db:seed
 ```
+<br>
 
-7.画像ファイルのシンボリックリンク
-
-```bash
-php artisan storage:link
-```
-
-8.テストを実行する際は.test.env ファイルを作成
+4.テストを実行する際は.test.env ファイルを作成
 
 ```bash
 cp .env .env.testing
 ```
 
-| 設定項目      | 変更前       | 変更後     |
-| ------------- | ------------ | ---------- |
-| APP_ENV       | local        | test       |
-| DB_CONNECTION | mysql        | mysql_test |
-| DB_DATABASE   | laravel_db   | demo_test  |
-| DB_USERNAME   | laravel_user | root       |
-| DB_PASSWORD   | laravel_user | root       |
+| 設定項目       | 変更前       | 変更後     |
+| -------------- | ------------ | ---------- |
+| APP_ENV        | local        | testing    |
+| DB_CONNECTION  | mysql        | mysql_test |
+| DB_DATABASE    | laravel_db   | demo_test  |
+| DB_USERNAME    | laravel_user | root       |
+| DB_PASSWORD    | laravel_user | root       |
+| CACHE_DRIVER   | file         | array      |
+| SESSION_DRIVER | file         | array      |
+| MAIL_MAILER    | smtp         | log        |
 
 ### テスト実行手順
 
-- demo_test データベース作成  
+- demo_test データベース作成
 
 ```bash
 docker-compose exec mysql bash
 ```
 
 ```sql
-mysql -u root -P
+mysql -u root -p
 ```
 
 ```sql
-CREATE DATABASE demo_test
+CREATE DATABASE demo_test;
 ```
 
 - テスト用テーブル作成
 
 ```bash
 php artisan migrate --env=testing
-```  
+```
 
 - php artisan migrate --env=testing 実行時に DB エラーが発生した場合は以下のコマンドで volume を削除して再構築してください。
 
 ```bash
 docker-compose down -v  # volume 削除 DB 初期化
 docker-compose up -d
-```  
+```
 
 - テスト実行
 
 ```bash
-php artisan test
+php artisan test --env=testing
 ```
+<br>
 
 ### ストライプダミー決済実行のテストカード番号
 
@@ -146,6 +141,8 @@ php artisan test
 
 - これらは **テストモード専用** の番号です。本番では使用しないでください。
 
+<br>
+
 ## 使用技術
 
 - PHP 8.3-fpm
@@ -154,15 +151,146 @@ php artisan test
 - fortify \* v1.28.0
 - mailhog
 
+<br>
+
+## テーブル仕様
+
+- users テーブル
+
+|     カラム名             |      型      | primary key | unique key | not null | foreign key |
+| :---------------:        | :----------: | :---------: | :--------: | :------: | :---------: |
+|        id                |   bigint.    |      ◯      |            |    ◯     |             |
+|       name               | varchar(255) |             |            |    ◯     |             |
+|       email              | varchar(255) |             |     　     |    ◯     |             |
+|     password             | varchar(255) |             |            |    〇    |             |
+| profile_completed        |  boolean     |             |            |          |             |
+| email_verified_at        |  timestamp   |             |            |          |             |
+|  remember_token          | varchar(100) |             |            |          |             |
+| two_factor_secret        |   text       |             |            |          |             |
+| two_factor_recovery_code |   text       |             |            |          |             |
+| two_factor_confirmed_at  |  timestamp   |             |            |          |             |
+|    role                  | varchar(100) |             |            |    〇    |             |
+| created_at               |  timestamp   |             |            |          |              |
+| updated_at               |  timestamp   |             |            |          |              |
+<br>
+
+- profiles テーブル
+
+|  カラム名       |    型        | primary key | unique key | not null | foreign key  |
+| :--------:     | :-------:    | :---------: | :--------: | :------: | :----------: |
+|     id         |  bigint      |      ◯      |            |    ◯     |              |
+|  user_id       |  bigint      |             |            |    ◯     |  users(id)   |
+| postal_code    |  char(8)     |             |            |    ◯     |             |
+|  address       | varchar(255) |             |            |    〇     |              |
+|  building      | varchar(255) |             |            |           |              |
+|  profile_image | varchar(255) |             |            |          |              |
+| created_at     | timestamp    |             |            |          |              |
+| updated_at     | timestamp    |             |            |          |              |
+<br>
+
+- likes テーブル
+
+|    カラム名    |    型     | primary key | unique key | not null |   foreign key     |
+| :------------: | :-------: | :---------: | :--------: | :------:  | :--------------: |
+|       id       |  bigint   |      ◯     |            |    ◯     |                  |
+|    user_id     |  bigint   |             |            |    ◯     |    users(id)     |
+|    item_id     |  bigint   |             |            |    ◯     |    items(id)     |
+|   created_at   | timestamp |             |            |           |                  |
+|   updated_at   | timestamp |             |            |           |                  |
+<br>
+
+- comments テーブル
+
+|   カラム名    |      型      | primary key | unique key | not null |   foreign key   |
+| :-----------: | :----------: | :---------: | :--------: | :------: | :-------------: |
+|      id       |    bigint    |      ◯     |            |    ◯     |                 |
+|    user_id    |    bigint    |             |            |    ◯     |    users(id)    |
+|    item_id    |    bigint    |             |            |    ◯     |    items(id)    |
+|    comment    |    text      |             |            |           |                 |
+|  created_at   |  timestamp   |             |            |           |                 |
+|  updated_at   |  timestamp   |             |            |           |                 |
+<br>
+
+- items テーブル
+
+|  カラム名       |    型          | primary key | unique key | not null | foreign key        |
+| :--------:      | :-------:     | :---------: | :--------: | :------: | :---------:        |
+|     id          |  bigint       |      ◯      |            |    ◯     |                  |
+|   user_id       |  bigint       |              |            |    ◯     |  users(id)       |
+|   condition_id  |  bigint       |              |            |    ◯     |  conditions(id)  |
+|   item_name     |  varchar(255) |              |            |    ◯     |                  |
+|   brand_name    |  varchar(255) |              |            |           |                  |
+|   price         |  int          |              |            |    ◯     |                  |
+|   item_image    |  varchar(255) |              |            |    ◯     |                  |
+|   status        |  tinyint      |              |            |    ◯     |                  |
+|   description   |  text         |              |            |    ◯     |                  |
+| created_at      | timestamp     |              |            |           |                  |
+| updated_at      | timestamp     |              |            |           |                  |
+<br>
+
+- categories テーブル
+
+|  カラム名        |    型          | primary key | unique key | not null | foreign key        |
+| :--------:      | :-------:     | :---------: | :--------: | :------: | :---------:        |
+|     id          |  bigint       |      ◯      |            |    ◯     |                  |
+|   category      |  int          |              |            |    ◯     |                  |
+| created_at      | timestamp     |              |            |           |                  |
+| updated_at      | timestamp     |              |            |           |                  |
+<br>
+
+- category_item テーブル
+
+|  カラム名       |    型          | primary key | unique key | not null | foreign key        |
+| :--------:      | :-------:     | :---------: | :--------: | :------: | :---------:        |
+|     id          |  bigint       |      ◯      |            |    ◯     |                  |
+|   item_id       |  bigint       |              |            |    ◯     |  items(id)       |
+|   category_id   |  bigint       |              |            |    ◯     |  categories(id)  |
+| created_at      | timestamp     |              |            |           |                  |
+| updated_at      | timestamp     |              |            |           |                  |
+<br>
+
+- conditions テーブル
+
+|  カラム名        |    型         | primary key | unique key | not null | foreign key        |
+| :--------:      | :-------:     | :---------: | :--------: | :------: | :---------:        |
+|     id          |  bigint       |      ◯      |            |    ◯     |                  |
+|   condition     |  tinyint      |              |            |    ◯     |                  |
+| created_at      | timestamp     |              |            |           |                  |
+| updated_at      | timestamp     |              |            |           |                  |
+<br>
+
+- orders テーブル
+
+|  カラム名              |    型         | primary key | unique key | not null | foreign key        |
+| :--------:            | :-------:     | :---------: | :--------: | :------: | :---------:        |
+|     id                |  bigint       |      ◯      |            |    ◯     |                  |
+|   user_id             |  bigint       |              |            |    ◯     |  users(id)       |
+|   item_id             |  bigint       |              |            |    ◯     |  items(id)       |
+|   payment_method      |  tinyint      |              |            |    ◯     |                  |
+| shopping_postal_code  |  varchar(255) |              |            |           |                  |
+| shopping_address      |  varchar(255) |              |            |           |                  |
+| shopping_building     |  varchar(255) |              |            |           |                  |
+|   status              |  varchar(255) |              |            |           |                  |
+|  checkout_session_id  |  varchar(255) |              |     〇     |           |                  |
+|   paid_at             |  timestamp    |              |            |           |                  |
+| created_at            | timestamp     |              |            |           |                  |
+| updated_at            | timestamp     |              |            |           |                  |
+<br>
+
+
 ## ER 図  
 
 ![ER](./flea.drawio.png)  
+
+<br>
 
 ## 開発環境
 
 - 商品一覧：http://localhost/
 - ユーザー登録：http://localhost/register
-- phpMyAdmin：http://localhost:8080/  
+- phpMyAdmin：http://localhost:8080/
+
+<br>
 
 ## ログイン情報  
 
