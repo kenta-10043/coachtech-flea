@@ -29,7 +29,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(FortifyLoginRequest::class, LoginRequest::class);
     }
 
     /**
@@ -42,7 +42,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::createUsersUsing(CreateNewUser::class);
-        
+
         Fortify::registerView(function () {
             return view('auth.register');
         });

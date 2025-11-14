@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('shopping_postal_code')->nullable();
             $table->string('shopping_address')->nullable();
             $table->string('shopping_building')->nullable();
+            $table->string('status')->default('draft');
+            $table->string('checkout_session_id')->nullable()->unique();
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();
         });
