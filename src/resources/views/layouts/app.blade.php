@@ -21,6 +21,7 @@
                 <form class="search__form" action="{{ route('index') }}" method="get">
                     <input class="search__input" type="text" name="keyword" value="{{ $keyword ?? '' }}"
                         placeholder="　　　　　なにをお探しですか？　　　　　">
+                    <input type="hidden" name="tab" value="{{ request('tab') }}">
                 </form>
                 <div class="link__button">
                     <form action="/logout" method="post">
@@ -49,4 +50,5 @@
         @yield('content')
     </div>
 </body>
+
 </html>

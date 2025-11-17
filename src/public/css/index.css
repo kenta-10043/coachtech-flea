@@ -10,10 +10,24 @@
     color: #5F5F5F;
 }
 
+.recommendation__tab.on{
+    text-decoration: none;
+    margin-left: 130px;
+    color: #5F5F5F;
+    font-weight: bold;
+}
+
 .mylist__tab{
     text-decoration: none;
     margin-left: 60px;
     color: #5F5F5F;
+}
+
+.mylist__tab.on {
+    text-decoration: none;
+    margin-left: 60px;
+    color: #5F5F5F;
+    font-weight: bold;
 }
 
 .item__container {

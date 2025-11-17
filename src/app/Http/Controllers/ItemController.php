@@ -39,14 +39,13 @@ class ItemController extends Controller
     {
         $keyword = $request->input('keyword', '');
         $query = Item::query();
-        if ($request->filled('keyword')) {
-            $query->where('item_name', 'LIKE', '%' . $keyword . '%');
-        }
+
         if ($request->query('tab') === 'mylist') {
             if (auth()->check()) {
                 $user = Auth::user();
                 $likedItemIds = $user->likes()->pluck('item_id');
                 $query->whereIn('id', $likedItemIds);
+                $query->where('user_id', '!=', auth()->id());
             } else {
                 $items = collect();
                 return view('index', compact('items', 'keyword'));
@@ -55,6 +54,10 @@ class ItemController extends Controller
             if (auth()->check()) {
                 $query->where('user_id', '!=', auth()->id());
             }
+        }
+
+        if ($request->filled('keyword')) {
+            $query->where('item_name', 'LIKE', '%' . $keyword . '%');
         }
         $items = $query->get();
 
