@@ -294,14 +294,26 @@ php artisan test --env=testing
 
 ## ログイン情報  
 
-### 管理者ユーザー  
-- email:admmin@example.com  
-- password:password00000  
+### 一般ユーザー 
+#### user01
+- email:user01@example.com  
+- password:password01
+- itemデータ紐づけなし
+<br>
 
-### 一般ユーザー  
-- email:user@example.com  
-- password:password00000  
+#### user02  
+- email:user02@example.com    
+- password:password02  
+- itemデータ紐づけCO01~CO05  
+<br>
+
+#### user03  
+- email:user03@example.com  
+- password:password03  
+- itemデータ紐づけCO06~CO10
+  
+<br>  
 
 - roleによって管理者・一般ユーザーを区別しています  
-- 今回は仕様書から管理者機能は実装しておりません  
+  
 
