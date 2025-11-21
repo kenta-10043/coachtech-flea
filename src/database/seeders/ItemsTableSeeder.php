@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Enums\Condition;
 use App\Enums\Status;
+use App\Models\User;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -14,8 +15,10 @@ class ItemsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->create(['id' => 1]);
         $items = [
             [
+                'user_id' => 1,
                 'item_name' => '腕時計',
                 'price' => 15000,
                 'brand_name' => 'Rolax',
@@ -25,6 +28,7 @@ class ItemsTableSeeder extends Seeder
                 'condition_id' => Condition::GOOD->value,
             ],
             [
+                'user_id' => 1,
                 'item_name' => 'HDD',
                 'price' => 5000,
                 'brand_name' => '西芝',
@@ -34,6 +38,7 @@ class ItemsTableSeeder extends Seeder
                 'condition_id' => Condition::NEAR_GOOD->value,
             ],
             [
+                'user_id' => 1,
                 'item_name' => '玉ねぎ3束',
                 'price' => 300,
                 'brand_name' => null,
@@ -43,6 +48,7 @@ class ItemsTableSeeder extends Seeder
                 'condition_id' => Condition::FAIR->value,
             ],
             [
+                'user_id' => 1,
                 'item_name' => '革靴',
                 'price' => 4000,
                 'brand_name' => null,
@@ -52,6 +58,7 @@ class ItemsTableSeeder extends Seeder
                 'condition_id' => Condition::BAD->value,
             ],
             [
+                'user_id' => 1,
                 'item_name' => 'ノートPC',
                 'price' => 45000,
                 'brand_name' => null,
@@ -61,6 +68,7 @@ class ItemsTableSeeder extends Seeder
                 'condition_id' => Condition::GOOD->value,
             ],
             [
+                'user_id' => 1,
                 'item_name' => 'マイク',
                 'price' => 8000,
                 'brand_name' => null,
@@ -70,6 +78,7 @@ class ItemsTableSeeder extends Seeder
                 'condition_id' => Condition::NEAR_GOOD->value,
             ],
             [
+                'user_id' => 1,
                 'item_name' => 'ショルダーバッグ',
                 'price' => 3500,
                 'brand_name' => null,
@@ -79,6 +88,7 @@ class ItemsTableSeeder extends Seeder
                 'condition_id' => Condition::FAIR->value,
             ],
             [
+                'user_id' => 1,
                 'item_name' => 'タンブラー',
                 'price' => 500,
                 'brand_name' => null,
@@ -88,6 +98,7 @@ class ItemsTableSeeder extends Seeder
                 'condition_id' => Condition::BAD->value,
             ],
             [
+                'user_id' => 1,
                 'item_name' => 'コーヒーミル',
                 'price' => 4000,
                 'brand_name' => 'Starbacks',
@@ -97,6 +108,7 @@ class ItemsTableSeeder extends Seeder
                 'condition_id' => Condition::GOOD->value,
             ],
             [
+                'user_id' => 1,
                 'item_name' => 'メイクセット',
                 'price' => 2500,
                 'brand_name' => null,
@@ -106,11 +118,6 @@ class ItemsTableSeeder extends Seeder
                 'condition_id' => Condition::NEAR_GOOD->value,
             ],
         ];
-
-        $itemsWithUser = collect($items)->map(function ($item) {
-            $item['user_id'] = rand(1, 5);
-            return $item;
-        })->toArray();
-        DB::table('items')->insert($itemsWithUser);
+        DB::table('items')->insert($items);
     }
 }
