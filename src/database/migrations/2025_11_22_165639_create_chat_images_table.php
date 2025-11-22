@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('profile_completed')->default(false);
-            $table->string('role', 20)->default('user');
+        Schema::create('chat_images', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('chat_id')->constrained()->onDelete('cascade');
+            $table->string('chat_image');
+            $table->timestamps();
         });
     }
 
@@ -22,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('profile_completed');
-        });
+        Schema::dropIfExists('chat_images');
     }
 };

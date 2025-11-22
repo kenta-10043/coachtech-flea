@@ -34,14 +34,44 @@
 
 .page__sell{
     text-decoration: none;
+    font-weight: bold;
     margin-left: 130px;
     color: #5F5F5F;
 }
 
+.page__sell.on{
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 130px;
+    color: #FF0000;
+}
+
 .page__buy{
     text-decoration: none;
+    font-weight: bold;
     margin-left: 60px;
     color: #5F5F5F;
+}
+
+.page__buy.on{
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 60px;
+    color: #FF0000;
+}
+
+.page__transaction{
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 60px;
+    color: #5F5F5F;
+}
+
+.page__transaction.on{
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 60px;
+    color: #FF0000;
 }
 
 .item__container {

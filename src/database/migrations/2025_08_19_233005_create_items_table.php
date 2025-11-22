@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('buyer_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('condition_id')->constrained()->cascadeOnDelete();
             $table->string('item_name');
-            $table->string('brand_name')->nullable();;
+            $table->string('brand_name')->nullable();
             $table->integer('price');
             $table->string('item_image');
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('transaction_status')->default(1);
             $table->text('description');
             $table->timestamps();
         });

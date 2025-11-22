@@ -25,6 +25,7 @@ class SellController extends Controller
         $data['user_id'] = auth()->id();
         $data['condition_id'] = $data['condition'];
         unset($data['condition']);
+
         $item = Item::create($data);
         $item->categories()->attach($request->category);
 

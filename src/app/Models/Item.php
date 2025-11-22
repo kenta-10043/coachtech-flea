@@ -16,9 +16,10 @@ class Item extends Model
         'price',
         'item_image',
         'status',
+        'transaction_status',
         'description',
         'user_id',
-        'condition_id'
+        'condition_id',
     ];
 
     public function getLabelAttribute(): string
@@ -59,5 +60,10 @@ class Item extends Model
     public function order()
     {
         return $this->hasOne(Order::class);
+    }
+
+    public function chats()
+    {
+        return $this->hasMany(Chat::class);
     }
 }

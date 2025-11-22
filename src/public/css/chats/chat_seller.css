@@ -1,0 +1,160 @@
+/* プロフィール */
+.profile__container {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #5F5F5F;
+}
+
+.profile__image {
+    width: 79px;
+    height: 79px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 13px;
+}
+
+/* 商品情報 */
+
+.main__content__title {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.item__box {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #5F5F5F;
+
+}
+
+.item__inner {
+    height: 233px;
+    margin-left: 40px;
+}
+
+.item__image,
+.preview__image {
+    width: 203px;
+    height: 206px;
+    object-fit: cover;
+    margin-left: 40px;
+
+}
+
+.item__name {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+    margin-top: 50px;
+    margin-bottom: 26px;
+}
+
+.item__price {
+    font-size: 36px;
+    height: 45px;
+    margin: 0;
+
+}
+
+/* チャット */
+
+.chat__area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.chat__profile__container {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.chat__profile__image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 27px;
+}
+
+.chat__user__name {
+    width: 135px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 14px;
+
+}
+
+.chat__body__container {
+    margin-left: 97px;
+}
+
+.chat__body {
+    width: 461px;
+    height: 60px;
+    background-color: #D9D9D9;
+    border-radius: 4px;
+
+}
+
+.input__textarea {
+    max-width: 937px;
+    width: 100%;
+    height: 44px;
+    border: 1px solid #5F5F5F;
+    display: inline-block;
+}
+
+
+#realFile {
+    display: none;
+}
+
+.image-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+
+}
+
+.input__box {
+    display: flex;
+    align-items: center;
+    margin-left: 27px;
+}
+
+.button__box {
+    display: flex;
+    align-items: center;
+}
+
+.input__button__label {
+    width: 143px;
+    height: 44px;
+    border-radius: 10px;
+    border: 2px solid #FF5555;
+    color: #FF5555;
+    display: inline-block;
+    text-align: center;
+    padding-top: 8px;
+    margin-left: 14px;
+
+}
+
+.input__button {
+    border: none;
+    background-color: white;
+}
+
+.input__button__image {
+    width: 80px;
+    height: 61px;
+}
+
+.error__alert {
+    font-size: 36px;
+    color: red;
+}

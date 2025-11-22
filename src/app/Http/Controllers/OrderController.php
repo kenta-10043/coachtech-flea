@@ -127,11 +127,16 @@ class OrderController extends Controller
 
     private function finalizePaidOrder(Order $order, Item $item, string $sessionId): void
     {
+        $userId = auth()->id();
+
         $order->status = 'paid';
         $order->paid_at = now();
         $order->checkout_session_id = $sessionId;
         $order->save();
-        $item->status = 2;
+
+        $item->status = 2;  //購入状況：購入済み
+        $item->buyer_id = $userId;
+        $item->transaction_status = 2;  //取引状況：取引中  1:pending 2:in_progress 3:completed
         $item->save();
     }
 

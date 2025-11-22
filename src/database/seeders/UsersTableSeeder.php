@@ -58,7 +58,7 @@ class UsersTableSeeder extends Seeder
             'profile_completed' => 1,
             'remember_token' => null,
         ]);
-        $user02->profile()->create([
+        $user03->profile()->create([
             'profile_image' => '/profile_images/default.png',
             'postal_code' => '231-4567',
             'address' => 'sample_address03',

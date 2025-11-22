@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProfileRequest;
+use App\Models\Item;
 
 class ProfileController extends Controller
 {
@@ -16,10 +17,13 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $sellItems = $user->items()->where('status', 1)->get();
+        $sellItems = $user->items()->where('status', 1)->get();  //出品中
         $buyItems = $user->orders()->whereNotNull('paid_at')->whereHas('item')->with('item')->get();
+        $transactionItems = Item::where(function ($query) use ($user) {
+            $query->where('user_id', $user->id)->orWhere('buyer_id', $user->id);
+        })->where('transaction_status', 2)->get();  //取引中
 
-        return view('profiles.profile', compact('user', 'sellItems', 'buyItems'));
+        return view('profiles.profile', compact('user', 'sellItems', 'buyItems', 'transactionItems'));
     }
 
     public function store(ProfileRequest $request)

@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ChatController;
 
 
 
@@ -44,5 +45,8 @@ Route::middleware('auth')->group(
 
         Route::get('/sell', [SellController::class, 'index'])->name('sell.index');
         Route::post('/sell', [SellController::class, 'store'])->name('sell.store');
+
+        Route::get('/chat/{item_id}', [ChatController::class, 'index'])->name('chat.index');
+        Route::post('/chat/{item_id}', [ChatController::class, 'send'])->name('chat.send');
     }
 );
