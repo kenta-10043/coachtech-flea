@@ -24,7 +24,7 @@ class ChatController extends Controller
         $sellerUser = $item->user;
 
 
-        $allMessages = Chat::with(['sender.profile', 'chatImage'])->where('item_id', $item->id)->orderBy('created_at')->get();
+        $allMessages = Chat::with(['sender.profile', 'chatImages'])->where('item_id', $item->id)->orderBy('created_at')->get();
 
 
         if ($item->user_id === $user->id) {
