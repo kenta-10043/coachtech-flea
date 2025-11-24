@@ -33,11 +33,24 @@
                                 alt="{{ $sellerUser->name }}">
                         </div>
                         <div class="chat__body__container">
-                            <p class="chat__body">{{ $allMessage->body }}</p>
-                            @foreach ($allMessage->chatImages as $image)
-                                <a href="{{ asset('storage/' . $image->chat_image) }}"><img class="image-icon"
-                                        src="{{ asset('storage/others/写真のフリーアイコン5 (1).png') }}" alt="写真アイコン"></a>
-                            @endforeach
+                            <form action="{{ route('chat.update', ['chat_id' => $allMessage->id]) }}" method="POST">
+                                @method('PUT')
+                                @csrf
+                                <textarea class="chat__body" name="body" cols="30" rows="1">{{ old('body', $allMessage->body) }}</textarea>
+                                <div class="chat__body__items">
+                                    @foreach ($allMessage->chatImages as $image)
+                                        <a class="chat__body__link"
+                                            href="{{ asset('storage/' . $image->chat_image) }}"><img class="image-icon"
+                                                src="{{ asset('storage/others/写真のフリーアイコン5 (1).png') }}" alt="写真アイコン"></a>
+                                    @endforeach
+                                    <button type="submit">編集</button>
+                                </div>
+                            </form>
+                            <form action="{{ route('chat.destroy', ['chat_id' => $allMessage->id]) }}" method="POST">
+                                @method('delete')
+                                @csrf
+                                <button class="delete__button" type="submit">削除</button>
+                            </form>
                         </div>
                     </div>
                 @else
@@ -59,39 +72,43 @@
                 @endif
             </div>
         @endforeach
-    </div>
-
-    <div>
-        <form action="{{ route('chat.send', ['item_id' => $item->id]) }}" method="POST" id="chat-form"
-            enctype="multipart/form-data">
-            @csrf
-
-            <div class="error__alert">
-                @error('body')
-                    <p class="alert__message">{{ $message }}</p>
-                @enderror
-            </div>
-            <div class="input__box">
-
-                <textarea class="input__textarea" name="body" cols="30" rows="1" id="chat-input"
-                    placeholder="取引メッセージを記入してください"><{{ old('body') }}</textarea>
+        <div>
+            {{ $allMessages->links() }}
+        </div>
+        <div>
+            <form action="{{ route('chat.send', ['item_id' => $item->id]) }}" method="POST" id="chat-form"
+                enctype="multipart/form-data">
+                @csrf
 
                 <div class="error__alert">
-                    @error('chat_images')
+                    @error('body')
                         <p class="alert__message">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="button__box">
-                    <label class="input__button__label" for="realFile">画像を追加</label>
-                    <input type="file" id="realFile" name="chat_images[]" multiple>
-                    <button class="input__button" type="submit"><img class="input__button__image"
-                            src="{{ asset('storage/' . 'others/inputbuttun 1.png') }}" alt="インプット画像"></button>
-                </div>
-            </div>
-            <div id="preview-container"></div>
+                <div class="input__box">
 
-        </form>
+                    <textarea class="input__textarea" name="body" cols="30" rows="1" id="chat-input"
+                        placeholder="取引メッセージを記入してください"><{{ old('body') }}</textarea>
+
+                    <div class="error__alert">
+                        @error('chat_images')
+                            <p class="alert__message">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="button__box">
+                        <label class="input__button__label" for="realFile">画像を追加</label>
+                        <input type="file" id="realFile" name="chat_images[]" multiple>
+                        <button class="input__button" type="submit"><img class="input__button__image"
+                                src="{{ asset('storage/' . 'others/inputbuttun 1.png') }}" alt="インプット画像"></button>
+                    </div>
+                </div>
+                <div id="preview-container"></div>
+
+            </form>
+        </div>
+
     </div>
+
 
 
 

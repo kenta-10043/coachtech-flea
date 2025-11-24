@@ -22,6 +22,9 @@
     <div class="container">
         <div class="side__content">
             <h2 class="side__content__title">その他の取引</h>
+                @foreach ($transactionItems as $transactionItem)
+                    <p>{{ $transactionItem->item_name }}</p>
+                @endforeach
         </div>
         <div class="main__content">
             @yield('content')

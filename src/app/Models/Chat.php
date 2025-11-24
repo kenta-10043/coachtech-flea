@@ -26,6 +26,11 @@ class Chat extends Model
         return $this->belongsTo(User::class, 'receiver_id');
     }
 
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+
     public function chatImages()
     {
         return $this->hasMany(ChatImage::class);

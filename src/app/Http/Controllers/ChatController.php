@@ -18,25 +18,52 @@ class ChatController extends Controller
     {
         $item = Item::With('user.profile')->findOrFail($item_id);
         $user = Auth::user();
+        $chat = Chat::where('item_id', $item->id)->first();
 
         $buyerUserId = $item->buyer_id;
         $buyerUser = User::find($buyerUserId);
         $sellerUser = $item->user;
 
 
-        $allMessages = Chat::with(['sender.profile', 'chatImages'])->where('item_id', $item->id)->orderBy('created_at')->get();
+        $allMessages = Chat::with(['sender.profile', 'chatImages'])->where('item_id', $item->id)->orderBy('created_at')->simplePaginate(5);
+
+        // $descChats = Chat::whereHas('item', function ($query) {
+        //     $query->where('transaction_status', 2);
+        // })
+        //     ->with([
+        //         'receiver' => function ($query) {
+        //             $query->orderBy('created_at', 'desc');
+        //         },
+        //         'item'
+        //     ])
+        //     ->get();
+
+        // $transactionItems = Item::where('transaction_status', 2)->whereHas('chats')->with([
+        //     'receiver' => function ($query) {
+        //         $query->orderBy('created_at', 'desc');
+        //     }
+        // ])->get();
+
+        $transactionItems = Item::where('transaction_status', 2)
+            ->withMax(['chats' => function ($q) {
+                $q->where('receiver_id', auth()->id());
+            }], 'created_at')
+            ->orderBy('chats_max_created_at', 'desc')
+            ->with('chats.receiver')
+            ->get();
+
 
 
         if ($item->user_id === $user->id) {
             // $myMessages = Chat::where('item_id', $item->id)->where('sender_id', $sellerUser->id)->orderBy('created_at')->get();
             // $partnerMessages = Chat::where('item_id', $item->id)->where('sender_id', $buyerUserId)->orderBy('created_at')->get();
 
-            return view('chats.chat_seller', compact('item', 'user', 'buyerUser', 'sellerUser', 'allMessages'));
+            return view('chats.chat_seller', compact('item', 'user', 'chat', 'buyerUser', 'sellerUser', 'allMessages', 'transactionItems'));
         } else {
             // $myMessages = Chat::where('item_id', $item->id)->where('sender_id', $buyerUserId)->orderBy('created_at')->get();
             // $partnerMessages = Chat::where('item_id', $item->id)->where('sender_id', $sellerUser->id)->orderBy('created_at')->get();
 
-            return view('chats.chat_buyer', compact('item', 'user', 'buyerUser', 'sellerUser', 'allMessages'));
+            return view('chats.chat_buyer', compact('item', 'user', 'chat', 'buyerUser', 'sellerUser', 'allMessages', 'transactionItems'));
         }
     }
 
@@ -68,5 +95,38 @@ class ChatController extends Controller
         }
 
         return back();
+    }
+
+
+    public function update(Request $request, $chat_id)
+    {
+
+        $chat = Chat::findOrFail($chat_id);
+
+        if ($chat->sender_id !== auth()->id()) {
+            abort(403, "権限がありません");
+        }
+        $updateData = array_filter($request->only([
+            'body',
+        ]), function ($value) {
+            return $value !== null && $value !== '';
+        });
+        $chat->update($updateData);
+
+        return back()->with('success', "チャットの更新が完了しました");
+    }
+
+
+    public function destroy(Request $request, $chat_id)
+    {
+
+        $chat = Chat::findOrFail($chat_id);
+        if ($chat->sender_id !== auth()->id()) {
+            abort(403, "権限がありません");
+        }
+
+        $chat->delete();
+
+        return back()->with('success', "チャットの削除が完了しました");
     }
 }
