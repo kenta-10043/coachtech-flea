@@ -109,39 +109,4 @@
 
     </div>
 
-
-
-
-    <script>
-        const realFile = document.getElementById('realFile');
-        const previewContainer = document.getElementById('preview-container');
-
-        realFile.addEventListener('change', function() {
-            previewContainer.innerHTML = ''; // 初期化
-
-            Array.from(this.files).forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.style.maxWidth = '100px';
-                    img.style.marginRight = '5px';
-                    previewContainer.appendChild(img);
-                }
-                reader.readAsDataURL(file);
-            });
-        });
-
-        const input = document.getElementById('chat-input');
-
-        input.value = localStorage.getItem('chat_draft') || '';
-
-        input.addEventListener('input', () => {
-            localStorage.setItem('chat_draft', input.value);
-        });
-
-        document.getElementById('chat-form').addEventListener('submit', () => {
-            localStorage.removeItem('chat_draft');
-        });
-    </script>
 @endsection

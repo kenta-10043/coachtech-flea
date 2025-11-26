@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Models\ChatImage;
 use App\Http\Requests\ChatRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Events\MessageSent;
+use Illuminate\Support\Facades\Log;
 
 
 class ChatController extends Controller
@@ -69,12 +71,19 @@ class ChatController extends Controller
 
     public function send(ChatRequest $request, $item_id)
     {
+Log::info('現在の broadcast driver', [
+        'driver' => config('broadcasting.default'),
+        'pusher' => config('broadcasting.connections.pusher'),
+    ]);
+
         $item = Item::findOrFail($item_id);
         $senderId = Auth::id();            //送信者
         $sellerId = $item->user_id;  //出品者
         $buyerId = $item->buyer_id ?? null;  //購入者
 
-        $receiverId = ($senderId === $sellerId) ? $buyerId : $sellerId; //受信者
+        $receiverId = ($senderId === $sellerId)
+            ? ($buyerId ?? $sellerId) // buyer が null なら seller が入る
+            : $sellerId; //受信者
 
         $chat = Chat::create([
             'item_id' => $item->id,
@@ -93,6 +102,10 @@ class ChatController extends Controller
                 ]);
             }
         }
+
+
+        event(new MessageSent($chat));
+Log::info('chat送信: sender='.$senderId.' receiver='.$receiverId);
 
         return back();
     }

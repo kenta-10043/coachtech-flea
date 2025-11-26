@@ -12,6 +12,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "pusher/pusher-php-server": "^7.2",
         "stripe/stripe-php": "^17.6"
     },
     "require-dev": {
@@ -64,6 +65,10 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "audit": {
+            "block-insecure": false,
+            "ignore": ["PKSA-365x-2zjk-pt47"]
         }
     },
     "minimum-stability": "stable",

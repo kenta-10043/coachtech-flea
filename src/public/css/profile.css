@@ -74,6 +74,42 @@
     color: #FF0000;
 }
 
+.chat-badge__box{
+    display: inline;
+    position: relative;
+}
+
+.chat-badge{
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 900;
+    background-color: #FF0000;
+    font-size: 16px;
+    vertical-align: middle;
+    text-align: center;
+    position: absolute;
+    margin-left: 7px;
+    line-height: 23px;
+
+}
+
+.item-badge{
+    margin-left: 5px;
+    background-color: #FF0000;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    position: absolute;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    padding-top: 2px;
+    padding-left: 6px;
+}
+
 .item__container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;

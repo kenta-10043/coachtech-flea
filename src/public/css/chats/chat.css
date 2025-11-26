@@ -38,3 +38,8 @@
 .side__content__title{
     color: white;
 }
+
+.chat__link{
+    color:white;
+    text-decoration: none;
+}

@@ -24,6 +24,8 @@ use App\Http\Controllers\ChatController;
 Route::get('/', [ItemController::class, 'index'])->name('index');
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 
+
+
 Route::middleware('auth')->group(
     function () {
 

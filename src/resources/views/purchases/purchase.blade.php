@@ -93,18 +93,4 @@
             </div>
         </div>
     </form>
-
-    <script>
-        const select = document.getElementById('payment_method');
-        const display = document.getElementById('selectedPayment');
-
-        display.textContent = select.options[select.selectedIndex].text;
-
-
-        select.addEventListener('change', function() {
-            const value = this.value;
-            const text = this.options[this.selectedIndex].text;
-            display.textContent = text;
-        });
-    </script>
 @endsection

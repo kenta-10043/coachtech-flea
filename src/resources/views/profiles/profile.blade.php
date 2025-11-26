@@ -17,8 +17,11 @@
                 href="{{ route('profile.index', ['page' => 'sell']) }}">出品した商品</a>
             <a class="page__buy{{ request('page') === 'buy' ? ' on' : '' }}"
                 href="{{ route('profile.index', ['page' => 'buy']) }}">購入した商品</a>
-            <a class="page__transaction{{ request('page') === 'transaction' ? ' on' : '' }}"
-                href="{{ route('profile.index', ['page' => 'transaction']) }}">取引中の商品</a>
+            <div class="chat-badge__box">
+                <a class="page__transaction{{ request('page') === 'transaction' ? ' on' : '' }}"
+                    href="{{ route('profile.index', ['page' => 'transaction']) }}">取引中の商品</a>
+                <div class="chat-badge" id="chat-badge">0</div>
+            </div>
         </div>
         <div class="item__container">
             @if (request()->query('page') === 'sell' || !request()->query('page'))
@@ -56,19 +59,24 @@
 
             @if (request()->query('page') === 'transaction')
                 @foreach ($transactionItems as $item)
-                    <a class="item__link" href="{{ route('chat.index', ['item_id' => $item->id]) }}">
-                        <div class="item__cards">
-                            <img class="item__cards__image" src="{{ asset('storage/' . $item->item_image) }}"
-                                alt="{{ $item->item_name }}">
-                            <p class="item__cards__name">{{ $item->item_name }} </p>
-                            @if ($item->status === \App\Enums\Status::SOLD->value)
-                                <span
-                                    class="item__status-alert">{{ \App\Enums\Status::from($item->status)->label() }}</span>
-                            @endif
-                        </div>
-                    </a>
+                    <div class="item-row" data-item-id="{{ $item->id }}">
+                        <p class="item-badge" id="badge-item-{{ $item->id }}">0</p>
+                        <a class="item__link" href="{{ route('chat.index', ['item_id' => $item->id]) }}">
+                            <div class="item__cards">
+                                <img class="item__cards__image" src="{{ asset('storage/' . $item->item_image) }}"
+                                    alt="{{ $item->item_name }}">
+                                <p class="item__cards__name">{{ $item->item_name }} </p>
+                                @if ($item->status === \App\Enums\Status::SOLD->value)
+                                    <span
+                                        class="item__status-alert">{{ \App\Enums\Status::from($item->status)->label() }}</span>
+                                @endif
+                            </div>
+                        </a>
+                    </div>
                 @endforeach
             @endif
         </div>
     </div>
+
+
 @endsection
