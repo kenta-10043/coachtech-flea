@@ -7,10 +7,51 @@
 @endsection
 
 @section('content')
+
+    @if (session('error'))
+        <div class="alert-error">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="profile__container">
+        <div class="profile__container__inner">
         <img class="profile__image" src="{{ asset('storage/' . $sellerUser->profile->profile_image) }}"
             alt="{{ $user->name }}">
+        </div>
         <p class="main__content__title">{{ $sellerUser->name }}さんとの取引画面</p>
+
+
+        <button id="btuOpen" class="button-open">取引を終了する</button>
+        {{-- モーダル部分 --}}
+        <div id="myModal" class="modal">
+            <div class="modal__content">
+
+                <div class="modal__content__item">
+                    <p class="modal__content__title">取引完了しました。</p>
+                </div>
+
+                <form action="{{ route('rating.review', ['item_id' => $item->id]) }}" method="POST">
+                    @csrf
+                    <div>
+                        <p class="modal__content__content" id="content">今回の取引相手はどうでしたか？</p>
+                    </div>
+                    <div class="star__box" id="star-box">
+                        <p class="star" data-score=1>★</p>
+                        <p class="star" data-score=2>★</p>
+                        <p class="star" data-score=3>★</p>
+                        <p class="star" data-score=4>★</p>
+                        <p class="star" data-score=5>★</p>
+                    </div>
+                    <input type="hidden" name="rating" id="rating">
+                    <input type="hidden" name="transaction_status" value="3">
+                    <div class="review__button__area">
+                        <button class="review__button" type="submit">送信する</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
 
     <div class=item__box>

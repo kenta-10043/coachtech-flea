@@ -64,6 +64,11 @@ class Item extends Model
 
     public function chats()
     {
-        return $this->hasMany(Chat::class);
+        return $this->hasOne(Chat::class);
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
     }
 }

@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
+
 
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +22,6 @@ class DatabaseSeeder extends Seeder
             ItemCategoryTableSeeder::class,
             UsersTableSeeder::class,
         ]);
+        Cache::put('seed_refreshed', true);
     }
 }

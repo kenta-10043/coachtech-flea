@@ -8,6 +8,7 @@ use App\Models\Chat;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\ChatImage;
+use App\Models\Rating;
 use App\Http\Requests\ChatRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Events\MessageSent;
@@ -26,25 +27,7 @@ class ChatController extends Controller
         $buyerUser = User::find($buyerUserId);
         $sellerUser = $item->user;
 
-
         $allMessages = Chat::with(['sender.profile', 'chatImages'])->where('item_id', $item->id)->orderBy('created_at')->simplePaginate(5);
-
-        // $descChats = Chat::whereHas('item', function ($query) {
-        //     $query->where('transaction_status', 2);
-        // })
-        //     ->with([
-        //         'receiver' => function ($query) {
-        //             $query->orderBy('created_at', 'desc');
-        //         },
-        //         'item'
-        //     ])
-        //     ->get();
-
-        // $transactionItems = Item::where('transaction_status', 2)->whereHas('chats')->with([
-        //     'receiver' => function ($query) {
-        //         $query->orderBy('created_at', 'desc');
-        //     }
-        // ])->get();
 
         $transactionItems = Item::where('transaction_status', 2)
             ->withMax(['chats' => function ($q) {
@@ -54,16 +37,10 @@ class ChatController extends Controller
             ->with('chats.receiver')
             ->get();
 
-
-
         if ($item->user_id === $user->id) {
-            // $myMessages = Chat::where('item_id', $item->id)->where('sender_id', $sellerUser->id)->orderBy('created_at')->get();
-            // $partnerMessages = Chat::where('item_id', $item->id)->where('sender_id', $buyerUserId)->orderBy('created_at')->get();
 
             return view('chats.chat_seller', compact('item', 'user', 'chat', 'buyerUser', 'sellerUser', 'allMessages', 'transactionItems'));
         } else {
-            // $myMessages = Chat::where('item_id', $item->id)->where('sender_id', $buyerUserId)->orderBy('created_at')->get();
-            // $partnerMessages = Chat::where('item_id', $item->id)->where('sender_id', $sellerUser->id)->orderBy('created_at')->get();
 
             return view('chats.chat_buyer', compact('item', 'user', 'chat', 'buyerUser', 'sellerUser', 'allMessages', 'transactionItems'));
         }
@@ -71,10 +48,6 @@ class ChatController extends Controller
 
     public function send(ChatRequest $request, $item_id)
     {
-Log::info('現在の broadcast driver', [
-        'driver' => config('broadcasting.default'),
-        'pusher' => config('broadcasting.connections.pusher'),
-    ]);
 
         $item = Item::findOrFail($item_id);
         $senderId = Auth::id();            //送信者
@@ -102,10 +75,6 @@ Log::info('現在の broadcast driver', [
                 ]);
             }
         }
-
-
-        event(new MessageSent($chat));
-Log::info('chat送信: sender='.$senderId.' receiver='.$receiverId);
 
         return back();
     }

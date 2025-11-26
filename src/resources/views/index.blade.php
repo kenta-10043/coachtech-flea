@@ -9,6 +9,7 @@
             {{ session('success') }}
         </div>
     @endif
+
     <div class="index__content__tab">
         <a class="recommendation__tab {{ request('tab') === 'recommendation' ? 'on' : '' }}"
             href="{{ route('index', array_merge(request()->all(), ['tab' => 'recommendation'])) }}">おすすめ</a>

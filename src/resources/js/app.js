@@ -31,8 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("userId:", userId);
     console.log("現在のページ itemId:", currentItemId);
 
-    // ==========================================
-    // ① ページ表示時：全体未読の復元
+    // ページ表示時：全体未読の復元
     // ==========================================
     let total = getTotalUnread();
     console.log("全体未読:", total);
@@ -42,8 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         badge.style.display = total > 0 ? "inline-block" : "none";
     }
 
-    // ==========================================
-    // ② メッセージ受信処理
+    // メッセージ受信処理
     // ==========================================
     if (userId) {
         window.Echo.private(`chat.${userId}`).listen("MessageSent", (e) => {
@@ -80,8 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ==========================================
-    // ③ チャットページの場合：その itemId 未読だけリセット
+    // チャットページの場合：その itemId 未読だけリセット
     // ==========================================
     if (currentItemId) {
         console.log("リセット対象 item:", currentItemId);
@@ -99,9 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // =============================
-    // 🔵 商品一覧ページ：個別未読バッジ表示
-    // =============================
+    //  商品一覧ページ：個別未読バッジ表示
+    //=================================
     document.querySelectorAll(".item-row").forEach((row) => {
         const itemId = row.dataset.itemId;
         const badgeElem = row.querySelector(`#badge-item-${itemId}`);
@@ -122,7 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// =============================
 //   プロフィール画像即時表示
 // =============================
 const profile = document.getElementById("profile_image");
@@ -143,7 +138,6 @@ if (profile) {
     });
 }
 
-// =============================
 //   購入方法選択 即時反映
 // =============================
 const select = document.getElementById("payment_method");
@@ -155,7 +149,6 @@ if (select && display) {
     });
 }
 
-// =============================
 //   出品画像プレビュー
 // =============================
 const itemImage = document.getElementById("item_image");
@@ -176,7 +169,6 @@ if (itemImage && previewImg) {
     });
 }
 
-// =============================
 //   チャット画像プレビュー
 // =============================
 const realFile = document.getElementById("realFile");
@@ -198,7 +190,6 @@ if (realFile && previewContainer) {
     });
 }
 
-// =============================
 //   チャット本文 draft 保存
 // =============================
 const input = document.getElementById("chat-input");
@@ -208,3 +199,56 @@ if (input) {
         localStorage.setItem("chat_draft", input.value);
     });
 }
+
+//  評価モーダル
+//==============
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("myModal");
+    const openButton = document.getElementById("btuOpen");
+
+    if (openButton) {
+        openButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            modal.classList.add("active");
+        });
+    }
+
+    modal.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+
+    document.addEventListener("click", () => {
+        if (modal.classList.contains("active")) {
+            modal.classList.remove("active");
+        }
+    });
+
+    const disabledButton = document.getElementById("btnDisabled");
+    if (disabledButton) {
+        disabledButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            alert("この取引はまだ評価できません");
+        });
+    }
+});
+
+//評価機能
+//=========
+const stars = document.querySelectorAll("#star-box .star");
+console.log(stars);
+const ratingInput = document.getElementById("rating");
+
+stars.forEach((star) => {
+    star.addEventListener("click", () => {
+        const score = star.dataset.score;
+        ratingInput.value = score;
+        console.log(score);
+
+        stars.forEach((s) => s.classList.remove("active"));
+        stars.forEach((s) => {
+            if (s.dataset.score <= score) {
+                s.classList.add("active");
+            }
+        });
+    });
+});

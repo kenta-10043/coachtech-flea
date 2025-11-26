@@ -4,11 +4,29 @@
 @endsection
 
 @section('content')
+    @if ($seedRefreshed)
+        <script>
+            console.log("DB が初期化されたので localStorage をクリアします");
+            localStorage.clear();
+        </script>
+    @endif
     <div class="profile__container">
         <img class="profile__image" src="{{ asset('storage/' . $user->profile->profile_image) }}" alt="{{ $user->name }}">
-        <div class="profile__user-name">
-            <p>{{ $user->name }} </p>
+
+        <div class="rating__box">
+            <div class="profile__user-name">
+                <p class="user-name">{{ $user->name }} </p>
+            </div>
+
+            <div class="stars__box" id="stars-box">
+                <p class="stars" data-score=1>★</p>
+                <p class="stars" data-score=2>★</p>
+                <p class="stars" data-score=3>★</p>
+                <p class="stars" data-score=4>★</p>
+                <p class="stars" data-score=5>★</p>
+            </div>
         </div>
+
         <button class="button__edit" onclick="location.href='{{ route('profile.create') }}'">プロフィールを編集</button>
     </div>
     <div>
