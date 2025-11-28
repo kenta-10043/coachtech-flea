@@ -170,6 +170,7 @@ php artisan test --env=testing
 | two_factor_recovery_code |   text       |             |            |          |             |
 | two_factor_confirmed_at  |  timestamp   |             |            |          |             |
 |    role                  | varchar(100) |             |            |    〇    |             |
+| deleted_at               |  timestamp   |             |            |          |             |
 | created_at               |  timestamp   |             |            |          |              |
 | updated_at               |  timestamp   |             |            |          |              |
 <br>
@@ -213,19 +214,21 @@ php artisan test --env=testing
 
 - items テーブル
 
-|  カラム名       |    型          | primary key | unique key | not null | foreign key        |
-| :--------:      | :-------:     | :---------: | :--------: | :------: | :---------:        |
-|     id          |  bigint       |      ◯      |            |    ◯     |                  |
-|   user_id       |  bigint       |              |            |    ◯     |  users(id)       |
-|   condition_id  |  bigint       |              |            |    ◯     |  conditions(id)  |
-|   item_name     |  varchar(255) |              |            |    ◯     |                  |
-|   brand_name    |  varchar(255) |              |            |           |                  |
-|   price         |  int          |              |            |    ◯     |                  |
-|   item_image    |  varchar(255) |              |            |    ◯     |                  |
-|   status        |  tinyint      |              |            |    ◯     |                  |
-|   description   |  text         |              |            |    ◯     |                  |
-| created_at      | timestamp     |              |            |           |                  |
-| updated_at      | timestamp     |              |            |           |                  |
+|  カラム名             |    型          | primary key | unique key | not null | foreign key        |
+| :--------:           | :-------:     | :---------: | :--------: | :------: | :---------:        |
+|     id               |  bigint       |      ◯      |            |    ◯     |                  |
+|   user_id            |  bigint       |              |            |    ◯     |  users(id)       |
+|   buyer_id           |  bigint       |              |            |           |  users(id)       |
+|   condition_id       |  bigint       |              |            |    ◯     |  conditions(id)  |
+|   item_name          |  varchar(255) |              |            |    ◯     |                  |
+|   brand_name         |  varchar(255) |              |            |           |                  |
+|   price              |  int          |              |            |    ◯     |                  |
+|   item_image         |  varchar(255) |              |            |    ◯     |                  |
+|   status             |  tinyint      |              |            |    ◯     |                  |
+|   transaction_status |  tinyint      |              |            |           |                  |
+|   description        |  text         |              |            |    ◯     |                  |
+| created_at           | timestamp     |              |            |           |                  |
+| updated_at           | timestamp     |              |            |           |                  |
 <br>
 
 - categories テーブル
@@ -275,7 +278,44 @@ php artisan test --env=testing
 |   paid_at             |  timestamp    |              |            |           |                  |
 | created_at            | timestamp     |              |            |           |                  |
 | updated_at            | timestamp     |              |            |           |                  |
+<br>  
+
+- ratings テーブル
+
+|  カラム名              |    型         | primary key | unique key | not null | foreign key        |
+| :--------:            | :-------:     | :---------: | :--------: | :------: | :---------:        |
+|     id                |  bigint       |      ◯      |            |    ◯     |                  |
+|   reviewer_id         |  bigint       |              |            |    ◯     |  users(id)       |
+|   reviewee_id         |  bigint       |              |            |    ◯     |  users(id)       |
+|   rating              |  tinyint      |              |            |           |                  |
+| created_at            | timestamp     |              |            |           |                  |
+| updated_at            | timestamp     |              |            |           |                  |
+<br>  
+
+- chats テーブル
+
+|  カラム名              |    型         | primary key | unique key | not null | foreign key        |
+| :--------:            | :-------:     | :---------: | :--------: | :------: | :---------:        |
+|     id                |  bigint       |      ◯      |            |    ◯     |                  |
+|   item_id             |  bigint       |              |            |    ◯     |  item(id)        |
+|   sender_id           |  bigint       |              |            |           |  users(id)       |
+|   receiver_id         |  bigint       |              |            |           |  users(id)       |
+|   body                |  text         |              |            |           |                  |
+| created_at            | timestamp     |              |            |           |                  |
+| updated_at            | timestamp     |              |            |           |                  |
+<br>  
+
+- chat_images テーブル
+
+|  カラム名              |    型         | primary key | unique key | not null | foreign key        |
+| :--------:            | :-------:     | :---------: | :--------: | :------: | :---------:        |
+|     id                |  bigint       |      ◯      |            |    ◯     |                  |
+|   chat_id             |  bigint       |              |            |    ◯     |  chat(id)        |
+|   chat_image          |  string       |              |            |           |                  |
+| created_at            | timestamp     |              |            |           |                  |
+| updated_at            | timestamp     |              |            |           |                  |
 <br>
+
 
 
 ## ER 図  
