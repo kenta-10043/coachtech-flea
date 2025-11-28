@@ -38,6 +38,27 @@ make init
 
 <br>
 
+| 設定項目    　　    | 変更前    | 変更後       |
+| -------------------| --------- | ------------ |
+| PUSHER_APP  　  　 |   ー       | ×××××        |
+| PUSHER_APP_KEY     |   ー       | ×××××        |
+| PUSHER_APP_SECRET  |    ー      | ×××××        |
+| PUSHER_APP_CLUSTER |    ー     | ×××××        |
+
+<br>
+
+| 設定項目    　　         | 変更前                     | 変更後       |
+| ---------------------   | ---------                  | ------------ |
+| VITE_PUSHER_APP_KEY     |  "${PUSHER_APP_KEY}"       | ×××××        |
+| VITE_PUSHER_APP_HOST    |        ー                   | そのまま      |
+| VITE_PUSHER_APP_SECRET  |        ー                  | そのまま      |
+| VITE_PUSHER_SCHEME  　  |         ー                  | そのまま      |
+| VITE_PUSHER_APP_CLUSTER |  "${PUSHER_APP_CLUSTER}"   | ×××××        |
+- ××××× はご自身で KEY を取得・入力してください。
+- Pusher の API キーは、[Pusher](https://dashboard.pusher.com/)にアクセスから取得してください
+
+<br>
+
 | 設定項目      | 入力値        |
 | ------------- | ------------- |
 | STRIPE KEY    | pk_test ××××× |
@@ -48,7 +69,7 @@ make init
 <br>
 
 | 設定項目      | 入力値        |
-| ------------- | ------------- |
+| ------------- | -------------   |
 | USER_ID       | ××××　　　　　 |
 | GROUP_ID 　　　| ××××　　　　　 |
 - Docker環境下で権限トラブルの軽減のためにプロジェクトルート直下に.envファイルを作成してUSER_IDとGROUP_IDにご自身のホストIDを入力してください。
