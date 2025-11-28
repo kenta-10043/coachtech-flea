@@ -88,4 +88,5 @@
             </form>
         </div>
     </div>
+    @vite('resources/js/sell.js')
 @endsection

@@ -93,4 +93,5 @@
             </div>
         </div>
     </form>
+    @vite('resources/js/purchase.js')
 @endsection

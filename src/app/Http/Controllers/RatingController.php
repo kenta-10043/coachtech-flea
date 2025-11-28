@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Rating;
 use App\Models\Item;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ItemConfirmedMail;
 use Illuminate\Support\Facades\Auth;
 
 class RatingController extends Controller
@@ -49,6 +51,11 @@ class RatingController extends Controller
             $item->update([
                 'transaction_status' => $data['transaction_status'],
             ]);
+        }
+
+        if (auth()->id() === $item->buyer_id) {
+            Mail::to($item->user->email)
+                ->send(new ItemConfirmedMail($item, $item->user));
         }
 
         return redirect(route('index'))->with('success', '評価を送信しました');

@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body data-item-id="{{ $item->id }}">
 
     <header class="main-header">
         <nav class="header__nav">
@@ -39,6 +39,8 @@
     </div>
 
     @vite('resources/js/app.js')
+    @include('components.seed-clear')
+
 </body>
 
 </html>

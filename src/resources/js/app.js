@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("現在のページ itemId:", currentItemId);
 
     // ページ表示時：全体未読の復元
-    // ==========================================
     let total = getTotalUnread();
     console.log("全体未読:", total);
 
@@ -42,34 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // メッセージ受信処理
-    // ==========================================
     if (userId) {
-        window.Echo.private(`chat.${userId}`).listen("MessageSent", (e) => {
+        window.Echo.private(`chat.${userId}`).listen(".MessageSent", (e) => {
             console.log("受信:", e);
 
             const sender = Number(e.sender_id);
             const item = Number(e.item_id);
 
-            // 自分のメッセージ → カウント不要
             if (sender === userId) return;
+            if (currentItemId === item) return;
 
-            // 今開いているチャット → カウント不要
-            if (currentItemId === item) {
-                console.log("今開いているチャット → 未読にしない");
-                return;
-            }
-
-            // -------- 個別未読 +1 --------
             const key = `badge_item_${item}`;
             const prev = Number(localStorage.getItem(key)) || 0;
             const next = prev + 1;
             localStorage.setItem(key, next);
 
-            console.log(`item ${item} 未読 ${prev} → ${next}`);
-
-            // -------- 全体未読再計算 --------
             total = getTotalUnread();
-            console.log("全体未読 →", total);
 
             if (badge) {
                 badge.textContent = total > 0 ? total : "";
@@ -79,14 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // チャットページの場合：その itemId 未読だけリセット
-    // ==========================================
-    if (currentItemId) {
+    if (currentItemId !== null) {
         console.log("リセット対象 item:", currentItemId);
 
-        // この itemId の未読だけリセット
         localStorage.setItem(`badge_item_${currentItemId}`, 0);
 
-        // 全体未読再計算
         total = getTotalUnread();
         console.log("全体未読（再）:", total);
 
@@ -96,15 +80,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    //  商品一覧ページ：個別未読バッジ表示
-    //=================================
+    // 商品一覧ページ：個別未読バッジ表示
     document.querySelectorAll(".item-row").forEach((row) => {
         const itemId = row.dataset.itemId;
         const badgeElem = row.querySelector(`#badge-item-${itemId}`);
 
         if (!badgeElem) return;
 
-        // localStorage の個別未読取得
         const unread =
             Number(localStorage.getItem(`badge_item_${itemId}`)) || 0;
 
@@ -115,140 +97,5 @@ document.addEventListener("DOMContentLoaded", () => {
             badgeElem.textContent = "";
             badgeElem.style.display = "none";
         }
-    });
-});
-
-//   プロフィール画像即時表示
-// =============================
-const profile = document.getElementById("profile_image");
-if (profile) {
-    profile.addEventListener("change", function (e) {
-        const file = e.target.files[0];
-        const preview = document.getElementById("preview");
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                preview.src = event.target.result;
-                preview.style.display = "inline";
-            };
-            reader.readAsDataURL(file);
-        } else {
-            preview.style.display = "none";
-        }
-    });
-}
-
-//   購入方法選択 即時反映
-// =============================
-const select = document.getElementById("payment_method");
-const display = document.getElementById("selectedPayment");
-if (select && display) {
-    display.textContent = select.options[select.selectedIndex].text;
-    select.addEventListener("change", function () {
-        display.textContent = this.options[this.selectedIndex].text;
-    });
-}
-
-//   出品画像プレビュー
-// =============================
-const itemImage = document.getElementById("item_image");
-const previewImg = document.getElementById("preview");
-if (itemImage && previewImg) {
-    itemImage.addEventListener("change", function (e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                previewImg.src = event.target.result;
-                previewImg.style.display = "block";
-            };
-            reader.readAsDataURL(file);
-        } else {
-            previewImg.style.display = "none";
-        }
-    });
-}
-
-//   チャット画像プレビュー
-// =============================
-const realFile = document.getElementById("realFile");
-const previewContainer = document.getElementById("preview-container");
-if (realFile && previewContainer) {
-    realFile.addEventListener("change", function () {
-        previewContainer.innerHTML = "";
-        Array.from(this.files).forEach((file) => {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const img = document.createElement("img");
-                img.src = e.target.result;
-                img.style.maxWidth = "100px";
-                img.style.marginRight = "5px";
-                previewContainer.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-        });
-    });
-}
-
-//   チャット本文 draft 保存
-// =============================
-const input = document.getElementById("chat-input");
-if (input) {
-    input.value = localStorage.getItem("chat_draft") || "";
-    input.addEventListener("input", () => {
-        localStorage.setItem("chat_draft", input.value);
-    });
-}
-
-//  評価モーダル
-//==============
-document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById("myModal");
-    const openButton = document.getElementById("btuOpen");
-
-    if (openButton) {
-        openButton.addEventListener("click", (e) => {
-            e.stopPropagation();
-            modal.classList.add("active");
-        });
-    }
-
-    modal.addEventListener("click", (e) => {
-        e.stopPropagation();
-    });
-
-    document.addEventListener("click", () => {
-        if (modal.classList.contains("active")) {
-            modal.classList.remove("active");
-        }
-    });
-
-    const disabledButton = document.getElementById("btnDisabled");
-    if (disabledButton) {
-        disabledButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            alert("この取引はまだ評価できません");
-        });
-    }
-});
-
-//評価機能
-//=========
-const stars = document.querySelectorAll("#star-box .star");
-console.log(stars);
-const ratingInput = document.getElementById("rating");
-
-stars.forEach((star) => {
-    star.addEventListener("click", () => {
-        const score = star.dataset.score;
-        ratingInput.value = score;
-        console.log(score);
-
-        stars.forEach((s) => s.classList.remove("active"));
-        stars.forEach((s) => {
-            if (s.dataset.score <= score) {
-                s.classList.add("active");
-            }
-        });
     });
 });

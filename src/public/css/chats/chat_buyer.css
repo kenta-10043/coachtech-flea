@@ -106,7 +106,7 @@
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 27px;
+    margin-right: 10px;
 }
 
 .chat__user__name {
@@ -115,7 +115,6 @@
     font-weight: bold;
     padding-top: 14px;
     margin-right: 10px;
-    margin-left: -10px;
 }
 
 .chat__body{
@@ -136,13 +135,36 @@
     display: flex;
 }
 
-.chat__body__link{
-    display: block;
-    margin-top: -5px;
+.chat__profile__inner{
+    margin-right: 244px;
+    margin-bottom: -25px;
 }
 
-.delete__button{
+.chat__profile__inner-b{
+    margin-left: 222px;
+    margin-bottom: -25px;
+}
 
+.chat__body__update{
+    position: relative;
+    margin-left: 368px;
+    border: none;
+    background-color: white;
+    color: #5F5F5F;
+    font-size: 15px;
+}
+
+.delete__button__box{
+    position: absolute;
+    margin-top: -24px;
+    margin-left: 420px;
+}
+
+.chat__body__delete{
+    border: none;
+    background-color: white;
+    color: #5F5F5F;
+    font-size: 15px;
 }
 
 .input__textarea{

@@ -4,12 +4,7 @@
 @endsection
 
 @section('content')
-    @if ($seedRefreshed)
-        <script>
-            console.log("DB が初期化されたので localStorage をクリアします");
-            localStorage.clear();
-        </script>
-    @endif
+
     <div class="profile__container">
         <img class="profile__image" src="{{ asset('storage/' . $user->profile->profile_image) }}" alt="{{ $user->name }}">
 
@@ -25,6 +20,7 @@
                 <p class="stars" data-score=4>★</p>
                 <p class="stars" data-score=5>★</p>
             </div>
+            <input type="hidden" name="ratingAvg" id="ratingAvg" value="{{ $ratingAvg }}">
         </div>
 
         <button class="button__edit" onclick="location.href='{{ route('profile.create') }}'">プロフィールを編集</button>
@@ -78,7 +74,7 @@
             @if (request()->query('page') === 'transaction')
                 @foreach ($transactionItems as $item)
                     <div class="item-row" data-item-id="{{ $item->id }}">
-                        <p class="item-badge" id="badge-item-{{ $item->id }}">0</p>
+                        <p class="item-badge" id="badge-item-{{ $item->id }}"></p>
                         <a class="item__link" href="{{ route('chat.index', ['item_id' => $item->id]) }}">
                             <div class="item__cards">
                                 <img class="item__cards__image" src="{{ asset('storage/' . $item->item_image) }}"
@@ -96,5 +92,5 @@
         </div>
     </div>
 
-
+    @vite('resources/js/profile_rating.js')
 @endsection

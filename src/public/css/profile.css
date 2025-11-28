@@ -141,6 +141,7 @@
 
 .item__cards__name {
     display: inline-block;
+    min-width: 60px;
 }
 
 .item__card__description {
@@ -178,6 +179,10 @@
     height: 40px;
     width: 40px;
     line-height: 1;
+}
+
+.stars.active {
+    color: #FFF048;
 }
 
 @media (max-width: 1243px) {

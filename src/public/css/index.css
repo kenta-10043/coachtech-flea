@@ -57,6 +57,7 @@
 
 .item__cards__name {
     display: inline-block;
+    min-width: 60px;
 }
 
 .alert-success {

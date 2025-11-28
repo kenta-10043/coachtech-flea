@@ -54,4 +54,5 @@
             <button class='register__button' type="submit">更新する</button>
         </form>
     </div>
+    @vite('resources/js/profile_image.js')
 @endsection

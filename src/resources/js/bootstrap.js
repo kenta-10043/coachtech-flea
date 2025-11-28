@@ -21,9 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("userId:", userId);
 
     // チャンネル購読
-    window.Echo.private(`chat.${userId}`).listen("MessageSent", (e) => {
+    window.Echo.private(`chat.${userId}`).listen(".MessageSent", (e) => {
         console.log("受信データ:", e);
     });
 });
-
-

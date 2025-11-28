@@ -16,8 +16,8 @@
 
     <div class="profile__container">
         <div class="profile__container__inner">
-        <img class="profile__image" src="{{ asset('storage/' . $sellerUser->profile->profile_image) }}"
-            alt="{{ $user->name }}">
+            <img class="profile__image" src="{{ asset('storage/' . $sellerUser->profile->profile_image) }}"
+                alt="{{ $user->name }}">
         </div>
         <p class="main__content__title">{{ $sellerUser->name }}さんとの取引画面</p>
 
@@ -68,29 +68,34 @@
                 @if ($allMessage->sender_id == auth()->id())
                     <div>
                         <div class="chat__profile__container">
+                            <div class="chat__profile__inner">
+                                @foreach ($allMessage->chatImages as $image)
+                                    <a class="chat__body__link" href="{{ asset('storage/' . $image->chat_image) }}"><img
+                                            class="image-icon" src="{{ asset('storage/others/写真のフリーアイコン5 (1).png') }}"
+                                            alt="写真アイコン"></a>
+                                @endforeach
+                            </div>
                             <p class="chat__user__name">{{ $allMessage->sender->name }}</p>
                             <img class="chat__profile__image"
                                 src="{{ asset('storage/' . $allMessage->sender->profile->profile_image) }}"
                                 alt="{{ $sellerUser->name }}">
                         </div>
                         <div class="chat__body__container">
+
                             <form action="{{ route('chat.update', ['chat_id' => $allMessage->id]) }}" method="POST">
                                 @method('PUT')
                                 @csrf
                                 <textarea class="chat__body" name="body" cols="30" rows="1">{{ old('body', $allMessage->body) }}</textarea>
                                 <div class="chat__body__items">
-                                    @foreach ($allMessage->chatImages as $image)
-                                        <a class="chat__body__link"
-                                            href="{{ asset('storage/' . $image->chat_image) }}"><img class="image-icon"
-                                                src="{{ asset('storage/others/写真のフリーアイコン5 (1).png') }}" alt="写真アイコン"></a>
-                                    @endforeach
-                                    <button type="submit">編集</button>
+
+                                    <button class="chat__body__update" type="submit">編集</button>
                                 </div>
                             </form>
-                            <form action="{{ route('chat.destroy', ['chat_id' => $allMessage->id]) }}" method="POST">
+                            <form class="delete__button__box"
+                                action="{{ route('chat.destroy', ['chat_id' => $allMessage->id]) }}" method="POST">
                                 @method('delete')
                                 @csrf
-                                <button class="delete__button" type="submit">削除</button>
+                                <button class="chat__body__delete" type="submit">削除</button>
                             </form>
                         </div>
                     </div>
@@ -101,13 +106,16 @@
                                 src="{{ asset('storage/' . $allMessage->sender->profile->profile_image) }}"
                                 alt="{{ $sellerUser->name }}">
                             <p class="chat__user__name">{{ $allMessage->sender->name }}</p>
+                            <div class="chat__profile__inner-b">
+                                @foreach ($allMessage->chatImages as $image)
+                                    <a href="{{ asset('storage/' . $image->chat_image) }}"><img class="image-icon"
+                                            src="{{ asset('storage/others/写真のフリーアイコン5 (1).png') }}" alt="写真アイコン"></a>
+                                @endforeach
+                            </div>
                         </div>
                         <div class="chat__body__container">
                             <p class="chat__body">{{ $allMessage->body }}</p>
-                            @foreach ($allMessage->chatImages as $image)
-                                <a href="{{ asset('storage/' . $image->chat_image) }}"><img class="image-icon"
-                                        src="{{ asset('storage/others/写真のフリーアイコン5 (1).png') }}" alt="写真アイコン"></a>
-                            @endforeach
+
                         </div>
                     </div>
                 @endif
@@ -129,7 +137,7 @@
                 <div class="input__box">
 
                     <textarea class="input__textarea" name="body" cols="30" rows="1" id="chat-input"
-                        placeholder="取引メッセージを記入してください"><{{ old('body') }}</textarea>
+                        placeholder="取引メッセージを記入してください">{{ old('body') }}</textarea>
 
                     <div class="error__alert">
                         @error('chat_images')
@@ -150,4 +158,6 @@
 
     </div>
 
+    @vite('resources/js/chat_create.js')
+    @vite('resources/js/rating.js')
 @endsection

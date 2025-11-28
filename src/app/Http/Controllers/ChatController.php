@@ -76,6 +76,8 @@ class ChatController extends Controller
             }
         }
 
+        event(new MessageSent($chat));
+
         return back();
     }
 

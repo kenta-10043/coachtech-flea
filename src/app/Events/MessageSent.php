@@ -36,6 +36,11 @@ class MessageSent implements ShouldBroadcastNow
         ];
     }
 
+    public function broadcastAs()
+    {
+        return 'MessageSent';
+    }
+
     //ブロードキャスト用JSON作成
     public function broadcastWith()
     {

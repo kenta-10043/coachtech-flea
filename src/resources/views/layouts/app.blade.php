@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="user-id" content="{{ auth()->id() }}">
     <script>
-    window.userId = document.querySelector('meta[name="user-id"]').content;
+        window.userId = document.querySelector('meta[name="user-id"]').content;
     </script>
     <title>coachtechフリマ</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
@@ -57,6 +57,7 @@
     </div>
 
     @vite('resources/js/app.js')
+    @include('components.seed-clear')
 </body>
 
 </html>
