@@ -1,0 +1,1 @@
+const i=document.getElementById("profile_image");i&&i.addEventListener("change",function(l){const t=l.target.files[0],e=document.getElementById("preview");if(t){const n=new FileReader;n.onload=function(s){e.src=s.target.result,e.style.display="inline"},n.readAsDataURL(t)}else e.style.display="none"});

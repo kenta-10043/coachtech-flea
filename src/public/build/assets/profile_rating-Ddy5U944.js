@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{const t=document.querySelectorAll("#stars-box .stars"),a=document.getElementById("ratingAvg");if(!t.length||!a)return;const o=Number(a.value);console.log("評価平均：",o),t.forEach(e=>e.classList.remove("active")),t.forEach(e=>{Number(e.dataset.score)<=o&&e.classList.add("active")})});

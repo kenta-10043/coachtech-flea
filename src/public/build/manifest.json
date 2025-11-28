@@ -10,5 +10,41 @@
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
+  },
+  "resources/js/chat_create.js": {
+    "file": "assets/chat_create-CylYHO0W.js",
+    "name": "chat_create",
+    "src": "resources/js/chat_create.js",
+    "isEntry": true
+  },
+  "resources/js/profile_image.js": {
+    "file": "assets/profile_image-DVqF5W9V.js",
+    "name": "profile_image",
+    "src": "resources/js/profile_image.js",
+    "isEntry": true
+  },
+  "resources/js/profile_rating.js": {
+    "file": "assets/profile_rating-Ddy5U944.js",
+    "name": "profile_rating",
+    "src": "resources/js/profile_rating.js",
+    "isEntry": true
+  },
+  "resources/js/purchase.js": {
+    "file": "assets/purchase-BAe0vegQ.js",
+    "name": "purchase",
+    "src": "resources/js/purchase.js",
+    "isEntry": true
+  },
+  "resources/js/rating.js": {
+    "file": "assets/rating-C1dmo8A4.js",
+    "name": "rating",
+    "src": "resources/js/rating.js",
+    "isEntry": true
+  },
+  "resources/js/sell.js": {
+    "file": "assets/sell-jmnBF9WQ.js",
+    "name": "sell",
+    "src": "resources/js/sell.js",
+    "isEntry": true
   }
 }

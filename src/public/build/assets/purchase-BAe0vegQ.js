@@ -1,0 +1,1 @@
+const e=document.getElementById("payment_method"),t=document.getElementById("selectedPayment");e&&t&&(t.textContent=e.options[e.selectedIndex].text,e.addEventListener("change",function(){t.textContent=this.options[this.selectedIndex].text}));

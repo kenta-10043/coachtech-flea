@@ -1,0 +1,1 @@
+const i=document.getElementById("item_image"),e=document.getElementById("preview");i&&e&&i.addEventListener("change",function(a){const t=a.target.files[0];if(t){const n=new FileReader;n.onload=function(s){e.src=s.target.result,e.style.display="block"},n.readAsDataURL(t)}else e.style.display="none"});
