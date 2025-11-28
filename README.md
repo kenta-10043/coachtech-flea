@@ -320,7 +320,7 @@ php artisan test --env=testing
 
 ## ER 図  
 
-![ER](./flea_2.drawio.png)  
+![ER](./flea_2.png)  
 
 <br>
 
