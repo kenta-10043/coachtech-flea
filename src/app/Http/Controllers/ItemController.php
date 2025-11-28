@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Item;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
-
     public function show($item_id)
     {
         $item = Item::with('comments.user', 'likes.user', 'condition', 'categories')
@@ -19,7 +18,6 @@ class ItemController extends Controller
 
         return view('show', compact('item', 'isLiked', 'userId'));
     }
-
 
     public function toggleLike($item_id)
     {
@@ -48,6 +46,7 @@ class ItemController extends Controller
                 $query->where('user_id', '!=', auth()->id());
             } else {
                 $items = collect();
+
                 return view('index', compact('items', 'keyword'));
             }
         } else {
@@ -57,13 +56,12 @@ class ItemController extends Controller
         }
 
         if ($request->filled('keyword')) {
-            $query->where('item_name', 'LIKE', '%' . $keyword . '%');
+            $query->where('item_name', 'LIKE', '%'.$keyword.'%');
         }
         $items = $query->get();
 
         return view('index', compact('items', 'keyword'));
     }
-
 
     public function order($item_id)
     {

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Rating;
-use App\Models\Item;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\ItemConfirmedMail;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Item;
+use App\Models\Rating;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RatingController extends Controller
 {
@@ -16,12 +15,12 @@ class RatingController extends Controller
         $item = Item::findOrFail($item_id);
 
         if ($item->user_id === auth()->user()->id) {
-            //ログインユーザーが出品者
+            // ログインユーザーが出品者
             $revieweeId = $item->buyer_id;  // 購入者
             $reviewerId = $item->user_id;   // 出品者
             $isSeller = true;
         } else {
-            //ログインユーザーが購買者
+            // ログインユーザーが購買者
             $revieweeId = $item->user_id;   // 出品者
             $reviewerId = $item->buyer_id;  // 購入者
             $isSeller = false;

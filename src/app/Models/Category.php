@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\Category as CategoryEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\Category as CategoryEnum;
 
 class Category extends Model
 {

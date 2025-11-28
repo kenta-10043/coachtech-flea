@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Auth;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\User;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
+use Tests\TestCase;
 
 class EmailAuthenticationTest extends TestCase
 {
@@ -29,6 +29,7 @@ class EmailAuthenticationTest extends TestCase
             $response = $this->actingAs($user)->get($verificationUrl);
             $response->assertRedirect('/mypage/profile');
             $this->assertNotNull($user->fresh()->email_verified_at);
+
             return true;
         });
     }

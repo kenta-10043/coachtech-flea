@@ -2,9 +2,7 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -32,7 +30,7 @@ class MessageSent implements ShouldBroadcastNow
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('chat.' . $this->chat->receiver_id)
+            new PrivateChannel('chat.'.$this->chat->receiver_id),
         ];
     }
 
@@ -41,7 +39,7 @@ class MessageSent implements ShouldBroadcastNow
         return 'MessageSent';
     }
 
-    //ブロードキャスト用JSON作成
+    // ブロードキャスト用JSON作成
     public function broadcastWith()
     {
         return [
@@ -52,7 +50,7 @@ class MessageSent implements ShouldBroadcastNow
             'receiver_id' => $this->chat->receiver_id,
             'created_at' => $this->chat->created_at->toDateTimeString(),
             'chat_images' => $this->chat->chatImages
-                ? $this->chat->chatImages->map(fn($img) => asset('storage/' . $img->chat_image))
+                ? $this->chat->chatImages->map(fn ($img) => asset('storage/'.$img->chat_image))
                 : [],
         ];
     }

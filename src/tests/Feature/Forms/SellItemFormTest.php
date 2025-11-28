@@ -2,14 +2,14 @@
 
 namespace Tests\Feature\Forms;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Category;
 use App\Models\Condition;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
 class SellItemFormTest extends TestCase
 {
@@ -23,13 +23,13 @@ class SellItemFormTest extends TestCase
         $categories = Category::factory()->count(3)->create();
         $condition = Condition::factory()->create();
         $formData = [
-            'item_name'   => 'メガネ',
-            'brand_name'  => 'ブランド',
-            'price'       => 2000,
+            'item_name' => 'メガネ',
+            'brand_name' => 'ブランド',
+            'price' => 2000,
             'description' => '商品説明文',
-            'condition'   => $condition->id,
-            'category'    => $categories->pluck('id')->toArray(),
-            'item_image'  => UploadedFile::fake()->image('test.jpg'),
+            'condition' => $condition->id,
+            'category' => $categories->pluck('id')->toArray(),
+            'item_image' => UploadedFile::fake()->image('test.jpg'),
         ];
         $response = $this->post(route('sell.store'), $formData);
         $response->assertRedirect(route('index'));
@@ -42,7 +42,7 @@ class SellItemFormTest extends TestCase
         $this->assertStringContainsString('sample_images/', $item->item_image);
         foreach ($categories as $category) {
             $this->assertDatabaseHas('category_item', [
-                'item_id'     => $item->id,
+                'item_id' => $item->id,
                 'category_id' => $category->id,
             ]);
         }

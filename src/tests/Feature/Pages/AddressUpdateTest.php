@@ -2,13 +2,12 @@
 
 namespace Tests\Feature\Pages;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\Item;
-use App\Models\User;
 use App\Models\Order;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-
+use Tests\TestCase;
 
 class AddressUpdateTest extends TestCase
 {
@@ -33,7 +32,7 @@ class AddressUpdateTest extends TestCase
             'shopping_postal_code' => '145-4567',
             'shopping_address' => 'サンプル住所',
             'shopping_building' => 'サンプル建物名',
-            'payment_method'       => 1,
+            'payment_method' => 1,
         ]);
         $response = $this->actingAs($user)
             ->get(route('address.edit', ['item_id' => $item->id]));
@@ -48,8 +47,8 @@ class AddressUpdateTest extends TestCase
         Http::fake([
             'api.stripe.com/*' => Http::response([
                 'id' => 'cs_test_123',
-                'url' => 'https://checkout.stripe.com/c/pay/cs_test_123'
-            ], 200)
+                'url' => 'https://checkout.stripe.com/c/pay/cs_test_123',
+            ], 200),
         ]);
         $user = User::factory()->create();
         $this->actingAs($user);

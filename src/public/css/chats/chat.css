@@ -43,3 +43,29 @@
     color:white;
     text-decoration: none;
 }
+
+@media (max-width: 900px) {
+    .main-header {
+        width: 105%;
+        height: 80px;
+        opacity: 1;
+        background-color: black;
+    }
+}
+
+@media (max-width: 900px) {
+    .side__content {
+        max-width: 170px;
+        height: 100%;
+        background-color: #868686;
+        font-size: 10px;
+
+    }
+}
+
+@media (max-width: 900px) {
+    .main__content {
+        margin-left: -70px;
+
+    }
+}

@@ -4,9 +4,8 @@ namespace App\Actions\Fortify;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\RegisterRequest;
+use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers
 {

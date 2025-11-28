@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Pages;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\Item;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ItemIndexPageTest extends TestCase
 {
@@ -17,7 +17,7 @@ class ItemIndexPageTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_item_index_page_purchasedItem(): void
+    public function test_item_index_page_purchased_item(): void
     {
         $purchasedItem = Item::factory()->create([
             'item_name' => 'sold_item',
@@ -33,7 +33,7 @@ class ItemIndexPageTest extends TestCase
         $response->assertSee('available_item');
     }
 
-    public function test_item_index_page_exhibitionItem(): void
+    public function test_item_index_page_exhibition_item(): void
     {
         $user = User::factory()->create();
         $otherUser = User::factory()->create();

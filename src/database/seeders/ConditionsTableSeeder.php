@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Condition;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Enums\Condition;
 
 class ConditionsTableSeeder extends Seeder
 {

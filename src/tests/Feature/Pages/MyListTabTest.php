@@ -2,16 +2,16 @@
 
 namespace Tests\Feature\Pages;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\Item;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class MyListTabTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_myList_tab_can_be_accessed(): void
+    public function test_my_list_tab_can_be_accessed(): void
     {
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -39,7 +39,7 @@ class MyListTabTest extends TestCase
         $response->assertSee('Sold');
     }
 
-    public function test_myList_tab_for_guest(): void
+    public function test_my_list_tab_for_guest(): void
     {
         $response = $this->get('/?tab=mylist');
         $response->assertStatus(200);

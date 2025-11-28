@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('reviewer_id')->nullable()->constrained('users')->cascadeOnDelete();  //評価したユーザー（購入者）
-            $table->foreignId('reviewee_id')->nullable()->constrained('users')->cascadeOnDelete();  //評価されるユーザー（出品者）
+            $table->foreignId('reviewer_id')->nullable()->constrained('users')->cascadeOnDelete();  // 評価したユーザー（購入者）
+            $table->foreignId('reviewee_id')->nullable()->constrained('users')->cascadeOnDelete();  // 評価されるユーザー（出品者）
             $table->tinyInteger('rating')->nullable();
             $table->timestamps();
         });

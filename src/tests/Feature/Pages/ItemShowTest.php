@@ -2,15 +2,15 @@
 
 namespace Tests\Feature\Pages;
 
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Condition;
+use App\Models\Item;
+use App\Models\Like;
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\Item;
-use App\Models\User;
-use App\Models\Condition;
-use App\Models\Comment;
-use App\Models\Like;
-use App\Models\Category;
-use App\Models\Profile;
 
 class ItemShowTest extends TestCase
 {
@@ -35,12 +35,12 @@ class ItemShowTest extends TestCase
         $commentUser->profile()->create(Profile::factory()->make()->toArray());
         Like::factory()->create([
             'user_id' => $likeUser->id,
-            'item_id' => $item->id
+            'item_id' => $item->id,
         ]);
         Comment::factory()->create([
             'user_id' => $commentUser->id,
             'item_id' => $item->id,
-            'comment' => 'コメント本文'
+            'comment' => 'コメント本文',
         ]);
         $item = Item::withCount(['likes', 'comments'])->with('comments.user.profile', 'categories')->find($item->id);
         $category1 = Category::factory()->create(['category' => 1]);

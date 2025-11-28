@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Pages;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-use App\Models\Profile;
-use App\Models\User;
 use App\Models\Item;
 use App\Models\Order;
+use App\Models\Profile;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ProfilePageTest extends TestCase
 {
@@ -19,7 +19,7 @@ class ProfilePageTest extends TestCase
         $this->actingAs($user);
         Profile::factory()->create([
             'user_id' => $user->id,
-            'profile_image' => 'dummy.jpg'
+            'profile_image' => 'dummy.jpg',
         ]);
         $sellItem = Item::factory()->create([
             'user_id' => $user->id,
@@ -48,7 +48,7 @@ class ProfilePageTest extends TestCase
         $this->actingAs($user);
         Profile::factory()->create([
             'user_id' => $user->id,
-            'profile_image' => 'dummy.jpg'
+            'profile_image' => 'dummy.jpg',
         ]);
         $sellItem = Item::factory()->create([
             'user_id' => $user->id,
@@ -77,7 +77,7 @@ class ProfilePageTest extends TestCase
         $this->actingAs($user);
         Profile::factory()->create([
             'user_id' => $user->id,
-            'profile_image' => 'dummy.jpg'
+            'profile_image' => 'dummy.jpg',
         ]);
         $sellItem = Item::factory()->create([
             'user_id' => $user->id,

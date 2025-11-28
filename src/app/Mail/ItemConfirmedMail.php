@@ -2,13 +2,12 @@
 
 namespace App\Mail;
 
+use App\Models\Item;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Item;
 
 class ItemConfirmedMail extends Mailable
 {
@@ -17,10 +16,9 @@ class ItemConfirmedMail extends Mailable
     /**
      * Create a new message instance.
      */
-
     public $item;
-    public $user;
 
+    public $user;
 
     public function __construct(Item $item, $user)
     {

@@ -358,3 +358,21 @@ svg.w-5.h-5 {
 .review__button__area{
     text-align: right;
 }
+
+@media (max-width: 1432px) {
+    .main__content__title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 940px) {
+    .modal__content {
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 500px;
+        height: 367px;
+        overflow: auto;
+    }
+}

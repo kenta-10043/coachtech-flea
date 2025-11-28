@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Enums\PaymentMethod;
+use App\Http\Requests\AddressRequest;
+use App\Http\Requests\PurchaseRequest;
 use App\Models\Item;
 use App\Models\Order;
-use App\Http\Requests\PurchaseRequest;
-use App\Http\Requests\AddressRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Enums\PaymentMethod;
-use Stripe\Stripe;
 use Stripe\Checkout\Session as CheckoutSession;
-
-
+use Stripe\Stripe;
 
 class OrderController extends Controller
 {
@@ -27,7 +25,7 @@ class OrderController extends Controller
             ->first();
         $postalCode = $latestOrder?->shopping_postal_code ?? $user->profile->postal_code;
         $address = $latestOrder?->shopping_address ?? $user->profile->address;
-        $building = $latestOrder?->shopping_building ??  $user->profile->building;
+        $building = $latestOrder?->shopping_building ?? $user->profile->building;
         $paymentMethods = PaymentMethod::cases();
         $selectedPayment = $latestOrder?->payment_method
             ? PaymentMethod::from($latestOrder->payment_method)->label()
@@ -53,7 +51,7 @@ class OrderController extends Controller
     {
         $item = Item::findOrFail($item_id);
         $user = Auth::user();
-        $method = PaymentMethod::from((int)$request->payment_method);
+        $method = PaymentMethod::from((int) $request->payment_method);
         $order = Order::updateOrCreate(
             [
                 'item_id' => $item->id,
@@ -65,7 +63,7 @@ class OrderController extends Controller
                 'shopping_address' => $request->shopping_address,
                 'shopping_building' => $request->shopping_building,
                 'order_price' => $item->price,
-                'payment_method' => (int)$request->payment_method,
+                'payment_method' => (int) $request->payment_method,
             ]
         );
         Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -83,8 +81,8 @@ class OrderController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'client_reference_id' => (string)$order->id,
-            'success_url' => route('purchase.success', ['item_id' => $item->id]) . '?session_id={CHECKOUT_SESSION_ID}',
+            'client_reference_id' => (string) $order->id,
+            'success_url' => route('purchase.success', ['item_id' => $item->id]).'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('purchase.cancel', ['item_id' => $item->id]),
         ]);
 
@@ -96,7 +94,7 @@ class OrderController extends Controller
         $user = Auth::user();
         $item = Item::findOrFail($item_id);
         $sessionId = $request->query('session_id');
-        if (!$sessionId) {
+        if (! $sessionId) {
             return redirect()->route('purchase.order', ['item_id' => $item->id])->with('error', 'セッションIDが見つかりません');
         }
         Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -106,16 +104,17 @@ class OrderController extends Controller
             ->where('item_id', $item->id)
             ->where('status', 'draft')
             ->first();
-        if (!$order) {
+        if (! $order) {
             return redirect()->route('index')->with('success', '購入処理は完了しています');
         }
-        if (!empty($order->checkout_session_id)) {
+        if (! empty($order->checkout_session_id)) {
             return redirect()->route('index')->with('success', '購入処理は完了しています');
         }
-        $method = PaymentMethod::from((int)$order->payment_method);
+        $method = PaymentMethod::from((int) $order->payment_method);
         $isPaid = ($session->payment_status === 'paid');
         if ($method === PaymentMethod::CARD && $isPaid) {
             $this->finalizePaidOrder($order, $item, $sessionId);
+
             return redirect()->route('index')->with('success', '商品を購入しました');
         }
         $order->status = 'pending';
@@ -134,13 +133,11 @@ class OrderController extends Controller
         $order->checkout_session_id = $sessionId;
         $order->save();
 
-        $item->status = 2;  //購入状況：購入済み
+        $item->status = 2;  // 購入状況：購入済み
         $item->buyer_id = $userId;
-        $item->transaction_status = 2;  //取引状況：取引中  1:pending 2:in_progress 3:completed
+        $item->transaction_status = 2;  // 取引状況：取引中  1:pending 2:in_progress 3:completed
         $item->save();
     }
-
-
 
     public function update(AddressRequest $request, $item_id)
     {
@@ -162,10 +159,10 @@ class OrderController extends Controller
                 'shopping_address' => $request->shopping_address,
                 'shopping_building' => $building,
                 'order_price' => $item->price,
-                'payment_method' => (int)$request->payment_method,
+                'payment_method' => (int) $request->payment_method,
             ]
         );
 
-        return redirect(route('purchase.order', ['item_id' => $item->id]))->with('success', '配送先住所を登録しました');;
+        return redirect(route('purchase.order', ['item_id' => $item->id]))->with('success', '配送先住所を登録しました');
     }
 }

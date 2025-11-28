@@ -18,12 +18,12 @@ class Rating extends Model
 
     public function reviewer()
     {
-        return $this->belongsTo(User::class, 'reviewer_id');  //自分がする評価
+        return $this->belongsTo(User::class, 'reviewer_id');  // 自分がする評価
     }
 
     public function reviewee()
     {
-        return $this->belongsTo(User::class, 'reviewee_id');  //自分がされる評価
+        return $this->belongsTo(User::class, 'reviewee_id');  // 自分がされる評価
     }
 
     public function item()

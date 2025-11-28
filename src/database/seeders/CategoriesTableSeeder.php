@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Enums\Category;
 
 class CategoriesTableSeeder extends Seeder
 {

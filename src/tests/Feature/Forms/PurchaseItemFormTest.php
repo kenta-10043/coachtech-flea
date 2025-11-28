@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Forms;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-use Illuminate\Support\Facades\Http;
 use App\Models\Item;
-use App\Models\User;
 use App\Models\Order;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
+use Tests\TestCase;
 
 class PurchaseItemFormTest extends TestCase
 {
@@ -18,8 +18,8 @@ class PurchaseItemFormTest extends TestCase
         Http::fake([
             'api.stripe.com/*' => Http::response([
                 'id' => 'cs_test_123',
-                'url' => 'https://checkout.stripe.com/c/pay/cs_test_123'
-            ], 200)
+                'url' => 'https://checkout.stripe.com/c/pay/cs_test_123',
+            ], 200),
         ]);
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -55,13 +55,13 @@ class PurchaseItemFormTest extends TestCase
         );
     }
 
-    public function test_purchaseItem_displayed_sold_on_index(): void
+    public function test_purchase_item_displayed_sold_on_index(): void
     {
         Http::fake([
             'api.stripe.com/*' => Http::response([
                 'id' => 'cs_test_123',
-                'url' => 'https://checkout.stripe.com/c/pay/cs_test_123'
-            ], 200)
+                'url' => 'https://checkout.stripe.com/c/pay/cs_test_123',
+            ], 200),
         ]);
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -104,13 +104,13 @@ class PurchaseItemFormTest extends TestCase
         $indexResponse->assertSee('available_item');
     }
 
-    public function test_purchaseItem_displayed_sold_on_mylist(): void
+    public function test_purchase_item_displayed_sold_on_mylist(): void
     {
         Http::fake([
             'api.stripe.com/*' => Http::response([
                 'id' => 'cs_test_123',
-                'url' => 'https://checkout.stripe.com/c/pay/cs_test_123'
-            ], 200)
+                'url' => 'https://checkout.stripe.com/c/pay/cs_test_123',
+            ], 200),
         ]);
         $user = User::factory()->create();
         $this->actingAs($user);

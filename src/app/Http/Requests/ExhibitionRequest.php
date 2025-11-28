@@ -29,7 +29,7 @@ class ExhibitionRequest extends FormRequest
             'category' => 'required',
             'category.*' => 'exists:categories,id',
             'condition' => 'required',
-            'price' => 'required|numeric|min:0'
+            'price' => 'required|numeric|min:0',
         ];
     }
 

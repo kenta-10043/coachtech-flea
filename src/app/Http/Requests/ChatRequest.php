@@ -26,6 +26,7 @@ class ChatRequest extends FormRequest
             'chat_images.*' => 'mimes:png,jpeg',
         ];
     }
+
     public function messages()
     {
         return [

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ExhibitionRequest;
-use App\Models\Item;
 use App\Models\Category;
 use App\Models\Condition;
-
+use App\Models\Item;
 
 class SellController extends Controller
 {
@@ -17,6 +16,7 @@ class SellController extends Controller
 
         return view('exhibitions.sell', compact('categories', 'conditions'));
     }
+
     public function store(ExhibitionRequest $request)
     {
         $imagePath = $request->file('item_image')->store('sample_images', 'public');

@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\Item;
 use App\Models\user;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ItemSearchTest extends TestCase
 {
@@ -23,7 +23,7 @@ class ItemSearchTest extends TestCase
         $response->assertSee('サッカーボール');
     }
 
-    public function test_myList_tab_can_be_accessed(): void
+    public function test_my_list_tab_can_be_accessed(): void
     {
         $user = User::factory()->create();
         $this->actingAs($user);

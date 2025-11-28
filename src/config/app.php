@@ -171,7 +171,6 @@ return [
         App\Providers\FortifyServiceProvider::class,
     ])->toArray(),
 
-
     /*
     |--------------------------------------------------------------------------
     | Class Aliases

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\Condition as ConditionEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\Condition as ConditionEnum;
 
 class Condition extends Model
 {

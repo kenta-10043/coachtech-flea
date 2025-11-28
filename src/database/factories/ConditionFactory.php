@@ -17,7 +17,7 @@ class ConditionFactory extends Factory
     public function definition(): array
     {
         return [
-            'condition' => 1
+            'condition' => 1,
         ];
     }
 }

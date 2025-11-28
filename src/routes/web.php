@@ -1,15 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ItemController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\SellController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingController;
-
-
+use App\Http\Controllers\SellController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +23,6 @@ use App\Http\Controllers\RatingController;
 Route::get('/', [ItemController::class, 'index'])->name('index');
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 
-
-
 Route::middleware('auth')->group(
     function () {
 
@@ -41,7 +37,6 @@ Route::middleware('auth')->group(
         Route::get('/mypage/profile', [ProfileController::class, 'create'])->name('profile.create');
         Route::post('/mypage/profile', [ProfileController::class, 'store'])->name('profile.store');
         Route::get('/mypage', [ProfileController::class, 'index'])->name('profile.index');
-
 
         Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
         Route::post('/item/{item_id}/like', [ItemController::class, 'toggleLike'])->name('item.like');

@@ -202,3 +202,20 @@
         gap: 20px;
     }
 }
+
+@media (max-width: 1184px) {
+    .button__edit {
+        width: 310px;
+        height: 59px;
+        height: 59px;
+        border-color: red;
+        color: red;
+        font-weight: bold;
+        background-color: white;
+        margin-top: 161px;
+        margin-right: 90px;
+        border-radius: 7px;
+        font-size: 26px;
+        font-weight: bold;
+    }
+}

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\Status as StatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\Status as StatusEnum;
 
 class Item extends Model
 {

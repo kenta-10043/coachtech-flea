@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use App\Events\MessageSent;
+use App\Http\Requests\ChatRequest;
 use App\Models\Chat;
+use App\Models\ChatImage;
 use App\Models\Item;
 use App\Models\User;
-use App\Models\ChatImage;
-use App\Models\Rating;
-use App\Http\Requests\ChatRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Events\MessageSent;
-use Illuminate\Support\Facades\Log;
-
 
 class ChatController extends Controller
 {
@@ -50,13 +46,13 @@ class ChatController extends Controller
     {
 
         $item = Item::findOrFail($item_id);
-        $senderId = Auth::id();            //送信者
-        $sellerId = $item->user_id;  //出品者
-        $buyerId = $item->buyer_id ?? null;  //購入者
+        $senderId = Auth::id();            // 送信者
+        $sellerId = $item->user_id;  // 出品者
+        $buyerId = $item->buyer_id ?? null;  // 購入者
 
         $receiverId = ($senderId === $sellerId)
             ? ($buyerId ?? $sellerId) // buyer が null なら seller が入る
-            : $sellerId; //受信者
+            : $sellerId; // 受信者
 
         $chat = Chat::create([
             'item_id' => $item->id,
@@ -81,14 +77,13 @@ class ChatController extends Controller
         return back();
     }
 
-
     public function update(Request $request, $chat_id)
     {
 
         $chat = Chat::findOrFail($chat_id);
 
         if ($chat->sender_id !== auth()->id()) {
-            abort(403, "権限がありません");
+            abort(403, '権限がありません');
         }
         $updateData = array_filter($request->only([
             'body',
@@ -97,20 +92,19 @@ class ChatController extends Controller
         });
         $chat->update($updateData);
 
-        return back()->with('success', "チャットの更新が完了しました");
+        return back()->with('success', 'チャットの更新が完了しました');
     }
-
 
     public function destroy(Request $request, $chat_id)
     {
 
         $chat = Chat::findOrFail($chat_id);
         if ($chat->sender_id !== auth()->id()) {
-            abort(403, "権限がありません");
+            abort(403, '権限がありません');
         }
 
         $chat->delete();
 
-        return back()->with('success', "チャットの削除が完了しました");
+        return back()->with('success', 'チャットの削除が完了しました');
     }
 }

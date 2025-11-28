@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Pages;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\Profile;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ProfileCreatePageTest extends TestCase
 {

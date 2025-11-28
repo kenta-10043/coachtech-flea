@@ -51,7 +51,6 @@
                 </form>
             </div>
         </div>
-
     </div>
 
     <div class=item__box>
@@ -87,7 +86,6 @@
                                 @csrf
                                 <textarea class="chat__body" name="body" cols="30" rows="1">{{ old('body', $allMessage->body) }}</textarea>
                                 <div class="chat__body__items">
-
                                     <button class="chat__body__update" type="submit">編集</button>
                                 </div>
                             </form>
@@ -115,7 +113,6 @@
                         </div>
                         <div class="chat__body__container">
                             <p class="chat__body">{{ $allMessage->body }}</p>
-
                         </div>
                     </div>
                 @endif
@@ -134,6 +131,7 @@
                         <p class="alert__message">{{ $message }}</p>
                     @enderror
                 </div>
+
                 <div class="input__box">
 
                     <textarea class="input__textarea" name="body" cols="30" rows="1" id="chat-input"
@@ -144,6 +142,7 @@
                             <p class="alert__message">{{ $message }}</p>
                         @enderror
                     </div>
+
                     <div class="button__box">
                         <label class="input__button__label" for="realFile">画像を追加</label>
                         <input type="file" id="realFile" name="chat_images[]" multiple>
@@ -152,10 +151,8 @@
                     </div>
                 </div>
                 <div id="preview-container"></div>
-
             </form>
         </div>
-
     </div>
 
     @vite('resources/js/chat_create.js')
