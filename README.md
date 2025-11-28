@@ -179,6 +179,12 @@ php artisan test --env=testing
 - MySQL 8.0.34
 - fortify \* v1.28.0
 - mailhog
+- Stripe
+- WebSocket
+- Pusher
+- Laravel Broadcasting
+- Laravel Echo
+- JavaScript
 
 <br>
 
@@ -358,6 +364,7 @@ php artisan test --env=testing
 - 商品一覧：http://localhost/
 - ユーザー登録：http://localhost/register
 - phpMyAdmin：http://localhost:8080/
+- mailhog確認：http://localhost:8025/
 
 <br>
 
