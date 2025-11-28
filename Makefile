@@ -8,14 +8,19 @@
 init:
 	@echo "=== Docker コンテナをビルド＆起動 ==="
 	docker-compose up -d --build
-	@echo "=== Laravel 10 プロジェクト作成 ==="
-	docker-compose exec php composer create-project "laravel/laravel=10.*" . --prefer-dist
-	@echo "=== .env 設定（必要なら自分で編集してください）とアプリキー生成 ==="
-	docker-compose exec php cp .env.example .env || true
-	docker-compose exec php php artisan key:generate
+
+	@echo "=== Laravel 用 .env 設定 ==="
+	# src/.env が無ければ example から生成
+	@if [ ! -f src/.env ]; then docker-compose exec php cp .env.example .env; fi
+
+	@echo "=== アプリキー生成 ==="
+	docker-compose exec php php artisan key:generate || true
+
 	@echo "=== ストレージへのシンボリックリンク作成 ==="
 	docker-compose exec php php artisan storage:link || true
+
 	@echo "=== 初回セットアップ完了 ==="
+
 
 ##########################
 # 日常的に使うコマンド
