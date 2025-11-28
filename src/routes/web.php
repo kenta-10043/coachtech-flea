@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\RatingController;
 
 
 
@@ -22,6 +24,8 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/', [ItemController::class, 'index'])->name('index');
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
+
+
 
 Route::middleware('auth')->group(
     function () {
@@ -44,5 +48,12 @@ Route::middleware('auth')->group(
 
         Route::get('/sell', [SellController::class, 'index'])->name('sell.index');
         Route::post('/sell', [SellController::class, 'store'])->name('sell.store');
+
+        Route::get('/chat/{item_id}', [ChatController::class, 'index'])->name('chat.index');
+        Route::post('/chat/{item_id}', [ChatController::class, 'send'])->name('chat.send');
+        Route::put('/chat/{chat_id}', [ChatController::class, 'update'])->name('chat.update');
+        Route::delete('/chat/{chat_id}', [ChatController::class, 'destroy'])->name('chat.destroy');
+
+        Route::post('/rating/{item_id}', [RatingController::class, 'review'])->name('rating.review');
     }
 );

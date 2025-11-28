@@ -1,7 +1,9 @@
 .profile__container{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 50px;
+    position: relative;
+    margin-left: 244px;
 }
 
 .profile__image{
@@ -16,15 +18,25 @@
     margin-top: 28px;
 }
 
+.user-name{
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: -20px;
+    margin-left: 16px;
+}
+
 .button__edit{
-    width: 150px;
-    height: 30px;
+    width: 310px;
+    height: 59px;
     border-color: red;
     color: red;
     font-weight: bold;
     background-color: white;
     margin-top: 70px;
+    margin-right: 196px;
     border-radius: 7px;
+    font-size: 26px;
+    font-weight: bold;
 }
 
 .profile__content__page{
@@ -34,14 +46,80 @@
 
 .page__sell{
     text-decoration: none;
+    font-weight: bold;
     margin-left: 130px;
     color: #5F5F5F;
 }
 
+.page__sell.on{
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 130px;
+    color: #FF0000;
+}
+
 .page__buy{
     text-decoration: none;
+    font-weight: bold;
     margin-left: 60px;
     color: #5F5F5F;
+}
+
+.page__buy.on{
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 60px;
+    color: #FF0000;
+}
+
+.page__transaction{
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 60px;
+    color: #5F5F5F;
+}
+
+.page__transaction.on{
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 60px;
+    color: #FF0000;
+}
+
+.chat-badge__box{
+    display: inline;
+    position: relative;
+}
+
+.chat-badge{
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 900;
+    background-color: #FF0000;
+    font-size: 16px;
+    vertical-align: middle;
+    text-align: center;
+    position: absolute;
+    margin-left: 7px;
+    line-height: 23px;
+
+}
+
+.item-badge{
+    margin-left: 5px;
+    background-color: #FF0000;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    position: absolute;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    padding-top: 2px;
+    padding-left: 6px;
 }
 
 .item__container {
@@ -63,6 +141,7 @@
 
 .item__cards__name {
     display: inline-block;
+    min-width: 60px;
 }
 
 .item__card__description {
@@ -80,6 +159,31 @@
     margin-left: 20px;
     border-radius: 2px;
     }
+
+.rating__box{
+    position: absolute;
+    margin-left: 200px;
+}
+
+.stars__box {
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    margin-top: -60px;
+    margin-left: -20px;
+}
+
+.stars {
+    font-size: 40px;
+    color: #D9D9D9;
+    height: 40px;
+    width: 40px;
+    line-height: 1;
+}
+
+.stars.active {
+    color: #FFF048;
+}
 
 @media (max-width: 1243px) {
     .item__container {

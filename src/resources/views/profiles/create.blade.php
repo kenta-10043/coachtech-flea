@@ -54,21 +54,5 @@
             <button class='register__button' type="submit">更新する</button>
         </form>
     </div>
-
-    <script>
-        document.getElementById('profile_image').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            const preview = document.getElementById('preview');
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    preview.src = event.target.result;
-                    preview.style.display = "inline";
-                };
-                reader.readAsDataURL(file);
-            } else {
-                preview.style.display = "none";
-            }
-        });
-    </script>
+    @vite('resources/js/profile_image.js')
 @endsection

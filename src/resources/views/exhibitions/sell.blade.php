@@ -88,21 +88,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-        document.getElementById('item_image').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            const preview = document.getElementById('preview');
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    preview.src = event.target.result;
-                    preview.style.display = "block";
-                };
-                reader.readAsDataURL(file);
-            } else {
-                preview.style.display = "none";
-            }
-        });
-    </script>
+    @vite('resources/js/sell.js')
 @endsection

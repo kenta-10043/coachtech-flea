@@ -9,6 +9,8 @@ src/storage/*.key
 src/storage/*.pem
 src/.php-cs-fixer.cache
 src/storage/app/public/*
+src/node_modules
+src/public/build/
 
 !src/storage/app/public/sample_images/
 !src/storage/app/public/sample_images/**
@@ -16,6 +18,8 @@ src/storage/app/public/*
 !src/storage/app/public/others/**
 !src/storage/app/public/profile_images/
 !src/storage/app/public/profile_images/**
+!src/storage/app/public/chat_images/
+!src/storage/app/public/chat_images/**
 
 src/storage/framework/cache/*
 src/storage/framework/sessions/*
@@ -56,3 +60,4 @@ Thumbs.db
 # Docker用env（プロジェクトルート）
 #===========================
 .env
+

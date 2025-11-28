@@ -48,13 +48,15 @@
                         <p class="comments__count">{{ $item->comments_count }}</p>
                     </div>
                 </div>
-                @if ($item->status !== 2)
+                @if ($item->user->id === $userId)
+                    <p class="purchased-alert">ご自身の出品商品はご購入できません</p>
+                @elseif ($item->status === 2)
+                    <p class="purchased-alert">この商品は完売しました</p>
+                @else
                     <div>
                         <button class="purchase__button"
                             onclick="location.href='{{ route('purchase.order', ['item_id' => $item->id]) }}'">購入手続きへ</button>
                     </div>
-                @else
-                    <p class="purchased-alert">この商品は完売しました</p>
                 @endif
             </div>
             <div>

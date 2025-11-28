@@ -17,7 +17,7 @@ class ItemController extends Controller
         $userId = Auth::id();
         $isLiked = $userId ? $item->likes()->where('user_id', $userId)->exists() : false;
 
-        return view('show', compact('item', 'isLiked'));
+        return view('show', compact('item', 'isLiked', 'userId'));
     }
 
 

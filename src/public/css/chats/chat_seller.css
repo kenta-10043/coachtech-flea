@@ -1,0 +1,372 @@
+.alert-error {
+    color: white;
+    background-color: red;
+    font-weight: bolder;
+    width: 270px;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+/* プロフィール */
+.profile__container {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #5F5F5F;
+    justify-content: space-between;
+}
+
+.profile__container__inner{
+    display: flex;
+}
+
+.profile__image {
+    width: 79px;
+    height: 79px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 13px;
+}
+
+/* 商品情報 */
+
+.main__content__title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-left: -474px;
+}
+
+.item__box {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #5F5F5F;
+
+}
+
+.item__inner {
+    height: 233px;
+    margin-left: 40px;
+}
+
+.item__image,
+.preview__image {
+    width: 203px;
+    height: 206px;
+    object-fit: cover;
+    margin-left: 40px;
+
+}
+
+.item__name {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+    margin-top: 50px;
+    margin-bottom: 26px;
+}
+
+.item__price {
+    font-size: 36px;
+    height: 45px;
+    margin: 0;
+
+}
+
+/* チャット */
+
+.chat__message {
+    display: flex;
+}
+
+/* 相手のメッセージ */
+.partner-message {
+    justify-content: flex-start;
+}
+
+/* 自分のメッセージ */
+.my-message {
+    justify-content: flex-end;
+}
+
+.chat__profile__container {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-bottom: -10px;
+}
+
+.chat__profile__container__other {
+    display: flex;
+    align-items: center;
+    margin-bottom: -10px;
+    margin-left: 10px;
+}
+
+.chat__profile__image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.chat__user__name {
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 14px;
+    margin-right: 10px;
+}
+
+.chat__body {
+    width: 461px;
+    height: 60px;
+    background-color: #D9D9D9;
+    border-radius: 4px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: none;
+    text-align: left;
+    font-size: 15px;
+}
+
+.chat__body__items{
+    display: flex;
+}
+
+.chat__profile__inner {
+    margin-right: 244px;
+    margin-bottom: -25px;
+}
+
+.chat__profile__inner-b {
+    margin-left: 222px;
+    margin-bottom: -25px;
+}
+
+.chat__body__update {
+    position: relative;
+    margin-left: 368px;
+    border: none;
+    background-color: white;
+    color: #5F5F5F;
+    font-size: 15px;
+}
+
+.delete__button__box {
+    position: absolute;
+    margin-top: -24px;
+    margin-left: 420px;
+}
+
+.chat__body__delete {
+    border: none;
+    background-color: white;
+    color: #5F5F5F;
+    font-size: 15px;
+}
+
+.input__textarea {
+    max-width: 937px;
+    width: 100%;
+    height: 44px;
+    border: 1px solid #5F5F5F;
+    display: inline-block;
+}
+
+
+#realFile {
+    display: none;
+}
+
+.image-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    margin-left: 10px;
+
+}
+
+.input__box {
+    display: flex;
+    align-items: center;
+    margin-left: 27px;
+}
+
+.button__box {
+    display: flex;
+    align-items: center;
+}
+
+.input__button__label {
+    width: 143px;
+    height: 44px;
+    border-radius: 10px;
+    border: 2px solid #FF5555;
+    color: #FF5555;
+    display: inline-block;
+    text-align: center;
+    padding-top: 8px;
+    margin-left: 14px;
+
+}
+
+.input__button {
+    border: none;
+    background-color: white;
+}
+
+.input__button__image {
+    width: 80px;
+    height: 61px;
+}
+
+.error__alert {
+    font-size: 16px;
+    color: red;
+}
+
+.alert__message {
+    margin-bottom: -10px;
+    margin-left: 26px;
+}
+
+svg.w-5.h-5 {
+    width: 30px;
+    height: 30px;
+}
+
+/* モーダル部分 */
+.modal__body {
+    display: flex;
+    justify-content: center;
+    /* 水平方向の中央 */
+    align-items: center;
+    /* 垂直方向の中央 */
+}
+
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 999;
+    position: absolute;
+    /* 親要素内で配置 */
+    top: 100px;
+    left: 30%;
+    transform: translateX(-30%) scale(0.8);
+    background-color: #FDFCE6;
+    box-shadow: 5px 5px 3px #00000036;
+    border-radius: 15px;
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    /* 初期は透明 */
+    transform: scale(0.8);
+    /* 初期は少し小さい */
+    pointer-events: none;
+    /* クリックできない */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+
+}
+
+.modal.active {
+    opacity: 1;
+    /* フェードイン */
+    transform: scale(1);
+    /* 元の大きさ */
+    pointer-events: auto;
+    /* クリック可能 */
+}
+
+
+.modal__content {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 598px;
+    height: 367px;
+    overflow: auto;
+}
+
+.modal__content__item {
+    border-bottom: 1px solid black;
+    height: 66px;
+}
+
+.modal__content__title {
+    font-size: 35px;
+    margin-top: 21px;
+    margin-left: 23px;
+}
+
+.modal__content__content {
+    margin-top: 19px;
+    margin-left: 23px;
+    font-size: 20px;
+    color: #868686;
+}
+
+
+.button-open {
+    text-decoration: none;
+    width: 165px;
+    height: 54px;
+    border-radius: 30px;
+    color: white;
+    background-color: #FF8282;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 20px;
+
+}
+
+.button-disabled{
+    text-decoration: none;
+    width: 165px;
+    height: 54px;
+    border-radius: 30px;
+    color: white;
+    background-color: #FF8282;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.star__box {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+    height: 230px;
+    margin-top: -95px;
+
+}
+
+.star {
+    font-size: 100px;
+    color: #D9D9D9;
+    height: 100px;
+    width: 100px;
+    line-height: 1;
+}
+
+.star.active {
+    color: #FFF048;
+}
+
+.review__button {
+    width: 127px;
+    height: 49px;
+    border-radius: 5px;
+    background-color: #FF8282;
+    font-size: 24px;
+    color: white;
+    border: none;
+    margin-right: 14px;
+    margin-top: 14px;
+}
+
+.review__button__area {
+    text-align: right;
+}
