@@ -10,7 +10,6 @@ src/storage/*.pem
 src/.php-cs-fixer.cache
 src/storage/app/public/*
 src/node_modules
-src/public/build/
 
 !src/storage/app/public/sample_images/
 !src/storage/app/public/sample_images/**
