@@ -18,6 +18,24 @@ git clone https://github.com/kenta-10043/coachtech-flea.git
 2.
 
 ```bash
+cp .env.example .env
+```
+
+| 設定項目      | 入力値        |
+| ------------- | -------------   |
+| USER_ID       | ××××　　　　　 |
+| GROUP_ID 　　　| ××××　　　　　 |
+- Docker環境下で権限トラブルの軽減のためにプロジェクトルート直下に.envファイルを作成してUSER_IDとGROUP_IDにご自身のホストIDを入力してください。
+- ホストIDはローカルのターミナルでidコマンドを入力して確認できます。
+```bash
+id
+# uid=××××（〇〇〇〇) gid=××××（〇〇〇〇）
+```
+<br>
+
+3.
+
+```bash
 make init
 ```
 
@@ -68,18 +86,6 @@ make init
 
 <br>
 
-| 設定項目      | 入力値        |
-| ------------- | -------------   |
-| USER_ID       | ××××　　　　　 |
-| GROUP_ID 　　　| ××××　　　　　 |
-- Docker環境下で権限トラブルの軽減のためにプロジェクトルート直下に.envファイルを作成してUSER_IDとGROUP_IDにご自身のホストIDを入力してください。
-- ホストIDはローカルのターミナルでidコマンドを入力して確認できます。
-```bash
-id
-# uid=××××（〇〇〇〇) gid=××××（〇〇〇〇）
-```
-<br>
-
 2.マイグレーションの実行
 
 ```bash
@@ -117,6 +123,8 @@ cp .env .env.testing
 | CACHE_DRIVER   | file         | array      |
 | SESSION_DRIVER | file         | array      |
 | MAIL_MAILER    | smtp         | log        |
+
+<br>
 
 ### テスト実行手順
 
