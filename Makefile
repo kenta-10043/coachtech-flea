@@ -6,11 +6,12 @@
 # 初回セットアップ用
 ##########################
 init:
+	init:
+	@echo "=== Laravel 用 .env 作成 ==="
+	@if [ ! -f src/.env ]; then cp src/.env.example src/.env; fi
+
 	@echo "=== Docker コンテナをビルド＆起動 ==="
 	docker-compose up -d --build
-
-	@echo "=== Laravel 用 .env 設定 ==="
-	@if [ ! -f src/.env ]; then cp src/.env.example src/.env; fi
 
 	@echo "=== アプリキー生成 ==="
 	docker-compose exec php php artisan key:generate || true
@@ -19,6 +20,7 @@ init:
 	docker-compose exec php php artisan storage:link || true
 
 	@echo "=== 初回セットアップ完了 ==="
+
 
 ##########################
 # 日常的に使うコマンド
