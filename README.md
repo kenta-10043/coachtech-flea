@@ -56,27 +56,6 @@ make init
 
 <br>
 
-| 設定項目    　　    | 変更前    | 変更後       |
-| -------------------| --------- | ------------ |
-| PUSHER_APP  　  　 |   ー       | ×××××        |
-| PUSHER_APP_KEY     |   ー       | ×××××        |
-| PUSHER_APP_SECRET  |    ー      | ×××××        |
-| PUSHER_APP_CLUSTER |    ー     | ×××××        |
-
-<br>
-
-| 設定項目    　　         | 変更前                     | 変更後       |
-| ---------------------   | ---------                  | ------------ |
-| VITE_PUSHER_APP_KEY     |  "${PUSHER_APP_KEY}"       | ×××××        |
-| VITE_PUSHER_APP_HOST    |        ー                   | そのまま      |
-| VITE_PUSHER_APP_SECRET  |        ー                  | そのまま      |
-| VITE_PUSHER_SCHEME  　  |         ー                  | そのまま      |
-| VITE_PUSHER_APP_CLUSTER |  "${PUSHER_APP_CLUSTER}"   | ×××××        |
-- ××××× はご自身で KEY を取得・入力してください。
-- Pusher の API キーは、[Pusher](https://dashboard.pusher.com/)にアクセスから取得してください
-
-<br>
-
 | 設定項目      | 入力値        |
 | ------------- | ------------- |
 | STRIPE KEY    | pk_test ××××× |
@@ -180,10 +159,6 @@ php artisan test --env=testing
 - fortify \* v1.28.0
 - mailhog
 - Stripe
-- WebSocket
-- Pusher
-- Laravel Broadcasting
-- Laravel Echo
 - JavaScript
 
 <br>
@@ -336,6 +311,7 @@ php artisan test --env=testing
 |   sender_id           |  bigint       |              |            |           |  users(id)       |
 |   receiver_id         |  bigint       |              |            |           |  users(id)       |
 |   body                |  text         |              |            |           |                  |
+|   unread              |  tinyiny      |              |            |           |                  |
 | created_at            | timestamp     |              |            |           |                  |
 | updated_at            | timestamp     |              |            |           |                  |
 <br>  
