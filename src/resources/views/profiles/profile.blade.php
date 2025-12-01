@@ -74,7 +74,7 @@
             @if (request()->query('page') === 'transaction')
                 @foreach ($transactionItems as $item)
                     <div class="item-row" data-item-id="{{ $item->id }}">
-                        <p class="item-badge" id="badge-item-{{ $item->id }}"></p>
+                        <p class="item-badge"></p>
                         <a class="item__link" href="{{ route('chat.index', ['item_id' => $item->id]) }}">
                             <div class="item__cards">
                                 <img class="item__cards__image" src="{{ asset('storage/' . $item->item_image) }}"
