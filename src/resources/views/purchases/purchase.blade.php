@@ -93,5 +93,5 @@
             </div>
         </div>
     </form>
-    @vite('resources/js/purchase.js')
+    <script src="{{ asset('js/purchase.js') }}"></script>
 @endsection

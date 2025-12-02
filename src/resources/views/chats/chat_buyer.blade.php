@@ -155,6 +155,6 @@
         </div>
     </div>
 
-    @vite('resources/js/chat_create.js')
-    @vite('resources/js/rating.js')
+    <script src="{{ asset('js/chat_create.js') }}"></script>
+    <script src="{{ asset('js/rating.js') }}"></script>
 @endsection

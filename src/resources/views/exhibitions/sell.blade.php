@@ -88,5 +88,5 @@
             </form>
         </div>
     </div>
-    @vite('resources/js/sell.js')
+    <script src="{{ asset('js/sell.js') }}"></script>
 @endsection

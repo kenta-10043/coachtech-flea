@@ -48,6 +48,7 @@ Route::middleware('auth')->group(
         Route::post('/chat/{item_id}', [ChatController::class, 'send'])->name('chat.send');
         Route::put('/chat/{chat_id}', [ChatController::class, 'update'])->name('chat.update');
         Route::delete('/chat/{chat_id}', [ChatController::class, 'destroy'])->name('chat.destroy');
+        Route::put('/chat/unread/{item_id}', [ChatController::class, 'readIn'])->name('chat.readIn');
 
         Route::post('/rating/{item_id}', [RatingController::class, 'review'])->name('rating.review');
     }

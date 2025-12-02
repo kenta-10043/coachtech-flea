@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\Models\Item;
 use App\Models\Rating;
+use App\Models\Chat;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -23,14 +24,20 @@ class ProfileController extends Controller
         $buyItems = $user->orders()->whereNotNull('paid_at')->whereHas('item')->with('item')->get();
         $transactionItems = Item::where(function ($query) use ($user) {
             $query->where('user_id', $user->id)->orWhere('buyer_id', $user->id);
-        })->where('transaction_status', 2)->get();  // 取引中
+        })->where('transaction_status', 2)->withCount(['chats as unread_count' => function ($query) use ($user) {
+            $query->where('receiver_id', $user->id)->where('unread', 1);
+        }])->get();  // 取引中 アイテムと未読件数のカウント
 
         $ratings = Rating::where('reviewee_id', $user->id)->get();
         $ratingAvg = $ratings->isEmpty()
             ? null : round($ratings->avg('rating'));
 
-        return view('profiles.profile', compact('user', 'sellItems', 'buyItems', 'transactionItems', 'ratingAvg'));
+        $totalUnread = Chat::where('receiver_id', $user->id)->where('unread', 1)->count();
+
+
+        return view('profiles.profile', compact('user', 'sellItems', 'buyItems', 'transactionItems', 'ratingAvg', 'totalUnread'));
     }
+
 
     public function store(ProfileRequest $request)
     {

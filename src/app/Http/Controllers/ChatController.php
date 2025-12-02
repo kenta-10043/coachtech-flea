@@ -72,7 +72,6 @@ class ChatController extends Controller
             }
         }
 
-        event(new MessageSent($chat));
 
         return back();
     }
@@ -106,5 +105,12 @@ class ChatController extends Controller
         $chat->delete();
 
         return back()->with('success', 'チャットの削除が完了しました');
+    }
+
+    public function readIn(Request $request, $item_id)
+    {
+        Chat::where('item_id', $request->item_id)->where('receiver_id', auth()->id())->update(['unread' => 0]);
+
+        return response()->json(['status' => 'ok']);
     }
 }

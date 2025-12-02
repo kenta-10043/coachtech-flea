@@ -34,7 +34,10 @@
             <div class="chat-badge__box">
                 <a class="page__transaction{{ request('page') === 'transaction' ? ' on' : '' }}"
                     href="{{ route('profile.index', ['page' => 'transaction']) }}">取引中の商品</a>
-                <div class="chat-badge" id="chat-badge">0</div>
+                @if ($totalUnread > 0)
+                    <div class="chat-badge" id="chat-badge">{{ $totalUnread }}</div>
+                @else
+                @endif
             </div>
         </div>
         <div class="item__container">
@@ -74,8 +77,18 @@
             @if (request()->query('page') === 'transaction')
                 @foreach ($transactionItems as $item)
                     <div class="item-row" data-item-id="{{ $item->id }}">
-                        <p class="item-badge"></p>
-                        <a class="item__link" href="{{ route('chat.index', ['item_id' => $item->id]) }}">
+                        @if ($item->unread_count > 0)
+                            <p class="item-badge" id="badge-item-{{ $item->id }}">{{ $item->unread_count }}</p>
+                        @else
+                        @endif
+                        <a class="item__link" data-form-id="unreadForm-id-{{ $item->id }}"
+                            href="{{ route('chat.index', ['item_id' => $item->id]) }}">
+                            <form id="unreadForm-id-{{ $item->id }}"
+                                action="{{ route('chat.readIn', ['item_id' => $item->id]) }}" method="POST">
+                                @method('PUT')
+                                @csrf
+                                <input type="hidden" name="item_id" value="{{ $item->id }}">
+                            </form>
                             <div class="item__cards">
                                 <img class="item__cards__image" src="{{ asset('storage/' . $item->item_image) }}"
                                     alt="{{ $item->item_name }}">
@@ -92,5 +105,6 @@
         </div>
     </div>
 
-    @vite('resources/js/profile_rating.js')
+    <script src="{{ asset('js/unread_badge.js') }}"></script>
+    <script src="{{ asset('js/profile_rating.js') }}"></script>
 @endsection
