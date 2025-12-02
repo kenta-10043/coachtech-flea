@@ -28,7 +28,14 @@
         <div class="side__content">
             <h2 class="side__content__title">その他の取引</h>
                 @foreach ($transactionItems as $transactionItem)
-                    <a class='chat__link' href="{{ route('chat.index', [$transactionItem->id]) }}">
+                    <a class='chat__link'
+                        data-form-id="unreadForm-id-{{ $transactionItem->id }}"href="{{ route('chat.index', [$transactionItem->id]) }}">
+                        <form id="unreadForm-id-{{ $transactionItem->id }}"
+                            action="{{ route('chat.readIn', ['item_id' => $transactionItem->id]) }}" method="POST">
+                            @method('PUT')
+                            @csrf
+                            <input type="hidden" name="item_id" value="{{ $transactionItem->id }}">
+                        </form>
                         <p>{{ $transactionItem->item_name }}</p>
                     </a>
                 @endforeach
@@ -38,6 +45,7 @@
         </div>
     </div>
 
+    <script src="{{ asset('js/list_unread_badge.js') }}"></script>
 </body>
 
 </html>
