@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('sender_id')->nullable()->constrained('users')->nullOnDelete();  // 履歴を残す
             $table->foreignId('receiver_id')->nullable()->constrained('users')->nullOnDelete();
             $table->text('body')->nullable();
+            $table->tinyInteger('unread')->default(1); //0:既読  1:未読
             $table->timestamps();
         });
     }
