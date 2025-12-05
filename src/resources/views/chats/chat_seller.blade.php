@@ -14,11 +14,11 @@
         </div>
         <p class="main__content__title">{{ $buyerUser->name }}さんとの取引画面</p>
 
-        @if ($item->ratings->contains('reviewer_id', $item->buyer_id))
+        {{-- @if ($item->ratings->contains('reviewer_id', $item->buyer_id))
             <button id="btuOpen" class="button-open">取引を終了する</button>
         @else
             <button id="btnDisabled" class="button-disabled">取引を終了する</button>
-        @endif
+        @endif --}}
 
         {{-- モーダル部分 --}}
         <div id="myModal" class="modal">
@@ -67,7 +67,7 @@
                             <div class="chat__profile__inner">
                                 @foreach ($allMessage->chatImages as $image)
                                     <a class="chat__body__link" href="{{ asset('storage/' . $image->chat_image) }}"><img
-                                            class="image-icon" src="{{ asset('storage/others/写真のフリーアイコン5 (1).png') }}"
+                                            class="image-icon" src="{{ asset('storage/' . $image->chat_image) }}"
                                             alt="写真アイコン"></a>
                                 @endforeach
                             </div>
@@ -104,7 +104,7 @@
                             <div class="chat__profile__inner-b">
                                 @foreach ($allMessage->chatImages as $image)
                                     <a href="{{ asset('storage/' . $image->chat_image) }}"><img class="image-icon"
-                                            src="{{ asset('storage/others/写真のフリーアイコン5 (1).png') }}" alt="写真アイコン"></a>
+                                            src="{{ asset('storage/' . $image->chat_image) }}" alt="写真アイコン"></a>
                                 @endforeach
                             </div>
                         </div>
@@ -124,21 +124,22 @@
                 enctype="multipart/form-data">
                 @csrf
 
-                @error('body')
-                    <p class="alert__message">{{ $message }}</p>
-                @enderror
+                <div class="error__alert">
+                    @error('body')
+                        <p class="alert__message">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="error__alert">
+                    @error('chat_images.*')
+                        <p class="alert__message">{{ $message }}</p>
+                    @enderror
+                </div>
 
                 <div class="input__box">
-                    <div class="error__alert">
-                    </div>
                     <textarea class="input__textarea" name="body" cols="30" rows="1" id="chat-input"
                         placeholder="取引メッセージを記入してください">{{ old('body') }}</textarea>
 
-                    <div class="error__alert">
-                        @error('chat_images')
-                            <p class="alert__message">{{ $message }}</p>
-                        @enderror
-                    </div>
+
 
                     <div class="button__box">
                         <label class="input__button__label" for="realFile">画像を追加</label>
@@ -153,6 +154,9 @@
         </div>
     </div>
 
+    <script>
+        window.ratingSeller = @json($item->ratings->contains('reviewer_id', $item->buyer_id));
+    </script>
     <script src="{{ asset('js/chat_create.js') }}"></script>
-    <script src="{{ asset('js/rating.js') }}"></script>
+    <script src="{{ asset('js/rating_seller.js') }}"></script>
 @endsection

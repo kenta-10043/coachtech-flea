@@ -12,7 +12,6 @@
     display: flex;
     align-items: center;
     border-bottom: 2px solid #5F5F5F;
-    justify-content: space-between;
 }
 
 .profile__container__inner{
@@ -32,7 +31,7 @@
 .main__content__title {
     font-size: 36px;
     font-weight: bold;
-    margin-left: -474px;
+    margin-left: 60px;
 }
 
 .item__box {
@@ -119,7 +118,7 @@
 
 .chat__body {
     width: 461px;
-    height: 60px;
+    min-height: 60px;
     background-color: #D9D9D9;
     border-radius: 4px;
     margin-top: 0;
@@ -304,34 +303,6 @@ svg.w-5.h-5 {
     margin-left: 23px;
     font-size: 20px;
     color: #868686;
-}
-
-
-.button-open {
-    text-decoration: none;
-    width: 165px;
-    height: 54px;
-    border-radius: 30px;
-    color: white;
-    background-color: #FF8282;
-    border: none;
-    font-size: 20px;
-    font-weight: bold;
-    margin-right: 20px;
-
-}
-
-.button-disabled{
-    text-decoration: none;
-    width: 165px;
-    height: 54px;
-    border-radius: 30px;
-    color: white;
-    background-color: #FF8282;
-    border: none;
-    font-size: 20px;
-    font-weight: bold;
-    margin-right: 20px;
 }
 
 .star__box {

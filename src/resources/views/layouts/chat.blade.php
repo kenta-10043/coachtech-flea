@@ -36,7 +36,7 @@
                             @csrf
                             <input type="hidden" name="item_id" value="{{ $transactionItem->id }}">
                         </form>
-                        <p>{{ $transactionItem->item_name }}</p>
+                        <p class="chat__link__name">{{ $transactionItem->item_name }}</p>
                     </a>
                 @endforeach
         </div>

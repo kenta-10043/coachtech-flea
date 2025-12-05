@@ -6,11 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!modal) return;
 
-    if (openButton) {
-        openButton.addEventListener("click", (e) => {
-            e.stopPropagation();
-            modal.classList.add("active");
-        });
+    if (window.ratingSeller) {
+        modal.classList.add("active");
     }
 
     modal.addEventListener("click", (e) => {

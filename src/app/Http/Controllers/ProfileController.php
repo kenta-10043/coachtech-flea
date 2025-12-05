@@ -24,9 +24,13 @@ class ProfileController extends Controller
         $buyItems = $user->orders()->whereNotNull('paid_at')->whereHas('item')->with('item')->get();
         $transactionItems = Item::where(function ($query) use ($user) {
             $query->where('user_id', $user->id)->orWhere('buyer_id', $user->id);
-        })->where('transaction_status', 2)->withCount(['chats as unread_count' => function ($query) use ($user) {
-            $query->where('receiver_id', $user->id)->where('unread', 1);
-        }])->get();  // 取引中 アイテムと未読件数のカウント
+        })->where('transaction_status', 2)->withMax(['chats' => function ($q) {
+            $q->where('receiver_id', auth()->id());
+        }], 'created_at')
+            ->orderBy('chats_max_created_at', 'desc')
+            ->with('chats.receiver')->withCount(['chats as unread_count' => function ($query) use ($user) {
+                $query->where('receiver_id', $user->id)->where('unread', 1);
+            }])->get();  // 取引中 自分宛てのメッセージ新しい順 アイテムと未読件数のカウント
 
         $ratings = Rating::where('reviewee_id', $user->id)->get();
         $ratingAvg = $ratings->isEmpty()
